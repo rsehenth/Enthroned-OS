@@ -1,0 +1,28 @@
+// Enthroned OS - polkit rule for the Enthroned update units (Lote 8).
+//
+// Grants active LOCAL users in the `wheel` group passwordless permission to
+// START/INSPECT exactly these units, all with FIXED commands and none
+// accepting arguments:
+//   enthroned-update-check.service    read-only check (uupd update-check)
+//   enthroned-system-update.service   bootc upgrade via the fixed helper
+//   enthroned-flatpak-update.service  Flatpak system installation update
+//   enthroned-rollback.service        bootc rollback (previous deployment)
+// This is STRICTER than granting generic unit management: everything else
+// (including any other service) keeps the default polkit authorization.
+// See docs/architecture/ENTHRONED-UPDATE-ARCHITECTURE.md and
+// docs/operations/UPDATE-SYSTEM.md.
+polkit.addRule(function(action, subject) {
+    if (action.id != "org.freedesktop.systemd1.manage-units" ||
+        !subject.local || !subject.active || !subject.isInGroup("wheel")) {
+        return;
+    }
+    var allowed = [
+        "enthroned-update-check.service",
+        "enthroned-system-update.service",
+        "enthroned-flatpak-update.service",
+        "enthroned-rollback.service"
+    ];
+    if (allowed.indexOf(action.lookup("unit")) >= 0) {
+        return polkit.Result.YES;
+    }
+});

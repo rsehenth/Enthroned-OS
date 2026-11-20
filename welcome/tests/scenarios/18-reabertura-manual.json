@@ -1,0 +1,12 @@
+{
+  "name": "reabertura-manual",
+  "kind": "decision",
+  "description": "F4.13.18 - manual reopen from Settings: always shows (revisit, even completed); autostart after a completed walkthrough never shows; a completed phase is never reset by reopening.",
+  "cases": [
+    { "phase": "completed", "source": "manual", "alreadyRunning": false, "expectedShow": true },
+    { "phase": "completed", "source": "autostart", "alreadyRunning": false, "expectedShow": false },
+    { "phase": "dismissed", "source": "manual", "alreadyRunning": false, "expectedShow": true },
+    { "phase": "dismissed", "source": "autostart", "alreadyRunning": false, "expectedShow": false },
+    { "phase": "optional-pending", "source": "autostart", "alreadyRunning": false, "expectedShow": true }
+  ]
+}

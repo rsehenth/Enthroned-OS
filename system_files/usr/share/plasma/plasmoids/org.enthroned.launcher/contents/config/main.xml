@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+    http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="General">
+        <entry name="icon" type="String">
+            <label>The name of the icon used in the compact representation (e.g. on a small panel).</label>
+            <default>org.enthroned.launcher-classic</default>
+        </entry>
+        <entry name="favorites" type="StringList">
+            <label>Initial favorites, ported once to the per-instance KActivitiesStats store. Supported values are menu ids (usually .desktop file names) and special URLs that expand into default applications (e.g. preferred://browser).</label>
+            <default>preferred://browser,org.kde.dolphin.desktop,preferred://terminal,org.enthroned.settings.desktop,org.kde.discover.desktop</default>
+        </entry>
+        <entry name="favoritesPortedToKAstats" type="Bool">
+            <label>Are the favorites ported to use KActivitiesStats to allow per-instance favorites</label>
+            <default>false</default>
+        </entry>
+    </group>
+</kcfg>

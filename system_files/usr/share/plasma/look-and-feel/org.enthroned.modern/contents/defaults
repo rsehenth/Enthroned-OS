@@ -1,0 +1,36 @@
+# Enthroned Modern - first-login defaults for new users.
+# Section names are config files; format mirrors the official
+# lookandfeel/org.kde.breeze/contents/defaults (KDE Plasma 6.6).
+# User-owned settings are never overwritten after first login.
+
+[kdeglobals][KDE]
+widgetStyle=Breeze
+LookAndFeelPackage=org.enthroned.modern
+
+[kdeglobals][General]
+ColorScheme=EnthronedDark
+
+[kdeglobals][Icons]
+Theme=EnthronedDark
+
+[plasmarc][Theme]
+name=default
+
+[Wallpaper]
+Image=EnthronedVigilia
+
+[kcminputrc][Mouse]
+cursorTheme=breeze_cursors
+
+[kdeglobals][KDE]
+SingleClick=false
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
+BorderSize=Tiny
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+
+[KSplash]
+Theme=org.enthroned.modern

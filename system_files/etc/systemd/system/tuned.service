@@ -1,0 +1,31 @@
+# Enthroned OS - Gate 16: boot critical path fix for tuned.service.
+#
+# Full copy of the pinned Aurora fragment
+# (ghcr.io/ublue-os/aurora@sha256:9599680497ef22def5e9f05735faaf70ea2b4550ae8391f7ab71c6273432ae92,
+# systemd 262.1-1.fc45) with a single change: the "network.target" edge was
+# removed from After=. Evidence (H6 boot 2, Gate 12.6): tuned started only
+# when network.target was reached (48.770 s) because of that edge, then took
+# +18.063 s to apply the balanced profile on the critical path
+# (graphical.target <- multi-user <- tuned-ppd <- tuned <- network.target <-
+# NetworkManager). The active balanced profile has no network tunables.
+# Other profiles, including powersave Wi-Fi settings, need hardware validation.
+# The build compares the entire RPM fragment against this unit plus the
+# network.target edge. Removing this file restores the upstream ordering.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=Dynamic System Tuning Daemon
+After=systemd-sysctl.service dbus.service polkit.service
+Requires=dbus.service
+Conflicts=cpupower.service auto-cpufreq.service tlp.service power-profiles-daemon.service
+Documentation=man:tuned(8) man:tuned.conf(5) man:tuned-adm(8)
+
+[Service]
+Type=dbus
+PIDFile=/run/tuned/tuned.pid
+BusName=com.redhat.tuned
+ExecStart=/usr/sbin/tuned -l -P
+
+[Install]
+WantedBy=multi-user.target

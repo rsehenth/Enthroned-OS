@@ -1,0 +1,27 @@
+Enthroned OS
+Copyright 2026 Enthroned OS Project
+
+Original source code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). Other content is licensed as follows.
+
+Enthroned artwork
+  Wallpapers, logos, wordmarks and the icons and images derived from them are
+  under the Enthroned OS Artwork License (LICENSES/LicenseRef-Enthroned-Artwork.txt),
+  not Apache-2.0. The Enthroned name and logos are covered by TRADEMARKS.md.
+
+Derived from the Universal Blue image-template (Apache-2.0)
+  https://github.com/ublue-os/image-template (commit e9c6420)
+  Containerfile, Justfile, build_files/build.sh, image-template.env,
+  disk_config/disk.toml, disk_config/iso.toml and .github/workflows/build-disk.yml
+  are adapted from the template and modified for Enthroned OS.
+
+Derived from KDE Plasma Setup (GPL-2.0-or-later)
+  https://github.com/KDE/plasma-setup
+  system_files/usr/share/plasma/packages/org.kde.plasmasetup.prepare and
+  org.kde.plasmasetup.finished, and the matching translation catalog
+  build_files/l10n/pt_BR/org.kde.plasmasetup.po, remain under
+  GPL-2.0-or-later (LICENSES/GPL-2.0-or-later.txt). They are modified.
+
+Other third-party software (Aurora, Fedora, KDE Plasma, Qt, bootc, Brave and
+others) is not redistributed in this repository and keeps its own license. See
+docs/licensing/THIRD-PARTY.md.

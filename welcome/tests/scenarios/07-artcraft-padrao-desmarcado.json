@@ -1,0 +1,17 @@
+{
+  "name": "artcraft-padrao-desmarcado",
+  "kind": "persistence",
+  "description": "F4.13.7 - ArtCraft stays unchecked by default: a fresh state has no consent anywhere.",
+  "cases": [
+    {
+      "label": "fresh/missing state",
+      "json": "{}",
+      "expected": { "phase": "never-started", "artcraftConsented": false, "artcraftInstallState": "idle" }
+    },
+    {
+      "label": "explicit false",
+      "json": "{\"version\":1,\"phase\":\"never-started\",\"artcraftConsented\":false}",
+      "expected": { "artcraftConsented": false }
+    }
+  ]
+}

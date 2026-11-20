@@ -1,0 +1,12 @@
+{
+  "name": "download-indisponivel",
+  "kind": "machine",
+  "installer": {
+    "gate": "open",
+    "steps": ["start-check", "unavailable"],
+    "note": "release or asset cannot be fetched"
+  },
+  "description": "F4.13.10 - download unavailable: the installer reports failed and the phase records the failed optional install; a later retry is possible.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }, { "event": "artcraft-failure" }],
+  "expected": { "phase": "optional-failed", "artcraftInstallState": "failed", "installerState": "failed" }
+}

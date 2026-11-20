@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Enthroned Welcome
+Name[pt_BR]=Boas-vindas do Enthroned
+GenericName=First-experience assistant
+GenericName[pt_BR]=Assistente de primeira experiência
+Comment=Get to know and set up Enthroned OS on first login
+Comment[pt_BR]=Conheça e configure o Enthroned OS no primeiro login
+Exec=enthroned-welcome
+Icon=org.enthroned.welcome
+Terminal=false
+Categories=System;Utility;
+Keywords=enthroned;welcome;getting started;boas-vindas;bem-vindo;primeiros passos;primeira experiência;
+StartupNotify=true
+SingleMainWindow=true

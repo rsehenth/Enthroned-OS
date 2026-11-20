@@ -1,0 +1,11 @@
+{
+    "KPlugin": {
+        "Id": "org.enthroned.contextmenu",
+        "Name": "Enthroned Menu",
+        "Name[pt_BR]": "Menu do Enthroned",
+        "Description": "Desktop context menu: stock Plasma menu with the Enthroned Settings entry",
+        "Description[pt_BR]": "Menu de contexto do desktop: menu nativo do Plasma com a entrada Configurações do Enthroned",
+        "Icon": "org.enthroned.settings"
+    },
+    "X-Plasma-HasConfigurationInterface": false
+}

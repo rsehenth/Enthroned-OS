@@ -1,0 +1,5 @@
+# Closed production channel (Gate 12.3). Keep this ahead of Aurora's presets.
+disable uupd.timer
+disable enthroned-system-update.timer
+disable bootc-fetch-apply-updates.timer
+disable rpm-ostreed-automatic.timer

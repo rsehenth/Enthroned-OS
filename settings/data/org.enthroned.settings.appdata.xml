@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.enthroned.settings</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>Enthroned Settings</name>
+  <name xml:lang="pt_BR">Configurações do Enthroned</name>
+  <summary>Settings and update center for Enthroned OS</summary>
+  <summary xml:lang="pt_BR">Central de configurações e atualizações do Enthroned OS</summary>
+  <description>
+    <p>
+      Enthroned Settings is the native settings and update center of Enthroned OS,
+      a KDE Plasma desktop distribution. It shows system identity, appearance
+      profiles, system information and the update state through the real
+      Enthroned OS mechanisms (bootc, uupd, systemd, Flatpak).
+    </p>
+    <p xml:lang="pt_BR">
+      Configurações do Enthroned é a central nativa de configurações e
+      atualizações do Enthroned OS, uma distribuição KDE Plasma. Mostra
+      identidade do sistema, perfis de aparência, informações do sistema e o
+      estado de atualização pelos mecanismos reais do Enthroned OS (bootc,
+      uupd, systemd, Flatpak).
+    </p>
+  </description>
+  <launchable type="desktop-id">org.enthroned.settings.desktop</launchable>
+  <provides>
+    <binary>enthroned-settings</binary>
+  </provides>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <developer_name>Enthroned OS</developer_name>
+  <update_contact>enthroned-os@localhost</update_contact>
+</component>

@@ -1,0 +1,9 @@
+# Enthroned OS lock screen default wallpaper.
+# Overrides /usr/share/kde-settings/kde-profile/default/xdg/kscreenlockerrc.
+
+[Greeter]
+WallpaperPlugin=org.kde.image
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=file:///usr/share/wallpapers/EnthronedVigilia/
+PreviewImage=file:///usr/share/wallpapers/EnthronedVigilia/

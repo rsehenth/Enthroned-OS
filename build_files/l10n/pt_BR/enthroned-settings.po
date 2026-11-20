@@ -1,0 +1,2259 @@
+# Enthroned OS - Enthroned Settings (enthroned-settings), pt_BR.
+# Compiled to /usr/share/locale/pt_BR/LC_MESSAGES/enthroned-settings.mo at image
+# build time (build_files/build.sh). The application source strings are
+# the English messages; ki18n/gettext loads this catalog according to the
+# session language (plasma-localerc, System Settings > Language & Region).
+#
+# SPDX-License-Identifier: Apache-2.0
+msgid ""
+msgstr ""
+"Project-Id-Version: enthroned-settings\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "%1 %2"
+msgstr "%1 %2"
+
+msgid "%1 %2 · channel %3"
+msgstr "%1 %2 · canal %3"
+
+msgid "%1 (uupd.timer)"
+msgstr "%1 (uupd.timer)"
+
+msgid "%1 free of %2"
+msgstr "%1 livres de %2"
+
+msgid "%1 free of %2 (%3)"
+msgstr "%1 livres de %2 (%3)"
+
+msgid "%1, opens the KDE module"
+msgstr "%1, abre o módulo do KDE"
+
+msgid "/etc/uupd/config.json or /usr/lib/uupd/config.json"
+msgstr "/etc/uupd/config.json ou /usr/lib/uupd/config.json"
+
+msgid "/usr/share/doc/enthroned-os (when installed)"
+msgstr "/usr/share/doc/enthroned-os (quando instalada)"
+
+msgid "A new system version has been staged. Restart the computer to apply it."
+msgstr "Uma nova versao do sistema foi preparada. Reinicie o computador para "
+"aplica-la."
+
+msgid "About this device"
+msgstr "Sobre o dispositivo"
+
+msgid "About this distribution"
+msgstr "Sobre esta distribuição"
+
+msgid "Accessibility"
+msgstr "Acessibilidade"
+
+msgid "Accounts"
+msgstr "Contas"
+
+msgid "Active"
+msgstr "Ativo"
+
+msgid "Active (enforcing)"
+msgstr "Ativo (enforcing)"
+
+msgid "Active appearance profile: %1"
+msgstr "Perfil visual ativo: %1"
+
+msgid "Advanced"
+msgstr "Avançado"
+
+msgid "Advanced details"
+msgstr "Detalhes avançados"
+
+msgid "An automatic update (uupd.service) is running in the background. The center "
+"does not start another concurrent operation."
+msgstr "Uma atualização automática (uupd.service) está em andamento em segundo "
+"plano. A central não inicia outra operação concorrente."
+
+msgid "An update operation failed. See the details in System updates."
+msgstr "Uma operacao de atualizacao falhou. Veja os detalhes na Central."
+
+msgid "Animations, blur and shadows."
+msgstr "Animações, desfoque e sombras."
+
+msgid "App store (Discover)"
+msgstr "Loja de aplicativos (Discover)"
+
+msgid "App store (KDE Discover)"
+msgstr "Loja de aplicativos (KDE Discover)"
+
+msgid "Appearance profile: no active Enthroned profile"
+msgstr "Perfil visual: nenhum perfil Enthroned ativo"
+
+msgid "Application updates (Flatpak)"
+msgstr "Atualizações de aplicativos (Flatpak)"
+
+msgid "Applications"
+msgstr "Aplicativos"
+
+msgid "Applications (Flatpak)"
+msgstr "Aplicativos (Flatpak)"
+
+msgid "Applies the Enthroned Light or Enthroned Dark color scheme with Plasma's own "
+"tool (plasma-apply-colorscheme). Your profile, panel and wallpaper stay "
+"unchanged."
+msgstr "Aplica o esquema de cores Enthroned Light ou Enthroned Dark com a ferramenta "
+"do próprio Plasma (plasma-apply-colorscheme). Seu perfil, painel e papel de "
+"parede não mudam."
+
+msgid "Applies the appearance profile after confirmation"
+msgstr "Aplica o perfil de aparência após confirmação"
+
+msgid "Applies the dark Enthroned Dark color scheme"
+msgstr "Aplica o esquema de cores escuro Enthroned Dark"
+
+msgid "Applies the light Enthroned Light color scheme"
+msgstr "Aplica o esquema de cores claro Enthroned Light"
+
+msgid "Apply appearance profile"
+msgstr "Aplicar perfil de aparência"
+
+msgid "Apply profile"
+msgstr "Aplicar perfil"
+
+msgid "Applying…"
+msgstr "Aplicando…"
+
+msgid "Architecture"
+msgstr "Arquitetura"
+
+msgid "Architecture: %1"
+msgstr "Arquitetura: %1"
+
+msgid "ArtCraft Launcher (optional)"
+msgstr "ArtCraft Launcher (opcional)"
+
+msgid "Audio devices and volumes."
+msgstr "Dispositivos de áudio e volumes."
+
+msgid "Automatic mounting of USB drives and disks."
+msgstr "Montagem automática de pendrives e discos."
+
+msgid "Automatic updates (current policy)"
+msgstr "Atualizações automáticas (política atual)"
+
+msgid "Automatic updates (policy)"
+msgstr "Atualizações automáticas (política)"
+
+msgid "Available for recovery (see System updates → Recovery)."
+msgstr "Disponível para recuperação (ver Atualizações do sistema → Recuperação)."
+
+msgid "Available items"
+msgstr "Itens disponíveis"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+msgid "Bluetooth & devices"
+msgstr "Bluetooth e dispositivos"
+
+msgid "Bundled documentation"
+msgstr "Documentação embarcada"
+
+msgid "Cancel (demo)"
+msgstr "Cancelar (demo)"
+
+msgid "Cancellation requested (demo)"
+msgstr "Cancelamento solicitado (demo)"
+
+msgid "Change applied by the Plasma tools."
+msgstr "Alteração aplicada pelas ferramentas do Plasma."
+
+msgid "Changing the computer name requires administrator privileges and is not "
+"offered by this interface."
+msgstr "Alterar o nome do computador exige privilégios de administrador e não é "
+"oferecido por esta interface."
+
+msgid "Channel"
+msgstr "Canal"
+
+msgid "Channel: %1"
+msgstr "Canal: %1"
+
+msgid "Check"
+msgstr "Verificar"
+
+msgid "Check failed"
+msgstr "Verificação falhou"
+
+msgid "Check failed (code %1)"
+msgstr "Verificacao falhou (codigo %1)"
+
+msgid "Check for and install updates"
+msgstr "Verificar e instalar atualizações"
+
+msgid "Check for updates"
+msgstr "Verificar atualizações"
+
+msgid "Check skipped: an operation is in progress"
+msgstr "Verificacao ignorada: operacao em andamento"
+
+msgid "Check started"
+msgstr "Verificação iniciada"
+
+msgid "Check: no updates"
+msgstr "Verificação: nenhuma atualização"
+
+msgid "Check: update available"
+msgstr "Verificação: atualização disponível"
+
+msgid "Checking for updates"
+msgstr "Verificando atualizações"
+
+msgid "Checking for updates…"
+msgstr "Verificando atualizações…"
+
+msgid "Classic and Modern profiles"
+msgstr "Perfis Classic e Modern"
+
+msgid "Collecting…"
+msgstr "Coletando…"
+
+msgid "Color scheme and accent color."
+msgstr "Esquema de cores e cor de destaque."
+
+msgid "Color scheme unavailable on this system."
+msgstr "Esquema de cores indisponivel neste sistema."
+
+msgid "Color scheme, including higher-contrast options."
+msgstr "Esquema de cores, incluindo opções de maior contraste."
+
+msgid "Color scheme: %1"
+msgstr "Esquema de cores: %1"
+
+msgid "Colors and accent color"
+msgstr "Cores e cor de destaque"
+
+msgid "Colors and contrast"
+msgstr "Cores e contraste"
+
+msgid "Complete Plasma themes."
+msgstr "Temas completos do Plasma."
+
+msgid "Connected"
+msgstr "Conectado"
+
+msgid "Connection state"
+msgstr "Estado da conexão"
+
+msgid "Copies the device specifications to the clipboard"
+msgstr "Copia as especificações do dispositivo para a área de transferência"
+
+msgid "Copy specifications"
+msgstr "Copiar especificações"
+
+msgid "Could not apply the change: %1"
+msgstr "Não foi possível aplicar a alteração: %1"
+
+msgid "Could not apply the profile: %1"
+msgstr "Não foi possível aplicar o perfil: %1"
+
+msgid "Could not open the KDE module %1."
+msgstr "Não foi possível abrir o módulo %1 do KDE."
+
+msgid "Could not read the origin (bootc unavailable)"
+msgstr "Não foi possível ler a origem (bootc indisponível)"
+
+msgid "Could not start the check"
+msgstr "Nao foi possivel iniciar a verificacao"
+
+msgid "Creates a shortcut for the installed application on your desktop. Updates "
+"never create or duplicate shortcuts and no personal file is overwritten."
+msgstr "Cria um atalho do aplicativo instalado na sua área de trabalho. Atualizações "
+"nunca criam ou duplicam atalhos e nenhum arquivo pessoal é sobrescrito."
+
+msgid "Current color scheme: %1"
+msgstr "Esquema de cores atual: %1"
+
+msgid "Current color scheme: not identified."
+msgstr "Esquema de cores atual: não identificado."
+
+msgid "Current user"
+msgstr "Usuário atual"
+
+msgid "Cursor theme and size."
+msgstr "Tema e tamanho do cursor."
+
+msgid "Dark"
+msgstr "Escuro"
+
+msgid "Dark theme, centered floating panel, clock with time only (inspired by "
+"Windows 11)."
+msgstr "Escuro, painel flutuante centralizado, relógio só com hora (referência "
+"Windows 11)."
+
+msgid "Date and time"
+msgstr "Data e hora"
+
+msgid "Default applications"
+msgstr "Aplicativos padrão"
+
+msgid "Demo mode"
+msgstr "Modo de demonstração"
+
+msgid "Demo mode — no update will run. The data shown is fictional."
+msgstr "Modo de demonstração — nenhuma atualização será executada. Os dados exibidos "
+"são fictícios."
+
+msgid "Demo scenario:"
+msgstr "Cenário de demonstração:"
+
+msgid "Deployment staged"
+msgstr "Deployment preparado"
+
+msgid "Deployment status queried"
+msgstr "Status do deployment consultado"
+
+msgid "Desktop effects"
+msgstr "Efeitos da área de trabalho"
+
+msgid "Desktop shortcut on install"
+msgstr "Atalho na área de trabalho ao instalar"
+
+msgid "Detailed technical messages stay in the system journal (journalctl -u "
+"uupd-manual.service). The center shows only what is needed to decide."
+msgstr "Mensagens técnicas detalhadas ficam no journal do sistema (journalctl -u "
+"uupd-manual.service). A central mostra apenas o que é necessário para "
+"decidir."
+
+msgid "Device name"
+msgstr "Nome do dispositivo"
+
+msgid "Device name: %1"
+msgstr "Nome do dispositivo: %1"
+
+msgid "Device specifications"
+msgstr "Especificações do dispositivo"
+
+msgid "Display"
+msgstr "Tela"
+
+msgid "Display & resolution"
+msgstr "Tela e resolução"
+
+msgid "Documentation and licensing"
+msgstr "Documentação e licenciamento"
+
+msgid "Download finished"
+msgstr "Download concluido"
+
+msgid "Drawing tablet"
+msgstr "Mesa digitalizadora"
+
+msgid "Edition"
+msgstr "Edição"
+
+msgid "Enthroned (verified)"
+msgstr "Enthroned (verificada)"
+
+msgid "Enthroned OS %1 · channel %2"
+msgstr "Enthroned OS %1 · canal %2"
+
+msgid "Enthroned OS is immutable: the system changes through atomic images, not by "
+"installing packages on top of the base system."
+msgstr "O Enthroned OS é imutável: o sistema muda por imagens atômicas, não por "
+"instalação de pacotes sobre o sistema base."
+
+msgid "Enthroned OS is its own Linux distribution with a bootable image "
+"infrastructure based on Fedora Linux (Kinoite), KDE Plasma and the bootc/OCI "
+"model with atomic updates and rollback. The experience draws on the "
+"simplicity of Zorin OS and the familiarity of Windows 11, with its own "
+"identity and code. No compatibility with Windows applications or drivers is "
+"promised."
+msgstr "O Enthroned OS é uma distribuição Linux própria com infraestrutura de imagem "
+"bootável baseada em Fedora Linux (Kinoite), KDE Plasma e modelo bootc/OCI "
+"com atualizações atômicas e rollback. A experiência é inspirada na "
+"simplicidade do Zorin OS e na familiaridade do Windows 11, com identidade e "
+"código próprios. Nenhuma promessa de compatibilidade com aplicativos ou "
+"drivers Windows é feita."
+
+msgid "Enthroned OS specifications"
+msgstr "Especificações do Enthroned OS"
+
+msgid "Enthroned OS uses the system update schedule (uupd.timer). This screen is "
+"informational only; the interface does not change the policy at this stage."
+msgstr "O Enthroned OS utiliza o agendamento de atualizações do sistema "
+"(uupd.timer). Esta tela apenas informa; nenhuma política é alterada pela "
+"interface nesta fase."
+
+msgid "Enthroned OS version"
+msgstr "Versão do Enthroned OS"
+
+msgid "Enthroned OS · identity unavailable"
+msgstr "Enthroned OS · identidade indisponível"
+
+msgid "Enthroned Settings"
+msgstr "Configurações do Enthroned"
+
+msgid "Enthroned channel image (verified)"
+msgstr "Imagem do canal Enthroned (verificada)"
+
+msgid "Enthroned experience"
+msgstr "Experiência Enthroned"
+
+msgid "Enthroned profiles"
+msgstr "Perfis Enthroned"
+
+msgid "Enthroned wallpapers"
+msgstr "Papéis de parede Enthroned"
+
+msgid "Events this session"
+msgstr "Eventos desta sessão"
+
+msgid "Failed"
+msgstr "Falha"
+
+msgid "Failed to run bootc"
+msgstr "Falha ao executar bootc"
+
+msgid "Could not verify updates"
+msgstr "Não foi possível verificar atualizações"
+
+msgid "Deployment confirmation pending"
+msgstr "Confirmação do deployment pendente"
+
+msgid "System update completed"
+msgstr "Atualização do sistema concluída"
+
+msgid "The update command finished. A new deployment status is needed to determine whether to restart."
+msgstr "O comando de atualização terminou. Uma nova consulta ao deployment é necessária para saber se é preciso reiniciar."
+
+msgid "Deployment status confirmed; no restart is pending."
+msgstr "Status do deployment confirmado. Nenhuma reinicialização está pendente."
+
+msgid "Update command finished; deployment status is pending."
+msgstr "O comando de atualização terminou. O status do deployment está pendente."
+
+msgid "Update command finished"
+msgstr "Comando de atualização encerrado"
+
+msgid "Refresh deployment status"
+msgstr "Consultar status do deployment"
+
+msgid "The verification did not finish, so it is NOT known whether updates exist. Nothing was installed or changed. Try “Check for updates” again."
+msgstr "A verificação não terminou, então NÃO se sabe se existem atualizações. Nada foi instalado nem alterado. Tente “Verificar atualizações” novamente."
+
+msgid "Image reference"
+msgstr "Referência da imagem"
+
+msgid "Transport: %1"
+msgstr "Transporte: %1"
+
+msgid "Unknown (origin could not be read)"
+msgstr "Desconhecida (não foi possível ler a origem)"
+
+msgid "File search (Baloo)"
+msgstr "Pesquisa de arquivos (Baloo)"
+
+msgid "File system (/usr)"
+msgstr "Sistema de arquivos (/usr)"
+
+msgid "Firewall"
+msgstr "Firewall"
+
+msgid "Flatpak application permissions"
+msgstr "Permissões de aplicativos Flatpak"
+
+msgid "Flatpak installed"
+msgstr "Flatpak instalado"
+
+msgid "Flatpak permissions"
+msgstr "Permissões de Flatpaks"
+
+msgid "Flatpak removed"
+msgstr "Flatpak removido"
+
+msgid "Flatpak updated"
+msgstr "Flatpak atualizado"
+
+msgid "Font type and size."
+msgstr "Tipo e tamanho das fontes."
+
+msgid "Fonts"
+msgstr "Fontes"
+
+msgid "Fonts and text size"
+msgstr "Fontes e tamanho do texto"
+
+msgid "Frequent settings"
+msgstr "Configurações frequentes"
+
+msgid "Game controllers"
+msgstr "Controles de jogo"
+
+msgid "Gamepads and joysticks."
+msgstr "Gamepads e joysticks."
+
+msgid "Global theme (Look and Feel)"
+msgstr "Tema global (Look and Feel)"
+
+msgid "Graphics card"
+msgstr "Placa de vídeo"
+
+msgid "Graphics card: %1"
+msgstr "Placa de vídeo: %1"
+
+msgid "Graphics tablets."
+msgstr "Tablets gráficos."
+
+msgid "Hardware summary"
+msgstr "Resumo do hardware"
+
+msgid "Hide"
+msgstr "Ocultar"
+
+msgid "Hide advanced settings"
+msgstr "Ocultar configurações avançadas"
+
+msgid "History"
+msgstr "Histórico"
+
+msgid "Home"
+msgstr "Início"
+
+msgid "Icon theme."
+msgstr "Tema de ícones."
+
+msgid "Icons"
+msgstr "Ícones"
+
+msgid "Image not from Enthroned OS — system updates blocked"
+msgstr "Imagem que não é do Enthroned OS — atualizações do sistema bloqueadas"
+
+msgid "Image origin"
+msgstr "Origem da imagem"
+
+msgid "Immutable desktop system based on bootc/OCI and KDE Plasma."
+msgstr "Sistema desktop imutável baseado em bootc/OCI e KDE Plasma."
+
+msgid "Indeterminate indicators appear when the source does not provide a reliable "
+"percentage. No progress is simulated with a timer."
+msgstr "Indicadores indeterminados aparecem quando a fonte não fornece porcentagem "
+"confiável. Nenhum progresso é simulado por cronômetro."
+
+msgid "Indexing and folders excluded from search."
+msgstr "Indexação e pastas excluídas da busca."
+
+msgid "Individual preferences (icons, application themes, etc.) remain in the "
+"native KDE pages: Colors & Themes. Switching profiles applies Plasma's "
+"official look-and-feel mechanism; KDE does not guarantee full reversal of "
+"individual preferences."
+msgstr "Preferências individuais (ícones, temas de aplicativos etc.) continuam nas "
+"páginas nativas do KDE: Cores e Temas. A troca de perfil aplica o mecanismo "
+"oficial de look-and-feel do Plasma; a reversão integral de preferências "
+"individuais não é garantida pelo KDE."
+
+msgid "Installed on this system (user Flatpak application)."
+msgstr "Instalado neste sistema (aplicativo Flatpak do usuário)."
+
+msgid "Installed version"
+msgstr "Versão instalada"
+
+msgid "Integration with your phone."
+msgstr "Integração com o celular."
+
+msgid "It will be applied at the next restart."
+msgstr "Será aplicada na próxima reinicialização."
+
+msgid "Journal unavailable; progress limited to the unit state"
+msgstr "Journal indisponivel; progresso limitado ao estado da unidade"
+
+msgid "KDE Connect"
+msgstr "KDE Connect"
+
+msgid "Kernel"
+msgstr "Kernel"
+
+msgid "Kernel: %1"
+msgstr "Kernel: %1"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Keyboard layouts and shortcuts."
+msgstr "Layouts de teclado e atalhos."
+
+msgid "Language and region"
+msgstr "Idioma e região"
+
+msgid "Language and region (locale)"
+msgstr "Idioma e região (locale)"
+
+msgid "Last check this session: %1"
+msgstr "Última verificação nesta sessão: %1"
+
+msgid "Last operation failed"
+msgstr "Falha na última operação"
+
+msgid "Last run (timer)"
+msgstr "Última execução (timer)"
+
+msgid "Layouts, key repeat and shortcuts."
+msgstr "Layouts, repetição de teclas e atalhos."
+
+msgid "License of the original code"
+msgstr "Licença do código próprio"
+
+msgid "Light"
+msgstr "Claro"
+
+msgid "Light and dark theme"
+msgstr "Tema claro e escuro"
+
+msgid "Light or dark theme"
+msgstr "Tema claro ou escuro"
+
+msgid "Light theme, solid panel, menu on the left, clock with date (inspired by "
+"Zorin OS)."
+msgstr "Claro, painel sólido, menu à esquerda, relógio com data (referência Zorin "
+"OS)."
+
+msgid "Load scenario"
+msgstr "Carregar cenário"
+
+msgid "Magnifier and zoom"
+msgstr "Lupa e zoom"
+
+msgid "Memory (RAM)"
+msgstr "Memória (RAM)"
+
+msgid "Memory (RAM): %1"
+msgstr "Memória (RAM): %1"
+
+msgid "Module failed"
+msgstr "Módulo falhou"
+
+msgid "Module finished"
+msgstr "Módulo concluído"
+
+msgid "Module unavailable on this system."
+msgstr "Módulo indisponível neste sistema."
+
+msgid "Monitors, resolution, scale and night light."
+msgstr "Monitores, resolução, escala e luz noturna."
+
+msgid "More KDE settings"
+msgstr "Mais ajustes do KDE"
+
+msgid "Mouse"
+msgstr "Mouse"
+
+msgid "Mouse cursor"
+msgstr "Cursor do mouse"
+
+msgid "Mouse cursor (theme)"
+msgstr "Cursor do mouse (tema)"
+
+msgid "Name, picture, password and login options."
+msgstr "Nome, foto, senha e opções de login."
+
+msgid "Network"
+msgstr "Rede"
+
+msgid "Network & Internet"
+msgstr "Rede e Internet"
+
+msgid "Network connections"
+msgstr "Conexões de rede"
+
+msgid "Network name"
+msgstr "Nome na rede"
+
+msgid "Network proxy configuration."
+msgstr "Configuração de proxy da rede."
+
+msgid "NetworkManager did not respond in this environment."
+msgstr "NetworkManager não respondeu neste ambiente."
+
+msgid "New deployment staged"
+msgstr "Novo deployment preparado (staged)"
+
+msgid "New updates are available for Enthroned OS."
+msgstr "Novas atualizacoes estao disponiveis para o Enthroned OS."
+
+msgid "Next scheduled run: %1"
+msgstr "Próxima execução agendada: %1"
+
+msgid "No check this session yet."
+msgstr "Nenhuma verificação nesta sessão."
+
+msgid "No connection"
+msgstr "Sem conexão"
+
+msgid "No events recorded this session"
+msgstr "Nenhum evento registrado nesta sessão"
+
+msgid "No module can be opened in this environment"
+msgstr "Nenhum módulo pode ser aberto neste ambiente"
+
+msgid "No pending items listed right now"
+msgstr "Nenhum item pendente listado no momento"
+
+msgid "No previous deployment identifiable right now."
+msgstr "Nenhum deployment anterior identificável agora."
+
+msgid "No settings found"
+msgstr "Nenhuma configuração encontrada"
+
+msgid "No update events found in the allowed sources"
+msgstr "Nenhum evento de atualização encontrado nas fontes permitidas"
+
+msgid "No updates available"
+msgstr "Nenhuma atualizacao disponivel"
+
+msgid "No updates available right now."
+msgstr "Nenhuma atualização disponível no momento."
+
+msgid "None"
+msgstr "Nenhuma"
+
+msgid "Not enough network connection to check for updates."
+msgstr "Sem conexão de rede suficiente para verificar atualizações."
+
+msgid "Not installed. It is a voluntary option offered by Enthroned Welcome; "
+"nothing is installed without consent."
+msgstr "Não instalado. É uma opção voluntária oferecida pelo Enthroned Welcome; nada "
+"é instalado sem consentimento."
+
+msgid "Not verified"
+msgstr "Não verificado"
+
+msgid "Notification preferences per application."
+msgstr "Preferências de notificação por aplicativo."
+
+msgid "Notifications"
+msgstr "Notificações"
+
+msgid "Number and names of virtual desktops."
+msgstr "Número e nomes das áreas de trabalho."
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Open %1"
+msgstr "Abrir %1"
+
+msgid "Opens KDE Discover"
+msgstr "Abre o KDE Discover"
+
+msgid "Opens the KDE Discover app store"
+msgstr "Abre a loja de aplicativos KDE Discover"
+
+msgid "Opens the Network & Internet page"
+msgstr "Abre a página Rede e Internet"
+
+msgid "Opens the System updates page"
+msgstr "Abre a página Atualizações do sistema"
+
+msgid "Opens the base image tweaks module"
+msgstr "Abre o módulo de ajustes da imagem base"
+
+msgid "Opens the native KDE System Settings module"
+msgstr "Abre o módulo nativo do KDE System Settings"
+
+msgid "Opens the tweaks module that ships with the base image. Use it only if you "
+"know what you are changing; system preferences remain in the Enthroned "
+"pages."
+msgstr "Abre o módulo de ajustes que acompanha a imagem base. Use apenas se souber o "
+"que está alterando; as preferências do sistema continuam nas páginas do "
+"Enthroned."
+
+msgid "Operating system"
+msgstr "Sistema operacional"
+
+msgid "Orca is not installed on this system."
+msgstr "O Orca não está instalado neste sistema."
+
+msgid "Outside Enthroned OS"
+msgstr "Fora do Enthroned OS"
+
+msgid "Pair and manage Bluetooth devices."
+msgstr "Parear e gerenciar dispositivos Bluetooth."
+
+msgid "Pair devices"
+msgstr "Parear dispositivos"
+
+msgid "Password wallet (KWallet)"
+msgstr "Carteira de senhas (KWallet)"
+
+msgid "Permissions of installed Flatpak applications."
+msgstr "Permissões de aplicativos Flatpak instalados."
+
+msgid "Permissive"
+msgstr "Permissivo"
+
+msgid "Permissive (logs, but does not block)"
+msgstr "Permissivo (registra, mas não bloqueia)"
+
+msgid "Personalization"
+msgstr "Personalização"
+
+msgid "Power and battery"
+msgstr "Energia e bateria"
+
+msgid "Preparing new version"
+msgstr "Preparando nova versão"
+
+msgid "Previous deployment"
+msgstr "Deployment anterior"
+
+msgid "Previous deployment (rollback)"
+msgstr "Deployment anterior (rollback)"
+
+msgid "Printers"
+msgstr "Impressoras"
+
+msgid "Printers and print queues."
+msgstr "Impressoras e filas de impressão."
+
+msgid "Privacy"
+msgstr "Privacidade"
+
+msgid "Privacy & security"
+msgstr "Privacidade e segurança"
+
+msgid "Processor"
+msgstr "Processador"
+
+msgid "Processor: %1"
+msgstr "Processador: %1"
+
+msgid "Profile applied through the official Plasma mechanism."
+msgstr "Perfil aplicado pelo mecanismo oficial do Plasma."
+
+msgid "Profile, theme and wallpaper"
+msgstr "Perfil, tema e papel de parede"
+
+msgid "Programs that start with the session."
+msgstr "Programas que iniciam junto com a sessão."
+
+msgid "Project"
+msgstr "Projeto"
+
+msgid "Proxy"
+msgstr "Proxy"
+
+msgid "Querying the update mechanisms (read-only)."
+msgstr "Consultando os mecanismos de atualização (somente leitura)."
+
+msgid "Read-only (immutable system)"
+msgstr "Somente leitura (sistema imutável)"
+
+msgid "Real sources: the uupd journal (uupd.service and uupd-manual.service), the "
+"Flatpak history and operations started in this center. No success is "
+"inferred from a single log line."
+msgstr "Fontes reais: journal do uupd (uupd.service e uupd-manual.service), "
+"histórico do Flatpak e operações iniciadas nesta central. Nenhum sucesso é "
+"inferido de uma única linha de log."
+
+msgid "Recent files history"
+msgstr "Histórico de arquivos recentes"
+
+msgid "Recover to the previous deployment"
+msgstr "Recuperação para deployment anterior"
+
+msgid "Recovery (rollback)"
+msgstr "Recuperação (rollback)"
+
+msgid "Removable media"
+msgstr "Mídia removível"
+
+msgid "Reopen Enthroned Welcome"
+msgstr "Reabrir Enthroned Welcome"
+
+msgid "Reopens the Enthroned Welcome assistant"
+msgstr "Reabre o assistente Enthroned Welcome"
+
+msgid "Reported by NetworkManager (read-only)."
+msgstr "Informado pelo NetworkManager (somente leitura)."
+
+msgid "Resolution and scale"
+msgstr "Resolução e escala"
+
+msgid "Restart"
+msgstr "Reinicializar"
+
+msgid "Restart now"
+msgstr "Reinicializar agora"
+
+msgid "Restart requested"
+msgstr "Reinicialização solicitada"
+
+msgid "Restart requested by the user (confirmed in the UI)"
+msgstr "Reinicializacao solicitada pelo usuario (confirmada na UI)"
+
+msgid "Restart required"
+msgstr "Reinicialização necessária"
+
+msgid "Restarts the computer after confirmation to apply the new version"
+msgstr "Reinicia o computador após confirmação para aplicar a nova versão"
+
+msgid "Restore previous appearance"
+msgstr "Restaurar aparência anterior"
+
+msgid "Review the list below and choose “Update now”. Running it depends on system "
+"authorization."
+msgstr "Revise a lista abaixo e escolha “Atualizar agora”. A execução depende da "
+"autorização do sistema."
+
+msgid "Revisit the first-experience assistant any time, including the optional "
+"installation."
+msgstr "Revê o assistente de primeira experiência quando quiser, incluindo a "
+"instalação opcional."
+
+msgid "Rollback possible via bootc (a previous deployment is present on the "
+"system)."
+msgstr "Rollback possível via bootc (deployment anterior presente no sistema)."
+
+msgid "Run automatic update now"
+msgstr "Atualização automática agora"
+
+msgid "Run blocked by policy"
+msgstr "Execução bloqueada por política"
+
+msgid "Running a rollback is not available at this stage. The real system mechanism "
+"is bootc rollback (command line, with bootc's own authorization)."
+msgstr "A execução do rollback não está disponível nesta fase. O mecanismo real do "
+"sistema é o bootc rollback (linha de comando, com a autorização própria do "
+"bootc)."
+
+msgid "Running deployment"
+msgstr "Deployment em execução"
+
+msgid "Running deployment (booted)"
+msgstr "Deployment em execução (booted)"
+
+msgid "Running image"
+msgstr "Imagem em execução"
+
+msgid "Running updates is blocked by policy at this stage of the project (check "
+"only). The supported manual path remains the Enthroned OS uupd/ujust."
+msgstr "A execução de atualizações está bloqueada por política nesta fase do projeto "
+"(somente verificação). O caminho manual suportado continua sendo o "
+"uupd/ujust do Enthroned OS."
+
+msgid "Runs the update after confirmation and system authorization"
+msgstr "Executa a atualização após confirmação e autorização do sistema"
+
+msgid "SELinux"
+msgstr "SELinux"
+
+msgid "Schedule"
+msgstr "Agendamento"
+
+msgid "Scope of the operation:"
+msgstr "Escopo da operação:"
+
+msgid "Screen locking"
+msgstr "Bloqueio de tela"
+
+msgid "Screen magnification effects, in Desktop effects."
+msgstr "Efeitos de ampliação da tela, em Efeitos da área de trabalho."
+
+msgid "Screen reader (Orca)"
+msgstr "Leitor de tela (Orca)"
+
+msgid "Screen shown when the session starts."
+msgstr "Tela exibida ao iniciar a sessão."
+
+msgid "Search results"
+msgstr "Resultados da pesquisa"
+
+msgid "Search settings"
+msgstr "Pesquisar configurações"
+
+msgid "Search, install and remove applications with KDE Discover."
+msgstr "Pesquisar, instalar e remover aplicativos com o KDE Discover."
+
+msgid "Service unavailable"
+msgstr "Serviço indisponível"
+
+msgid "Set as wallpaper"
+msgstr "Definir como papel de parede"
+
+msgid "Sets %1 as the wallpaper using the Plasma tool"
+msgstr "Define %1 como papel de parede usando a ferramenta do Plasma"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Settings areas"
+msgstr "Áreas das configurações"
+
+msgid "Show"
+msgstr "Mostrar"
+
+msgid "Show advanced settings"
+msgstr "Mostrar configurações avançadas"
+
+msgid "Show or hide the navigation"
+msgstr "Mostrar ou ocultar a navegação"
+
+msgid "Shows or hides technical details of the image and deployments"
+msgstr "Mostra ou oculta detalhes técnicos da imagem e dos deployments"
+
+msgid "Sleep, screen off and power saving."
+msgstr "Suspensão, desligamento da tela e economia de energia."
+
+msgid "Sound"
+msgstr "Som"
+
+msgid "Sound alerts, sticky keys, keyboard and screen reader."
+msgstr "Sinal sonoro, teclas de aderência, teclado e leitor de tela."
+
+msgid "Source: /etc/uupd/config.json (or /usr/lib/uupd/config.json)."
+msgstr "Fonte: /etc/uupd/config.json (ou /usr/lib/uupd/config.json)."
+
+msgid "Specifications copied."
+msgstr "Especificações copiadas."
+
+msgid "Speed, buttons and scrolling."
+msgstr "Velocidade, botões e rolagem."
+
+msgid "Splash screen"
+msgstr "Tela de abertura"
+
+msgid "Stage"
+msgstr "Fase"
+
+msgid "Staged deployment"
+msgstr "Deployment preparado (staged)"
+
+msgid "Staged new version"
+msgstr "Nova versão preparada"
+
+msgid "Starts the Orca screen reader"
+msgstr "Inicia o leitor de tela Orca"
+
+msgid "Starts the Orca screen reader."
+msgstr "Inicia o leitor de tela Orca."
+
+msgid "Startup applications"
+msgstr "Aplicativos de inicialização"
+
+msgid "State machine spec unavailable"
+msgstr "Spec da maquina de estados indisponivel"
+
+msgid "Storage"
+msgstr "Armazenamento"
+
+msgid "Storage for passwords and keys."
+msgstr "Armazenamento de senhas e chaves."
+
+msgid "Storage: %1"
+msgstr "Armazenamento: %1"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "System (bootc image)"
+msgstr "Sistema (imagem bootc)"
+
+msgid "System (bootc)"
+msgstr "Sistema (bootc)"
+
+msgid "System defaults for the browser, file manager and more."
+msgstr "Navegador, gerenciador de arquivos e outros padrões do sistema."
+
+msgid "System font size and type."
+msgstr "Tamanho e tipo das fontes do sistema."
+
+msgid "System identity unavailable"
+msgstr "Identidade do sistema indisponível"
+
+msgid "System image (bootc)"
+msgstr "Imagem do sistema (bootc)"
+
+msgid "System image tweaks (advanced)"
+msgstr "Ajustes da imagem do sistema (avançado)"
+
+msgid "System language and date, number and currency formats."
+msgstr "Idioma do sistema e formatos de data, número e moeda."
+
+msgid "System network rules."
+msgstr "Regras de rede do sistema."
+
+msgid "System security"
+msgstr "Segurança do sistema"
+
+msgid "System security (SELinux and immutable model)"
+msgstr "Segurança do sistema (SELinux e modelo imutável)"
+
+msgid "System up to date"
+msgstr "Sistema atualizado"
+
+msgid "System updates"
+msgstr "Atualizações do sistema"
+
+msgid "System: %1 %2"
+msgstr "Sistema: %1 %2"
+
+msgid "Tapping, scrolling and gestures."
+msgstr "Toque, rolagem e gestos."
+
+msgid "Technical base"
+msgstr "Base técnica"
+
+msgid "The Enthroned Welcome assistant is not installed on this system."
+msgstr "O assistente Enthroned Welcome não está instalado neste sistema."
+
+msgid "The SELinux state could not be read in this environment."
+msgstr "O estado do SELinux não pôde ser lido neste ambiente."
+
+msgid "The app store was not found on this system."
+msgstr "A loja de aplicativos não foi encontrada neste sistema."
+
+msgid "The base image tweaks module is not installed on this system."
+msgstr "O módulo de ajustes da imagem base não está instalado neste sistema."
+
+msgid "The computer will restart to apply the staged new version. Save your work "
+"before continuing."
+msgstr "O computador será reiniciado para aplicar a nova versão preparada. Salve seu "
+"trabalho antes de continuar."
+
+msgid "The enthroned-profile tool is not installed on this system. The profiles "
+"remain available in System Settings → Colors & Themes → Look and Feel."
+msgstr "A ferramenta enthroned-profile não está instalada neste sistema. Os perfis "
+"continuam disponíveis em Configurações do Sistema → Cores e Temas → Look and "
+"Feel."
+
+msgid "The enthroned-profile tool was not found on this system."
+msgstr "Ferramenta enthroned-profile nao encontrada neste sistema."
+
+msgid "The last operation did not finish. Open “View details” to see what happened "
+"and try again whenever you want."
+msgstr "A última operação não foi concluída. Abra “Ver detalhes” para ver o que "
+"aconteceu e tente novamente quando quiser."
+
+msgid "The last operation ended with an error. See the details and try again."
+msgstr "A última operação terminou com erro. Veja os detalhes e tente novamente."
+
+msgid "The native module could not be detected in this environment, so nothing is "
+"opened. Nothing is simulated."
+msgstr "O módulo nativo não pôde ser detectado neste ambiente; nada é aberto. Nada é "
+"simulado."
+
+msgid "The new system version has been staged. Restart the computer to apply it."
+msgstr "A nova versão do sistema foi preparada. Reinicie o computador para "
+"aplicá-la."
+
+msgid "The new version image was downloaded. Preparation is still in progress."
+msgstr "A imagem da nova versao foi baixada. A preparacao continua em andamento."
+
+msgid "A restart is still required for the staged change. Save your work before restarting."
+msgstr "A reinicialização continua necessária para aplicar a alteração preparada. Salve seu trabalho antes de reiniciar."
+
+msgid "The new version was downloaded and is being prepared for the next boot."
+msgstr "A nova versão foi baixada e está sendo preparada para a próxima "
+"inicialização."
+
+msgid "The origin of the system image could not be confirmed (bootc unavailable). "
+"As a safety measure, system updates stay blocked until the origin can be "
+"read."
+msgstr "Não foi possível confirmar a origem da imagem do sistema (bootc "
+"indisponível). Por segurança, a atualização do sistema fica bloqueada até "
+"que a origem seja lida."
+
+msgid "The profile will be applied through Plasma's official mechanism "
+"(look-and-feel). The session may reapply the panel and desktop "
+"layout.\n\nYou can go back with “Restore previous appearance” or by choosing "
+"another profile/theme in System Settings."
+msgstr "O perfil será aplicado pelo mecanismo oficial do Plasma (look-and-feel). A "
+"sessão pode reaplicar o layout do painel e da área de trabalho.\n\nÉ "
+"possível voltar com “Restaurar aparência anterior” ou escolhendo outro "
+"perfil/tema nas Configurações do Sistema."
+
+msgid "The run is performed by the Enthroned OS uupd-manual.service via systemd "
+"D-Bus, with the existing polkit authorization (uupd.rules). The computer "
+"does NOT restart automatically; restarting is always your decision, later, "
+"in the center."
+msgstr "A execução é feita pelo serviço uupd-manual.service do Enthroned OS via "
+"systemd D-Bus, com a autorização polkit existente (uupd.rules). O computador "
+"NÃO reinicia automaticamente; a reinicialização é sempre uma decisão sua, "
+"depois, na central."
+
+msgid "The system state could not be determined yet. Use “Check for updates” or "
+"wait for the next check."
+msgstr "Não foi possível determinar o estado do sistema ainda. Use “Verificar "
+"atualizações” ou aguarde a próxima verificação."
+
+msgid "The system update ended with errors. See the details in System updates."
+msgstr "A atualizacao do sistema terminou com erros. Veja os detalhes na Central."
+
+msgid "The system update finished. Restart when you can to apply it."
+msgstr "A atualizacao do sistema foi concluida. Reinicie quando puder para aplicar."
+
+msgid "The systemd D-Bus is not reachable in this environment; the center works "
+"with local data only."
+msgstr "O systemd D-Bus não está acessível neste ambiente; a central opera apenas "
+"com dados locais."
+
+msgid "The update is being run by the Enthroned OS service (uupd-manual.service)."
+msgstr "A atualização está sendo executada pelo serviço do Enthroned OS "
+"(uupd-manual.service)."
+
+msgid "The upstream image Enthroned OS is based on."
+msgstr "Imagem upstream em que o Enthroned OS se baseia."
+
+msgid "The uupd configuration was not found on this system."
+msgstr "Configuração do uupd não encontrada neste sistema."
+
+msgid "There is a new image in the channel; the exact version is only known after "
+"the download."
+msgstr "Há uma nova imagem no canal; a versão exata só é conhecida após o download."
+
+msgid "Third parties: see docs/licensing/THIRD-PARTY.md in the project repository."
+msgstr "Terceiros: ver docs/licensing/THIRD-PARTY.md no repositório do projeto."
+
+msgid "This computer"
+msgstr "Este computador"
+
+msgid "This installation uses an image that is not from Enthroned OS. To avoid "
+"replacing the system with a generic image, system updates are blocked in "
+"this center."
+msgstr "Esta instalação usa uma imagem que não é do Enthroned OS. Para evitar trocar "
+"o sistema por uma imagem genérica, as atualizações do sistema ficam "
+"bloqueadas nesta central."
+
+msgid "This opens the native KDE settings module for this area. Everything shown "
+"there comes from the real system."
+msgstr "Abre o módulo nativo do KDE para esta área. Tudo o que aparece lá vem do "
+"sistema real."
+
+msgid "This page only opens native KDE modules; nothing is simulated."
+msgstr "Esta página apenas abre módulos nativos do KDE; nada é simulado."
+
+msgid "Time & language"
+msgstr "Hora e idioma"
+
+msgid "Time zone"
+msgstr "Fuso horário"
+
+msgid "Time zone and automatic clock adjustment."
+msgstr "Fuso horário e ajuste automático do relógio."
+
+msgid "Title bar, buttons and window borders."
+msgstr "Barra de título, botões e bordas das janelas."
+
+msgid "To be defined (pending product decision)"
+msgstr "A definir (decisão de produto pendente)"
+
+msgid "Touchpad"
+msgstr "Touchpad"
+
+msgid "Unavailable"
+msgstr "Indisponível"
+
+msgid "Unavailable (systemd D-Bus not reachable)"
+msgstr "Indisponível (systemd D-Bus não acessível)"
+
+msgid "Unknown state"
+msgstr "Estado desconhecido"
+
+msgid "Unrecognized journal line"
+msgstr "Linha de journal nao reconhecida"
+
+msgid "Unverified (development channel)"
+msgstr "Não verificada (canal de desenvolvimento)"
+
+msgid "Unverified: the channel does not declare an Enthroned reference yet "
+"(development)"
+msgstr "Não verificada: o canal ainda não declara um registro Enthroned "
+"(desenvolvimento)"
+
+msgid "Update available"
+msgstr "Atualização disponível"
+
+msgid "Update ended with errors (code %1)"
+msgstr "Atualizacao terminou com erros (codigo %1)"
+
+msgid "Update failed"
+msgstr "Falha na atualização"
+
+msgid "Update finished"
+msgstr "Atualização concluída"
+
+msgid "Update finished with errors"
+msgstr "Atualização com erros"
+
+msgid "Update history"
+msgstr "Histórico de atualizações"
+
+msgid "Update in progress"
+msgstr "Atualização em andamento"
+
+msgid "Update now"
+msgstr "Atualizar agora"
+
+msgid "Update run blocked by policy at this stage (mutation flags disabled)"
+msgstr "Execucao de atualizacao bloqueada por politica desta fase (mutaveis "
+"desativados)"
+
+msgid "Update run blocked: image origin unverified (%1)"
+msgstr "Execucao de atualizacao bloqueada: origem da imagem nao verificada (%1)"
+
+msgid "Update skipped: an operation is in progress"
+msgstr "Atualizacao ignorada: operacao em andamento"
+
+msgid "Update started"
+msgstr "Atualização iniciada"
+
+msgid "Update started via %1"
+msgstr "Atualizacao iniciada via %1"
+
+msgid "Updates available"
+msgstr "Atualizações disponíveis"
+
+msgid "Usable memory as reported by the kernel."
+msgstr "Memória utilizável informada pelo kernel."
+
+msgid "User accounts"
+msgstr "Contas de usuário"
+
+msgid "Version"
+msgstr "Versão"
+
+msgid "View details"
+msgstr "Ver detalhes"
+
+msgid "View full specifications"
+msgstr "Ver todas as especificações"
+
+msgid "Virtual desktops"
+msgstr "Áreas de trabalho virtuais"
+
+msgid "Volume and devices"
+msgstr "Volume e dispositivos"
+
+msgid "Wallpaper"
+msgstr "Papel de parede"
+
+msgid "Wallpaper not installed"
+msgstr "Papel de parede não instalado"
+
+msgid "Wallpaper unavailable on this system."
+msgstr "Papel de parede indisponivel neste sistema."
+
+msgid "Watch timeout reached"
+msgstr "Tempo limite de observacao atingido"
+
+msgid "What a rollback covers and what it does not:\n• Covers: the system "
+"deployment (base image + image packages), switching to the previous "
+"deployment at boot.\n• Does not cover: personal files, Flatpak applications, "
+"user extensions and most user settings — that data lives outside the image "
+"and is not reverted.\n• Requirements: a previous deployment on the system "
+"(bootc status) and a restart after the rollback.\n• Authorization: the run "
+"goes through the fixed enthroned-rollback.service unit via systemd, never "
+"through a command typed by the interface."
+msgstr "O que o rollback cobre e o que não cobre:\n• Cobre: o deployment do sistema "
+"(imagem base + pacotes da imagem), trocando para o deployment anterior no "
+"boot.\n• Não cobre: arquivos pessoais, aplicativos Flatpak, extensões do "
+"usuário e a maioria das configurações do usuário — esses dados ficam fora da "
+"imagem e não são revertidos.\n• Requisitos: haver um deployment anterior no "
+"sistema (bootc status) e reinicializar após o rollback.\n• Autorização: a "
+"execução passa pela unidade fixa enthroned-rollback.service via systemd, "
+"nunca por um comando digitado na interface."
+
+msgid "What each Flatpak application can access."
+msgstr "O que cada aplicativo Flatpak pode acessar."
+
+msgid "What the system remembers about files and applications used."
+msgstr "O que o sistema lembra de arquivos e aplicativos usados."
+
+msgid "What will be updated"
+msgstr "O que será atualizado"
+
+msgid "When and how the screen locks."
+msgstr "Quando e como a tela é bloqueada."
+
+msgid "Wi-Fi and connections"
+msgstr "Wi-Fi e conexões"
+
+msgid "Wi-Fi and network connections"
+msgstr "Wi-Fi e conexões de rede"
+
+msgid "Wi-Fi, Ethernet, VPN and saved networks."
+msgstr "Wi-Fi, Ethernet, VPN e redes salvas."
+
+msgid "Window decorations"
+msgstr "Decoração das janelas"
+
+msgid "Writable"
+msgstr "Gravável"
+
+msgid "about version license identity specifications hardware"
+msgstr "sobre o dispositivo versão licença identidade especificações hardware about "
+"version license identity specifications hardware"
+
+msgid "accent highlight scheme palette"
+msgstr "destaque accent esquema paleta accent highlight scheme palette"
+
+msgid "accessibility screen reader magnifier text contrast"
+msgstr "acessibilidade leitor de tela lupa texto contraste accessibility screen "
+"reader magnifier text contrast"
+
+msgid "accounts user password login"
+msgstr "contas usuário senha login accounts user password login"
+
+msgid "alerts do not disturb notifications"
+msgstr "avisos não perturbe alertas alerts do not disturb notifications"
+
+msgid "animations blur transparency shadows performance"
+msgstr "animações desfoque transparência sombras desempenho animations blur "
+"transparency shadows performance"
+
+msgid "applications programs default store discover flatpak"
+msgstr "aplicativos programas padrão loja discover flatpak applications programs "
+"default store discover flatpak"
+
+msgid "audio volume speaker microphone headset output input sound"
+msgstr "áudio volume alto-falante microfone fone saída entrada audio volume speaker "
+"microphone headset output input sound"
+
+msgid "back previous version deployment restore system"
+msgstr "voltar versão anterior deployment restaurar sistema back previous version "
+"deployment restore system"
+
+msgid "baloo indexing file search"
+msgstr "baloo indexação busca arquivos baloo indexing file search"
+
+msgid "battery suspend screen off power saving"
+msgstr "bateria suspensão desligar a tela economia battery suspend screen off power "
+"saving"
+
+msgid "bluetooth devices mouse keyboard touchpad printers"
+msgstr "bluetooth e dispositivos mouse teclado touchpad impressoras bluetooth "
+"devices mouse keyboard touchpad printers"
+
+msgid "bluetooth headphones pairing pair wireless devices"
+msgstr "bluetooth fones pareamento parear dispositivos sem fio bluetooth headphones "
+"pairing pair wireless devices"
+
+msgid "bootc is present, but the query failed: %1"
+msgstr "bootc presente, mas a consulta falhou: %1"
+
+msgid "bootc not found on this system"
+msgstr "bootc nao encontrado neste sistema"
+
+msgid "bootc status has no deployment data"
+msgstr "bootc status sem dados de deployment"
+
+msgid "bootc status returned invalid data"
+msgstr "bootc status retornou dados invalidos"
+
+msgid "bootc unavailable in this environment."
+msgstr "bootc indisponível neste ambiente."
+
+msgid "bootc was not found on this system."
+msgstr "bootc não encontrado neste sistema."
+
+msgid "The bootc status cache is not available in this boot."
+msgstr "O cache de status do bootc não está disponível nesta inicialização."
+
+msgid "classic modern profile layout panel start menu zorin windows 11"
+msgstr "classic modern perfil layout painel menu iniciar zorin windows 11 classic "
+"modern profile layout panel start menu zorin windows 11"
+
+msgid "clock time zone automatic time ntp calendar"
+msgstr "relógio fuso horário horário automático ntp calendário clock time zone "
+"automatic time ntp calendar"
+
+msgid "dark mode light color scheme theme night"
+msgstr "modo escuro claro esquema de cores tema noite dark mode light color scheme "
+"theme night"
+
+msgid "default browser email file manager terminal open with"
+msgstr "navegador padrão e-mail gerenciador de arquivos terminal abrir com default "
+"browser email file manager terminal open with"
+
+msgid "desktops workspaces multitasking"
+msgstr "desktops espaços de trabalho multitarefa desktops workspaces multitasking"
+
+msgid "disabled"
+msgstr "desabilitado"
+
+msgid "display monitor resolution scale brightness night light screen"
+msgstr "tela e resolução monitor resolução escala brilho luz noturna display monitor "
+"resolution scale brightness night light screen"
+
+msgid "enabled"
+msgstr "habilitado"
+
+msgid "enabled (uupd.timer)"
+msgstr "habilitado (uupd.timer)"
+
+msgid "failed"
+msgstr "falha"
+
+msgid "flatpak apps update applications"
+msgstr "flatpak apps atualizar aplicativos flatpak apps update applications"
+
+msgid "flatpak sandbox permissions access"
+msgstr "flatpak sandbox permissões acesso flatpak sandbox permissions access"
+
+msgid "gamepad joystick controller"
+msgstr "gamepad joystick controle gamepad joystick controller"
+
+msgid "home overview summary dashboard overview"
+msgstr "início visão geral resumo painel home overview summary dashboard overview"
+
+msgid "hostname computer name pc machine"
+msgstr "hostname nome do computador pc máquina hostname computer name pc machine"
+
+msgid "icon theme"
+msgstr "tema de ícones icon theme"
+
+msgid "in progress (uupd.service)"
+msgstr "em andamento (uupd.service)"
+
+msgid "install store discover flathub programs uninstall"
+msgstr "instalar loja discover flathub programas desinstalar install store discover "
+"flathub programs uninstall"
+
+msgid "kcmshell6 is not available in this environment. The native KDE modules "
+"cannot be opened from here."
+msgstr "kcmshell6 não está disponível neste ambiente. Os módulos nativos do KDE não "
+"podem ser abertos a partir daqui."
+
+msgid "language formats currency number region"
+msgstr "idioma português língua formatos moeda número região language formats "
+"currency number region"
+
+msgid "layout abnt2 shortcuts repeat keys"
+msgstr "layout abnt2 atalhos repetição teclas layout abnt2 shortcuts repeat keys"
+
+msgid "letter typography text size font"
+msgstr "letra tipografia tamanho do texto fonte letter typography text size font"
+
+msgid "lock password screen protection idle"
+msgstr "bloquear senha proteção de tela inatividade lock password screen protection "
+"idle"
+
+msgid "logind D-Bus unavailable"
+msgstr "logind D-Bus indisponivel"
+
+msgid "magnify magnifier zoom enlarge screen"
+msgstr "ampliar lupa zoom aumentar tela magnify magnifier zoom enlarge screen"
+
+msgid "monitor resolution scale brightness orientation refresh rate night light "
+"display"
+msgstr "monitor resolução escala brilho orientação taxa de atualização luz noturna "
+"tela monitor resolution scale brightness orientation refresh rate night "
+"light display"
+
+msgid "network internet wifi wi-fi ethernet vpn connection"
+msgstr "rede e internet internet wifi wi-fi ethernet vpn conexão network internet "
+"wifi wi-fi ethernet vpn connection"
+
+msgid "new image from the current channel"
+msgstr "nova imagem do canal atual"
+
+msgid "not detected"
+msgstr "não detectada"
+
+msgid "notifications do not disturb alerts"
+msgstr "notificações avisos não perturbe alertas notifications do not disturb alerts"
+
+msgid "passwords keys secrets kwallet"
+msgstr "senhas chaves segredos kwallet passwords keys secrets kwallet"
+
+msgid "personalization appearance profile classic modern light dark theme wallpaper "
+"colors"
+msgstr "personalização aparência perfil tema claro escuro papel de parede cores "
+"personalization appearance profile classic modern light dark theme wallpaper "
+"colors"
+
+msgid "pointer cursor speed click scrolling"
+msgstr "ponteiro cursor velocidade clique rolagem pointer cursor speed click "
+"scrolling"
+
+msgid "pointer cursor theme size"
+msgstr "ponteiro tema do cursor tamanho pointer cursor theme size"
+
+msgid "ports network security block connections"
+msgstr "portas rede segurança bloquear conexões ports network security block "
+"connections"
+
+msgid "present"
+msgstr "presente"
+
+msgid "print printing scanner"
+msgstr "imprimir impressão scanner print printing scanner"
+
+msgid "privacy recent history"
+msgstr "privacidade recentes histórico privacy recent history"
+
+msgid "privacy security locking selinux wallet firewall"
+msgstr "privacidade e segurança bloqueio selinux carteira firewall privacy security "
+"locking selinux wallet firewall"
+
+msgid "processor cpu memory ram gpu graphics card storage disk kernel architecture "
+"hardware"
+msgstr "processador cpu memória ram gpu placa de vídeo armazenamento disco kernel "
+"arquitetura hardware processor cpu memory ram gpu graphics card storage disk "
+"kernel architecture hardware"
+
+msgid "record log updated when"
+msgstr "registro log atualizado quando record log updated when"
+
+msgid "screen reader orca sticky keys sound alert disability"
+msgstr "leitor de tela orca teclas de aderência sinal sonoro deficiência screen "
+"reader orca sticky keys sound alert disability"
+
+msgid "selinux immutable read-only protection integrity"
+msgstr "selinux imutável somente leitura proteção integridade selinux immutable "
+"read-only protection integrity"
+
+msgid "sound audio volume speaker microphone headset"
+msgstr "som áudio volume alto-falante microfone fone sound audio volume speaker "
+"microphone headset"
+
+msgid "start with system autostart programs at login"
+msgstr "iniciar com o sistema autostart programas ao entrar start with system "
+"autostart programs at login"
+
+msgid "system display sound power notifications automatic update"
+msgstr "sistema tela som energia notificações atualização automática system display "
+"sound power notifications automatic update"
+
+msgid "system updates update check bootc uupd flatpak version restart"
+msgstr "atualizações do sistema atualizar versão reiniciar system updates update "
+"check bootc uupd flatpak version restart"
+
+msgid "system: %1 · flatpak: %2 · brew: %3 · distrobox: %4"
+msgstr "sistema: %1 · flatpak: %2 · brew: %3 · distrobox: %4"
+
+msgid "systemd D-Bus is unavailable"
+msgstr "D-Bus systemd indisponivel"
+
+msgid "systemd D-Bus unavailable in this environment"
+msgstr "systemd D-Bus indisponivel neste ambiente"
+
+msgid "tap natural scrolling gestures"
+msgstr "toque rolagem natural gestos tap natural scrolling gestures"
+
+msgid "time language date zone region formats"
+msgstr "hora e idioma data fuso região formatos time language date zone region "
+"formats"
+
+msgid "title bar buttons borders window appearance"
+msgstr "barra de título botões bordas janelas aparência das janelas title bar "
+"buttons borders window appearance"
+
+msgid "update system bootc uupd new version"
+msgstr "atualizar sistema bootc uupd versão nova update system bootc uupd new "
+"version"
+
+msgid "usb drive disk automount"
+msgstr "pendrive usb disco montagem automática usb drive disk automount"
+
+msgid "user password account profile picture login name"
+msgstr "usuário senha conta foto de perfil login nome user password account profile "
+"picture login name"
+
+msgid "uupd modules"
+msgstr "Módulos uupd"
+
+msgid "uupd schedule timer automatic update itself"
+msgstr "uupd agendamento timer automática atualizar sozinho uupd schedule timer "
+"automatic update itself"
+
+msgid "version channel build edition technical base fedora aurora"
+msgstr "versão canal build edição base técnica fedora aurora version channel build "
+"edition technical base fedora aurora"
+
+msgid "wallpaper background image desktop"
+msgstr "wallpaper fundo de tela imagem área de trabalho plano de fundo wallpaper "
+"background image desktop"
+
+msgid "welcome assistant first experience"
+msgstr "boas-vindas assistente primeira experiência welcome assistant first "
+"experience"
+
+msgid "wifi wi-fi internet wireless ethernet cable vpn network network password "
+"connect"
+msgstr "wifi wi-fi internet wireless sem fio ethernet cabo vpn rede senha da rede "
+"conectar wifi wi-fi internet wireless ethernet cable vpn network network "
+"password connect"
+
+msgid "• System image via bootc (uupd)\n• Flatpak applications\n• Brew and "
+"Distrobox, when installed and enabled in the uupd configuration"
+msgstr "• Imagem do sistema via bootc (uupd)\n• Aplicativos Flatpak\n• Brew e "
+"Distrobox, quando instalados e habilitados na configuração do uupd"
+
+# ---- Lote 8: real updater (system/app separation, rollback, preflight) ----
+
+msgid "Not verified yet"
+msgstr "Ainda não verificado"
+
+msgid "Update availability unknown"
+msgstr "Disponibilidade de atualizações desconhecida"
+
+msgid "Use “Check for updates” to verify current availability."
+msgstr "Use “Verificar atualizações” para consultar a disponibilidade atual."
+
+msgid "No check has been performed yet, so the system is NOT known to be up to "
+"date. Use “Check for updates” to verify."
+msgstr "Nenhuma verificação foi realizada ainda, portanto NÃO se sabe que o "
+"sistema está atualizado. Use “Verificar atualizações” para conferir."
+
+msgid "Review the list below and choose what to update: everything, system "
+"only or applications only."
+msgstr "Revise a lista abaixo e escolha o que atualizar: tudo, somente o "
+"sistema ou somente os aplicativos."
+
+msgid "The update is running through the official Enthroned OS mechanisms "
+"with real progress."
+msgstr "A atualização está sendo executada pelos mecanismos oficiais do "
+"Enthroned OS, com progresso real."
+
+msgid "The system is being reverted to the previous deployment (bootc rollback)."
+msgstr "O sistema está sendo revertido para o deployment anterior (bootc rollback)."
+
+msgid "A change is staged for the next boot. Restart the computer when "
+"convenient to apply it."
+msgstr "Uma mudança está preparada para a próxima inicialização. Reinicie o "
+"computador quando for conveniente para aplicá-la."
+
+msgid "Reverting to previous version"
+msgstr "Revertendo para a versão anterior"
+
+msgid "Running updates is blocked by policy at this stage of the project "
+"(check only). Mutation requires a validated deployment with the update "
+"authorization enabled."
+msgstr "A execução de atualizações está bloqueada por política nesta fase do "
+"projeto (somente verificação). A mutação exige um deployment validado com a "
+"autorização de atualização habilitada."
+
+msgid "Rollback started"
+msgstr "Rollback iniciado"
+
+msgid "Rollback finished"
+msgstr "Rollback concluído"
+
+msgid "Rollback failed"
+msgstr "Rollback falhou"
+
+msgid "Applications updated"
+msgstr "Aplicativos atualizados"
+
+msgid "Application update failed"
+msgstr "Atualização de aplicativos falhou"
+
+msgid "Operation refused by preflight"
+msgstr "Operação recusada pelo preflight"
+
+msgid "Staged image outside the Enthroned channel"
+msgstr "Imagem preparada fora do canal Enthroned"
+
+msgid "The official Enthroned OS update channel is not configured on this "
+"system yet: no published image origin is declared for this installation. "
+"The check still works with the development channel, and generic Fedora or "
+"CentOS images stay blocked; installing channel updates requires the "
+"official registry to be configured first."
+msgstr "O canal oficial de atualizações do Enthroned OS ainda não está "
+"configurado neste sistema: nenhuma origem de imagem publicada está declarada "
+"para esta instalação. A verificação continua funcionando com o canal de "
+"desenvolvimento, e imagens genéricas Fedora ou CentOS permanecem bloqueadas; "
+"instalar atualizações do canal exige que o registro oficial seja configurado "
+"antes."
+
+msgid "The staged deployment does not come from the Enthroned channel origin. "
+"New update runs are blocked until this is resolved; use the recovery option "
+"below or the command line if you know what you are doing."
+msgstr "O deployment preparado não vem da origem do canal Enthroned. Novas "
+"execuções de atualização ficam bloqueadas até que isso seja resolvido; use a "
+"opção de recuperação abaixo ou a linha de comando se você souber o que está "
+"fazendo."
+
+msgid "Runs the full update (system image and applications) after "
+"confirmation and system authorization"
+msgstr "Executa a atualização completa (imagem do sistema e aplicativos) após "
+"confirmação e autorização do sistema"
+
+msgid "System only"
+msgstr "Somente o sistema"
+
+msgid "Runs the system image update only, without touching applications"
+msgstr "Executa somente a atualização da imagem do sistema, sem tocar nos "
+"aplicativos"
+
+msgid "Applications only"
+msgstr "Somente os aplicativos"
+
+msgid "Updates the Flatpak applications only, without touching the system image"
+msgstr "Atualiza somente os aplicativos Flatpak, sem tocar na imagem do sistema"
+
+msgid "Last check"
+msgstr "Última verificação"
+
+msgid "Never (no check was performed)"
+msgstr "Nunca (nenhuma verificação foi realizada)"
+
+msgid "Check finished"
+msgstr "Verificação concluída"
+
+msgid "Check ended with failure"
+msgstr "Verificação terminou com falha"
+
+msgid "Connection"
+msgstr "Conexão"
+
+msgid "Offline"
+msgstr "Sem conexão"
+
+msgid "Unknown"
+msgstr "Desconhecido"
+
+msgid "No previous deployment is identifiable right now, so there is nothing "
+"to roll back to yet. After the first applied update the previous version "
+"stays available on the system."
+msgstr "Nenhum deployment anterior é identificável neste momento, então ainda "
+"não há para onde reverter. Após a primeira atualização aplicada, a versão "
+"anterior fica disponível no sistema."
+
+msgid "Running a rollback requires the update authorization and a confirmed "
+"image origin; both are currently unavailable, so the button below stays "
+"disabled."
+msgstr "Executar um rollback exige a autorização de atualização e uma origem "
+"de imagem confirmada; ambos estão indisponíveis neste momento, por isso o "
+"botão abaixo permanece desabilitado."
+
+msgid "Roll back to the previous version"
+msgstr "Reverter para a versão anterior"
+
+msgid "Prepares the previous deployment after confirmation; the switch "
+"happens at the next restart"
+msgstr "Prepara o deployment anterior após confirmação; a troca acontece na "
+"próxima reinicialização"
+
+msgid "Update system only"
+msgstr "Atualizar somente o sistema"
+
+msgid "• The Enthroned OS system image only (kernel, security fixes, Plasma, "
+"libraries, drivers and image applications), via a transactional bootc "
+"upgrade.\n• Applications are NOT touched; your files and settings stay in "
+"place."
+msgstr "• Somente a imagem do sistema do Enthroned OS (kernel, correções de "
+"segurança, Plasma, bibliotecas, drivers e aplicativos da imagem), via "
+"upgrade transacional do bootc.\n• Os aplicativos NÃO são tocados; seus "
+"arquivos e configurações permanecem no lugar."
+
+msgid "The run is performed by the fixed enthroned-system-update.service unit "
+"via systemd, authorized by the Enthroned polkit rule. The computer does NOT "
+"restart automatically; restarting is always your decision, later, in the "
+"center."
+msgstr "A execução é feita pela unidade fixa enthroned-system-update.service "
+"via systemd, autorizada pela regra polkit do Enthroned. O computador NÃO "
+"reinicia automaticamente; reiniciar é sempre decisão sua, depois, na "
+"central."
+
+msgid "Update applications only"
+msgstr "Atualizar somente os aplicativos"
+
+msgid "• Flatpak applications for the system installation and for your user "
+"installation.\n• The system image is NOT touched and no restart is needed. "
+"Nothing is removed; your app data stays in place."
+msgstr "• Aplicativos Flatpak da instalação do sistema e da instalação do seu "
+"usuário.\n• A imagem do sistema NÃO é tocada e não é necessário reiniciar. "
+"Nada é removido; os dados dos seus aplicativos permanecem no lugar."
+
+msgid "The system installation runs through the fixed "
+"enthroned-flatpak-update.service unit; your user installation runs in your "
+"session with a fixed command. Neither accepts arguments from this interface."
+msgstr "A instalação do sistema é executada pela unidade fixa "
+"enthroned-flatpak-update.service; a instalação do seu usuário roda na sua "
+"sessão com um comando fixo. Nenhuma aceita argumentos desta interface."
+
+msgid "The next boot will switch to the previous system deployment. Save your "
+"work before continuing."
+msgstr "A próxima inicialização trocará para o deployment anterior do sistema. "
+"Salve seu trabalho antes de continuar."
+
+msgid "Personal files, Flatpak applications and most settings are not "
+"reverted; the rollback covers the system image only. The run is performed by "
+"the fixed enthroned-rollback.service unit, and the switch happens at the "
+"restart you confirm afterwards."
+msgstr "Arquivos pessoais, aplicativos Flatpak e a maioria das configurações "
+"não são revertidos; o rollback cobre somente a imagem do sistema. A execução "
+"é feita pela unidade fixa enthroned-rollback.service, e a troca acontece na "
+"reinicialização que você confirmar depois."
+
+msgid "The staged deployment does not come from the Enthroned channel origin"
+msgstr "O deployment preparado não vem da origem do canal Enthroned"
+
+msgid "Updating user applications"
+msgstr "Atualizando aplicativos do usuário"
+
+msgid "Updating %1"
+msgstr "Atualizando %1"
+
+msgid "User applications updated"
+msgstr "Aplicativos do usuário atualizados"
+
+msgid "The application update ended with errors"
+msgstr "A atualização de aplicativos terminou com erros"
+
+msgid "The application update ended with errors (code %1)"
+msgstr "A atualização de aplicativos terminou com erros (código %1)"
+
+msgid "The application update could not start"
+msgstr "A atualização de aplicativos não pôde iniciar"
+
+msgid "Recovery prepared"
+msgstr "Recuperação preparada"
+
+msgid "The previous version is prepared. Restart the computer to switch to it."
+msgstr "A versão anterior está preparada. Reinicie o computador para trocar "
+"para ela."
+
+msgid "Rollback prepared"
+msgstr "Rollback preparado"
+
+msgid "Rollback ended with errors (code %1)"
+msgstr "Rollback terminou com erros (código %1)"
+
+msgid "Reverting to the previous version failed. See the details in System "
+"updates."
+msgstr "A reversão para a versão anterior falhou. Veja os detalhes em "
+"Atualizações do sistema."
+
+msgid "Not enough free space for the system update (the bootc storage needs "
+"at least 2 GiB free)"
+msgstr "Espaço livre insuficiente para a atualização do sistema (o "
+"armazenamento do bootc precisa de pelo menos 2 GiB livres)"
+
+msgid "Not enough free space for the application update (the storage for "
+"applications needs at least 1 GiB free)"
+msgstr "Espaço livre insuficiente para a atualização de aplicativos (o "
+"armazenamento de aplicativos precisa de pelo menos 1 GiB livres)"
+
+msgid "Operation skipped: another operation is in progress"
+msgstr "Operação ignorada: outra operação está em andamento"
+
+msgid "Update run blocked: the staged deployment does not come from the "
+"Enthroned channel origin"
+msgstr "Execução bloqueada: o deployment preparado não vem da origem do canal "
+"Enthroned"
+
+msgid "Operation skipped: an automatic update (uupd.service) is running in "
+"the background"
+msgstr "Operação ignorada: uma atualização automática (uupd.service) está "
+"sendo executada em segundo plano"
+
+msgid "System update finished"
+msgstr "Atualização do sistema concluída"
+
+msgid "System update ended with errors (code %1)"
+msgstr "Atualização do sistema terminou com erros (código %1)"
+
+msgid "System update started via %1"
+msgstr "Atualização do sistema iniciada via %1"
+
+msgid "Application update started via %1"
+msgstr "Atualização de aplicativos iniciada via %1"
+
+msgid "Rollback started via %1"
+msgstr "Rollback iniciado via %1"
+
+msgid "Rollback blocked: no previous deployment is available"
+msgstr "Rollback bloqueado: nenhum deployment anterior está disponível"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Set %1 as wallpaper"
+msgstr "Definir %1 como papel de parede"
+
+msgid "The official wallpapers also appear in KDE's own wallpaper picker, together with any image you choose yourself. Your choice is kept when you switch profiles."
+msgstr "Os papéis de parede oficiais também aparecem no seletor do próprio KDE, junto com qualquer imagem que você escolher. Sua escolha é mantida ao trocar de perfil."
+
+msgid "Enthroned OS"
+msgstr "Enthroned OS"
+
+msgid "Violet (Enthroned)"
+msgstr "Violeta (Enthroned)"
+
+msgid "Magenta"
+msgstr "Magenta"
+
+msgid "Red"
+msgstr "Vermelho"
+
+msgid "Orange"
+msgstr "Laranja"
+
+msgid "Gold"
+msgstr "Dourado"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Teal"
+msgstr "Azul-petróleo"
+
+msgid "Blue"
+msgstr "Azul"
+
+msgid "Violet"
+msgstr "Violeta"
+
+msgid "Yellow"
+msgstr "Amarelo"
+
+msgid "Cyan"
+msgstr "Ciano"
+
+msgid "Brown"
+msgstr "Marrom"
+
+msgid "Grey"
+msgstr "Cinza"
+
+msgid "Black"
+msgstr "Preto"
+
+msgid "General appearance"
+msgstr "Aparência geral"
+
+msgid "Your profile, panel and wallpaper stay as they are."
+msgstr "Seu perfil, painel e papel de parede não mudam."
+
+msgid "Accent color"
+msgstr "Cor de destaque"
+
+msgid "Used for selections, focus and the rectangle you drag to select icons. Kept when you switch between light and dark."
+msgstr "Usada em seleções, no foco e no retângulo que você arrasta para selecionar ícones. É mantida ao alternar entre claro e escuro."
+
+msgid "Preview of the accent color"
+msgstr "Pré-visualização da cor de destaque"
+
+msgid "Preview"
+msgstr "Pré-visualização"
+
+msgid "Selected item"
+msgstr "Item selecionado"
+
+msgid "Main button"
+msgstr "Botão principal"
+
+msgid "Focus ring"
+msgstr "Anel de foco"
+
+msgid "Apply accent color"
+msgstr "Aplicar cor de destaque"
+
+msgid "Restore default"
+msgstr "Restaurar padrão"
+
+msgid "Window borders"
+msgstr "Bordas das janelas"
+
+msgid "Thickness of the frame around windows."
+msgstr "Espessura da moldura ao redor das janelas."
+
+msgid "Automatic (default)"
+msgstr "Automática (padrão)"
+
+msgid "Thin"
+msgstr "Fina"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Wide"
+msgstr "Larga"
+
+msgid "Animation speed"
+msgstr "Velocidade das animações"
+
+msgid "How quickly windows and menus move."
+msgstr "Rapidez com que janelas e menus se movem."
+
+msgid "Standard (default)"
+msgstr "Padrão"
+
+msgid "Fast"
+msgstr "Rápida"
+
+msgid "Instant"
+msgstr "Instantânea"
+
+msgid "Desktop"
+msgstr "Área de trabalho"
+
+msgid "Use your own image…"
+msgstr "Usar sua própria imagem…"
+
+msgid "Choose a PNG, JPEG or WebP image from your files to use as the wallpaper"
+msgstr "Escolha uma imagem PNG, JPEG ou WebP dos seus arquivos para usar como papel de parede"
+
+msgid "Desktop icon size"
+msgstr "Tamanho dos ícones da área de trabalho"
+
+msgid "Size of the icons on the desktop. Kept when you switch profiles."
+msgstr "Tamanho dos ícones na área de trabalho. É mantido ao trocar de perfil."
+
+msgid "Available while the Plasma desktop is running."
+msgstr "Disponível enquanto a área de trabalho Plasma estiver em execução."
+
+msgid "Small"
+msgstr "Pequeno"
+
+msgid "Medium"
+msgstr "Médio"
+
+msgid "Large (default)"
+msgstr "Grande (padrão)"
+
+msgid "Extra large"
+msgstr "Extra grande"
+
+msgid "Files and folders"
+msgstr "Arquivos e pastas"
+
+msgid "Folder color"
+msgstr "Cor da pasta"
+
+msgid "Colors one folder, the same way Dolphin's “Set folder icon” does. Pick the folder, then a color."
+msgstr "Colore uma pasta, do mesmo modo que “Definir ícone da pasta” do Dolphin. Escolha a pasta e depois uma cor."
+
+msgid "Change folder…"
+msgstr "Mudar pasta…"
+
+msgid "Choose folder…"
+msgstr "Escolher pasta…"
+
+msgid "Folder: %1"
+msgstr "Pasta: %1"
+
+msgid "Restore default folder appearance"
+msgstr "Restaurar aparência padrão da pasta"
+
+msgid "Dolphin: view"
+msgstr "Dolphin: visualização"
+
+msgid "Applies to every folder you open from now on."
+msgstr "Vale para todas as pastas que você abrir daqui em diante."
+
+msgid "Details (default)"
+msgstr "Detalhes (padrão)"
+
+msgid "Compact"
+msgstr "Compacta"
+
+msgid "Dolphin view"
+msgstr "Visualização do Dolphin"
+
+msgid "Dolphin: icon size"
+msgstr "Dolphin: tamanho dos ícones"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Dolphin icon size"
+msgstr "Tamanho dos ícones do Dolphin"
+
+msgid "Show hidden files"
+msgstr "Mostrar arquivos ocultos"
+
+msgid "Files and folders whose names start with a dot."
+msgstr "Arquivos e pastas cujo nome começa com ponto."
+
+msgid "Show previews"
+msgstr "Mostrar pré-visualizações"
+
+msgid "Thumbnails for images, videos and documents."
+msgstr "Miniaturas de imagens, vídeos e documentos."
+
+msgid "Restore Dolphin defaults"
+msgstr "Restaurar padrões do Dolphin"
+
+msgid "Panel and Start menu"
+msgstr "Painel e Menu Iniciar"
+
+msgid "Panel size"
+msgstr "Tamanho do painel"
+
+msgid "Height of the panel; icons on it scale with it. Switching profile restores that profile's own panel."
+msgstr "Altura do painel; os ícones nele acompanham. Trocar de perfil restaura o painel do próprio perfil."
+
+msgid "The Start menu has one icon scale for both profiles, tuned for readability; KDE offers no setting for it, so none is shown here."
+msgstr "O Menu Iniciar usa a mesma escala de ícones nos dois perfis, ajustada para legibilidade; o KDE não oferece ajuste para isso, então nenhum controle é exibido aqui."
+
+msgid "Individual preferences (icons, application themes, etc.) remain in the native KDE pages: Colors & Themes."
+msgstr "As demais preferências (ícones, temas de aplicativos etc.) continuam nas páginas nativas do KDE: Cores e Temas."
+
+msgid "Choose a wallpaper"
+msgstr "Escolher papel de parede"
+
+msgid "Images (*.png *.jpg *.jpeg *.webp *.bmp *.gif)"
+msgstr "Imagens (*.png *.jpg *.jpeg *.webp *.bmp *.gif)"
+
+msgid "Choose a folder"
+msgstr "Escolher uma pasta"
+
+msgid "The profile is applied through Plasma's official mechanism. The panel, Start menu and clock are rebuilt for that profile.\n\nKept: your wallpaper, accent color, desktop icon size, folder colors and Dolphin settings.\nReset: the panel size and any panel or clock change you made by hand.\n\nYou can go back with “Restore previous appearance”."
+msgstr "O perfil é aplicado pelo mecanismo oficial do Plasma. O painel, o Menu Iniciar e o relógio são recriados para esse perfil.\n\nMantidos: papel de parede, cor de destaque, tamanho dos ícones da área de trabalho, cores das pastas e configurações do Dolphin.\nRedefinidos: o tamanho do painel e qualquer ajuste manual no painel ou no relógio.\n\nVocê pode voltar com “Restaurar aparência anterior”."
+
+msgid "Saved."
+msgstr "Salvo."
+
+msgid "Accent color (quick choice)"
+msgstr "Cor de destaque (escolha rápida)"
+
+msgid "accent highlight selection color rectangle drag personalize"
+msgstr "destaque cor selecao retangulo arrastar personalizar acento"
+
+msgid "folder color icon colorful dolphin directory"
+msgstr "pasta cor icone colorida dolphin diretorio"
+
+msgid "desktop icons size bigger smaller"
+msgstr "area de trabalho icones tamanho maior menor"
+
+msgid "Dolphin view and icon size"
+msgstr "Visualização e tamanho dos ícones do Dolphin"
+
+msgid "dolphin files view details icons compact hidden files previews thumbnails"
+msgstr "dolphin arquivos visualizacao detalhes icones compacta ocultos previews miniaturas"
+
+msgid "panel taskbar height size bigger smaller"
+msgstr "painel barra de tarefas altura tamanho maior menor"
+
+msgid "Accent color unavailable on this system."
+msgstr "Cor de destaque indisponível neste sistema."
+
+msgid "Unknown accent color."
+msgstr "Cor de destaque desconhecida."
+
+msgid "Choose an image file (PNG, JPEG, WebP, BMP or GIF)."
+msgstr "Escolha um arquivo de imagem (PNG, JPEG, WebP, BMP ou GIF)."
+
+msgid "Invalid value for this setting."
+msgstr "Valor inválido para esta configuração."
+
+msgid "Could not save the setting."
+msgstr "Não foi possível salvar a configuração."
+
+msgid "Could not restore the default."
+msgstr "Não foi possível restaurar o padrão."
+
+msgid "Choose a folder you can modify."
+msgstr "Escolha uma pasta que você possa modificar."
+
+msgid "Could not change the folder color."
+msgstr "Não foi possível mudar a cor da pasta."
+
+msgid "The Plasma desktop is not running."
+msgstr "A área de trabalho Plasma não está em execução."

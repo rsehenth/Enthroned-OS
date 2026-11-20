@@ -1,0 +1,24 @@
+{
+  "name": "usuario-existente",
+  "kind": "persistence",
+  "description": "F4.13.17 - an existing user's stored preferences are respected exactly: no phase change without an event and no automatic profile application.",
+  "cases": [
+    {
+      "label": "completed state kept as-is",
+      "json": "{\"version\":1,\"phase\":\"completed\",\"currentPage\":4,\"artcraftConsented\":false,\"manualReopen\":true}",
+      "expected": { "phase": "completed", "currentPage": 4, "artcraftConsented": false },
+      "autostartShouldShow": false
+    },
+    {
+      "label": "persisted dismissal with preferences",
+      "json": "{\"version\":1,\"phase\":\"dismissed\",\"currentPage\":3,\"artcraftConsented\":true,\"artcraftInstallState\":\"done\"}",
+      "expected": { "phase": "dismissed", "currentPage": 3, "artcraftConsented": true, "artcraftInstallState": "done" },
+      "autostartShouldShow": false
+    },
+    {
+      "label": "interrupted with consent kept as-is",
+      "json": "{\"version\":1,\"phase\":\"interrupted\",\"currentPage\":3,\"artcraftConsented\":true,\"artcraftInstallState\":\"pending\",\"manualReopen\":false}",
+      "expected": { "phase": "interrupted", "currentPage": 3, "artcraftConsented": true, "artcraftInstallState": "pending" }
+    }
+  ]
+}

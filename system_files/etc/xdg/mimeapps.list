@@ -1,0 +1,24 @@
+# Enthroned OS - system-wide default applications (F4, ADR-0006; Lote 6).
+# Declares the distribution defaults only. Per-user overrides in
+# ~/.config/mimeapps.list always win, so existing users keep their choices.
+# Brave is provided as a system Flatpak (com.brave.Browser, published on
+# Flathub by Brave Software); if it is not installed yet, the desktop falls
+# back to its default browser until provisioning completes.
+#
+# Lote 6: Flatpak installer files open in KDE Discover, the app store that is
+# guaranteed in the image (with the Flatpak backend, which registers exactly
+# these MIME types). A default association removes the ambiguous "select
+# application" dialog for .flatpak/.flatpakref/.flatpakrepo downloads;
+# Discover still shows its own install confirmation, origin and permissions
+# before anything is installed, and users can change the association later
+# (System Settings > Apps > Default Apps). No installer runs automatically.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Default Applications]
+x-scheme-handler/http=com.brave.Browser.desktop
+x-scheme-handler/https=com.brave.Browser.desktop
+text/html=com.brave.Browser.desktop
+application/vnd.flatpak=org.kde.discover.desktop
+application/vnd.flatpak.ref=org.kde.discover.desktop
+application/vnd.flatpak.repo=org.kde.discover.desktop

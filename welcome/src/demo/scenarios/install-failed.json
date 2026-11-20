@@ -1,0 +1,11 @@
+{
+  "name": "install-failed",
+  "description": "Demo fixture: the flatpak install step fails (NO real download or install happens in demo mode).",
+  "steps": [
+    { "state": "checking", "message": "Consultando o lançamento oficial do ArtCraft Launcher…" },
+    { "state": "downloading", "message": "Baixando o ArtCraft Launcher…", "progress": 100 },
+    { "state": "verifying", "message": "Verificando o pacote (SHA-256)…" },
+    { "state": "installing", "message": "Instalando no perfil do usuário (Flatpak)…" },
+    { "state": "failed", "message": "A instalação Flatpak falhou: erro simulado pelo cenário de demonstração." }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "downloading",
+  "title": "Download da atualizacao",
+  "description": "Atualizacao iniciada; progresso do bootc com porcentagem e bytes (janela 0-80%).",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada via uupd-manual.service", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando imagem", "severity": "Info", "progressPercent": 12.5, "bytesTransferred": 52428800, "bytesTotal": 419430400 },
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando org.mozilla.Firefox", "severity": "Info", "currentItem": "org.mozilla.Firefox" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando imagem", "severity": "Info", "progressPercent": 55.3, "bytesTransferred": 231735500, "bytesTotal": 419430400 }
+    ], "expectState": "updating" }
+  ],
+  "finalState": "updating"
+}

@@ -1,0 +1,104 @@
+#!/bin/bash
+# Enthroned OS - root-owned bootc status cache writer (Lote 10, P1-2).
+#
+# `bootc status` requires root (H4 evidence: "This command must be executed
+# as the root user"), so the unprivileged Update Center cannot query it. This
+# helper is the ONLY privileged step of the read path: one fixed, read-only
+# command with fixed arguments. The boot and post-update units publish a
+# world-readable JSON file under /run for BootcStatusProvider to consume.
+#
+# Guarantees:
+#   - strictly read-only: no upgrade/switch/rollback/rebase argument is
+#     accepted or executed; no user input is read (no arguments, no stdin);
+#   - no mutation: bootc status never stages or deploys anything;
+#   - the managed directory must be root-owned and not group/world writable
+#     before anything is published into it (defense in depth);
+#   - the temporary file is created exclusively (noclobber, never follows an
+#     existing symlink) inside the root-owned directory and published with an
+#     atomic rename; the previous file is preserved until a valid replacement
+#     exists, and is removed whenever a new publication fails so stale data
+#     is never presented as fresh;
+#   - any failure that prevents publication discards the cache and exits 1
+#     (Lote 10.2: the unit then shows up in `systemctl --failed` with the
+#     journal message - the absence of the cache file remains the reader-side
+#     unavailability signal).
+#
+# SPDX-License-Identifier: Apache-2.0
+set -u
+
+OUT_DIR=/run/enthroned
+OUT_FILE="${OUT_DIR}/bootc-status.json"
+MAX_BYTES=1048576
+
+# Publication failed: never leave the previous capture behind to be presented
+# as fresh data, and make the failure identifiable in the journal/unit state.
+fail() {
+	rm -f -- "${OUT_FILE}" 2>/dev/null
+	echo "enthroned-bootc-status: $*" >&2
+	exit 1
+}
+# Gate 12.1: a kill (timeout(1) in ExecStartPost, systemd stop) must not leave
+# the previous capture behind either. Bash runs the trap once the foreground
+# child returns, which `timeout 25 bootc` bounds.
+trap 'fail "terminated"' TERM INT HUP
+
+if ! mkdir -p "${OUT_DIR}" || [ -L "${OUT_DIR}" ] ||
+	! dir_owner="$(stat -c '%U' "${OUT_DIR}")" ||
+	! dir_mode="$(stat -c '%a' "${OUT_DIR}")" ||
+	[ "${dir_owner}" != root ] || [ "$((8#${dir_mode} & 8#22))" -ne 0 ]; then
+	echo "enthroned-bootc-status: unsafe cache directory ${OUT_DIR}" >&2
+	exit 1
+fi
+
+# Serialize the boot and post-update writers through publication. flock(2)
+# needs no write permission, so the lock file must be root-only (0600): a
+# world-readable one lets any local user hold the lock and block publication.
+# Failing to lock discards the cache like every other failure (Gate 12.1).
+old_umask="$(umask)"
+umask 077
+if ! exec 8>"${OUT_DIR}/.bootc-status.lock" ||
+	! chmod 0600 -- "${OUT_DIR}/.bootc-status.lock" ||
+	! flock -x -w 2 8; then
+	umask "${old_umask}"
+	fail "could not lock ${OUT_DIR}"
+fi
+umask "${old_umask}"
+
+if [ ! -x /usr/bin/bootc ]; then
+	# ConditionPathExists normally skips the unit entirely; treat a manual
+	# run on a bootc-less system the same way (benign, nothing to publish).
+	echo "enthroned-bootc-status: /usr/bin/bootc not found" >&2
+	rm -f -- "${OUT_FILE}" 2>/dev/null
+	exit 0
+fi
+
+# Match systemd's ExecMainExitTimestampMonotonic in microseconds. Record the
+# start of the query, so a delayed publication cannot freshen an old capture.
+capture_usec="$(/usr/bin/python3 -I -c 'import time; print(time.monotonic_ns() // 1000)' 8>&-)" ||
+	fail "cannot read the monotonic clock"
+if ! json="$(timeout 25 /usr/bin/bootc status --format=json 8>&- 2>/dev/null)"; then
+	fail "bootc status failed or timed out"
+fi
+[ -n "${json}" ] || fail "bootc status returned nothing"
+[ "${#json}" -le "${MAX_BYTES}" ] || fail "bootc status output exceeds ${MAX_BYTES} bytes"
+
+# Reader-side structure validation happens in BootcStatusProvider; here jq
+# (present in the Aurora base) gates obviously broken output:
+# booted must be an object whose image reference is a real string (Lote 10.2:
+# null/true/empty objects no longer pass).
+json="$(printf '%s' "${json}" | /usr/bin/jq -ce --arg capture "${capture_usec}" '
+	select(.status.booted.image.image.image | type == "string" and length > 0)
+	| .enthronedCaptureUsec = $capture
+' 8>&-)" || fail "bootc status JSON has no usable status.booted image reference"
+[ "${#json}" -lt "${MAX_BYTES}" ] || fail "serialized cache exceeds ${MAX_BYTES} bytes"
+
+# Exclusive creation (noclobber fails on any existing path, including a
+# planted symlink), then an atomic rename over the destination.
+tmp="${OUT_DIR}/.bootc-status.json.tmp.$$"
+if ! (set -o noclobber; printf '%s\n' "${json}" >"${tmp}") 2>/dev/null; then
+	fail "cannot create the temporary file in ${OUT_DIR}"
+fi
+if ! chmod 0644 "${tmp}" 2>/dev/null || ! mv -f -- "${tmp}" "${OUT_FILE}" 2>/dev/null; then
+	rm -f -- "${tmp}" 2>/dev/null
+	fail "cannot publish ${OUT_FILE}"
+fi

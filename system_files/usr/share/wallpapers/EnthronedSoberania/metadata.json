@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Id": "EnthronedSoberania",
+        "License": "LicenseRef-Enthroned-Artwork",
+        "Name": "Enthroned — Soberania",
+        "Name[pt_BR]": "Enthroned — Soberania",
+        "Description": "Enthroned OS official wallpaper: Soberania",
+        "Description[pt_BR]": "Papel de parede oficial do Enthroned OS: Soberania"
+    }
+}

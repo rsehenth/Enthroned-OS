@@ -1,0 +1,20 @@
+{
+  "name": "apps-update",
+  "title": "Atualizacao somente de aplicativos",
+  "description": "Flatpak: progresso por aplicativo e termino sem reinicializacao.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "flatpak", "operationId": "update-2", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao de aplicativos iniciada via enthroned-flatpak-update.service", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "update-2", "rawType": "flatpak-progress", "phase": "Downloading", "progressPercent": 55.0, "currentItem": "com.brave.Browser/x86_64/stable", "description": "Atualizando com.brave.Browser", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "update-2", "rawType": "flatpak-progress", "phase": "Downloading", "progressPercent": -1.0, "currentItem": "org.mozilla.firefox/x86_64/stable", "description": "Atualizando org.mozilla.firefox", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "update-2", "rawType": "flatpak-update-success", "phase": "Completed", "description": "Aplicativos atualizados", "severity": "Info" }
+    ], "expectState": "upToDate" }
+  ],
+  "finalState": "upToDate"
+}

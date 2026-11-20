@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "contract": "Enthroned Welcome first-run state machine (F4.7/F4.8)",
+  "states": [
+    "never-started",
+    "started",
+    "interrupted",
+    "completed",
+    "dismissed",
+    "optional-pending",
+    "optional-done",
+    "optional-failed"
+  ],
+  "initial": "never-started",
+  "event_types": [
+    "first-launch",
+    "resume",
+    "close",
+    "finish",
+    "dismiss",
+    "artcraft-consent",
+    "artcraft-decline",
+    "artcraft-success",
+    "artcraft-failure",
+    "artcraft-retry"
+  ],
+  "transitions": [
+    { "from": "never-started", "event": "first-launch", "to": "started" },
+    { "from": "started", "event": "close", "to": "interrupted" },
+    { "from": "optional-pending", "event": "close", "to": "interrupted" },
+    { "from": "optional-done", "event": "close", "to": "interrupted" },
+    { "from": "optional-failed", "event": "close", "to": "interrupted" },
+    { "from": "interrupted", "event": "resume", "to": "started" },
+    { "from": "started", "event": "finish", "to": "completed" },
+    { "from": "optional-pending", "event": "finish", "to": "completed" },
+    { "from": "optional-done", "event": "finish", "to": "completed" },
+    { "from": "optional-failed", "event": "finish", "to": "completed" },
+    { "from": "dismissed", "event": "finish", "to": "completed" },
+    { "from": "started", "event": "dismiss", "to": "dismissed" },
+    { "from": "optional-pending", "event": "dismiss", "to": "dismissed" },
+    { "from": "optional-done", "event": "dismiss", "to": "dismissed" },
+    { "from": "optional-failed", "event": "dismiss", "to": "dismissed" },
+    { "from": "started", "event": "artcraft-consent", "to": "optional-pending" },
+    { "from": "optional-pending", "event": "artcraft-decline", "to": "started" },
+    { "from": "optional-pending", "event": "artcraft-success", "to": "optional-done" },
+    { "from": "optional-pending", "event": "artcraft-failure", "to": "optional-failed" },
+    { "from": "optional-failed", "event": "artcraft-retry", "to": "optional-pending" }
+  ],
+  "launch_decision": {
+    "second_instance_policy": "second-instance-exits-without-ui",
+    "autostart_shows_unless": ["completed", "dismissed"],
+    "manual_shows": "always (including completed and dismissed)"
+  },
+  "persistence": {
+    "path": "$XDG_STATE_HOME/enthroned-os/welcome-state.json",
+    "atomic_write": true,
+    "invalid_policy": "reset-to-initial",
+    "fields": [
+      "version",
+      "phase",
+      "currentPage",
+      "artcraftConsented",
+      "artcraftInstallState",
+      "updatedAt"
+    ]
+  },
+  "apps_policy": {
+    "launch_action_requires_available": true,
+    "no_fake_controls": true,
+    "ids": {
+      "brave": "com.brave.Browser.desktop",
+      "discover": "org.kde.discover.desktop",
+      "artcraft_launcher": "ai.storyteller.artcraft-launcher"
+    }
+  },
+  "profile_policy": {
+    "apply_requires_explicit_action": true,
+    "no_auto_apply_on_open": true,
+    "mechanism": "/usr/bin/enthroned-profile (official KDE look-and-feel)"
+  },
+  "installer": {
+    "source": "https://github.com/storytold/craft-launcher (official releases)",
+    "asset_pattern": "artcraft-launcher-<ver>-linux-<arch>.flatpak",
+    "checksums": "SHA256SUMS.txt from the same release, always verified",
+    "method": "flatpak install --user (no root, no system mutation)",
+    "app_id": "ai.storyteller.artcraft-launcher",
+    "env_gate": "ENTHRONED_WELCOME_ALLOW_INSTALL",
+    "default_when_gate_closed": "blocked",
+    "consent_required": true,
+    "default_checkbox": false,
+    "no_silent_install": true,
+    "offline_behavior": "action fails with a clear message; the assistant stays usable",
+    "states": [
+      "idle",
+      "checking",
+      "downloading",
+      "verifying",
+      "installing",
+      "done",
+      "failed",
+      "blocked"
+    ],
+    "transitions": [
+      { "from": "idle", "event": "start-check", "to": "checking" },
+      { "from": "idle", "event": "gate-closed", "to": "blocked" },
+      { "from": "checking", "event": "download-found", "to": "downloading" },
+      { "from": "checking", "event": "unavailable", "to": "failed" },
+      { "from": "downloading", "event": "download-ok", "to": "verifying" },
+      { "from": "downloading", "event": "download-failed", "to": "failed" },
+      { "from": "verifying", "event": "checksum-ok", "to": "installing" },
+      { "from": "verifying", "event": "checksum-failed", "to": "failed" },
+      { "from": "installing", "event": "install-ok", "to": "done" },
+      { "from": "installing", "event": "install-failed", "to": "failed" }
+    ]
+  }
+}

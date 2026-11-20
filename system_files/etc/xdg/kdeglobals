@@ -1,0 +1,26 @@
+# Enthroned OS system-wide KDE defaults.
+# Shipped in /etc/xdg in the container; bootc handles deployment defaults.
+# This file is the system default /etc/xdg/kdeglobals and acts as a
+# system-wide default layer. Per-user settings (~/.config/kdeglobals) always
+# win. Only keys that make the Enthroned experience the default for NEW users
+# are set here; nothing else in the session is overridden.
+#
+# LookAndFeelPackage points at the Enthroned Classic look-and-feel package
+# (/usr/share/plasma/look-and-feel/org.enthroned.classic), which applies the
+# first-login defaults (colors, wallpaper, panel layout). Switching to the
+# Enthroned Modern profile is done with:
+#   plasma-apply-lookandfeel -a org.enthroned.modern
+# SPDX-License-Identifier: Apache-2.0
+
+[KDE]
+LookAndFeelPackage=org.enthroned.classic
+# Windows-like: single click selects, double click opens (KDE reads this key
+# from kdeglobals, not from kcminputrc).
+SingleClick=false
+
+[General]
+ColorScheme=EnthronedLight
+
+[Icons]
+# Enthroned folder identity (light variant); every other icon inherits Breeze.
+Theme=Enthroned

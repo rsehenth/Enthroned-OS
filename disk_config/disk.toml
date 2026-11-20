@@ -1,0 +1,5 @@
+# Disk image layout for bootc-image-builder (qcow2/raw outputs).
+# Matches the Universal Blue image-template default: 20 GiB minimum root.
+[[customizations.filesystem]]
+mountpoint = "/"
+minsize = "20 GiB"

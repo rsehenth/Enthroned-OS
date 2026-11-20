@@ -1,0 +1,22 @@
+[Unit]
+Description=Enthroned OS desktop context menu defaults
+# Runs before plasmashell reads the containment configuration, so the desktop
+# right-click menu (Enthroned Settings entry + separator cleanup) is correct
+# from the first login: the bindings are keyed by containment TYPE
+# ([ActionPlugins][0]), which libplasma reads every time a desktop
+# containment is created, including the one the default layout creates on
+# the first session. Idempotent and read-only once applied.
+Before=plasma-plasmashell.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/enthroned-desktop-actions
+# NP-01: plasmashell waits on this unit (Before=), so the helper must never
+# hold the session open-ended. The config writes are local and typically
+# finish in milliseconds; a stuck helper is killed within this budget and
+# the session continues (the menu falls back to the stock defaults). The
+# ordering itself is kept: it is what avoids the first-login config race.
+TimeoutStartSec=15s
+
+[Install]
+WantedBy=plasma-core.target

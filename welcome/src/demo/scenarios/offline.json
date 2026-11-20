@@ -1,0 +1,8 @@
+{
+  "name": "offline",
+  "description": "Demo fixture: no network during the check (NO real download or install happens in demo mode). The assistant stays usable.",
+  "steps": [
+    { "state": "checking", "message": "Consultando o lançamento oficial do ArtCraft Launcher…" },
+    { "state": "failed", "message": "Não foi possível consultar o lançamento oficial (sem internet ou serviço indisponível)." }
+  ]
+}

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Boas-vindas do Enthroned (primeiro login)
+Comment=Mostra o assistente de boas-vindas conforme o estado de cada usuário
+Comment[pt_BR]=Mostra o assistente de boas-vindas conforme o estado de cada usuário
+Exec=enthroned-welcome --autostart
+TryExec=enthroned-welcome
+Icon=org.enthroned.welcome
+Terminal=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2

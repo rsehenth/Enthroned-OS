@@ -1,0 +1,7 @@
+{
+  "name": "interrupcao-brusca",
+  "kind": "machine",
+  "description": "Lote 11B - unclean interruption (VM window closed / process killed): no close event ever arrives, the persisted phase stays 'started' with the page preserved, and the NEXT autostart still shows the assistant for resume.",
+  "steps": [{ "event": "notify" }, { "page": 1 }],
+  "expected": { "phase": "started", "finalPage": 1, "autostartShouldShow": true }
+}

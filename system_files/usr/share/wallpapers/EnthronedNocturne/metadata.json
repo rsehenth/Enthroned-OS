@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Id": "EnthronedNocturne",
+        "License": "LicenseRef-Enthroned-Artwork",
+        "Name": "Enthroned Nocturne",
+        "Name[pt_BR]": "Enthroned Nocturne",
+        "Description": "Enthroned OS dark wallpaper (Modern profile)",
+        "Description[pt_BR]": "Papel de parede escuro do Enthroned OS (perfil Modern)"
+    }
+}

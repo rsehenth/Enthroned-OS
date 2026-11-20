@@ -1,0 +1,20 @@
+{
+  "name": "origin-unauthorized",
+  "title": "Origem nao autorizada",
+  "description": "Deployment staged fora do canal Enthroned bloqueia novas operacoes de atualizacao.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check-1", "rawType": "engine-check-started", "phase": "Checking", "description": "Verificando atualizacoes", "severity": "Info" }
+    ], "expectState": "checking" },
+    { "delayMs": 300, "events": [
+      { "source": "check", "operationId": "check-1", "rawType": "check-update-available", "phase": "FetchingInfo", "description": "Atualizacao disponivel", "severity": "Info" }
+    ], "expectState": "updatesAvailable" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "bootc-status", "rawType": "staged-origin-blocked", "phase": "WaitingRestart", "description": "O deployment staged nao vem da origem do canal Enthroned", "severity": "Warning" }
+    ], "expectState": "updatesAvailable" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "update-1", "rawType": "update-rejected", "phase": "Initializing", "description": "Execucao bloqueada: deployment staged fora da origem do canal", "severity": "Warning" }
+    ], "expectState": "updatesAvailable" }
+  ],
+  "finalState": "updatesAvailable"
+}

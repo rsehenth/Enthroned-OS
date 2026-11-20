@@ -1,0 +1,23 @@
+# Enthroned OS - identity report script (enthroned-identity), pt_BR.
+# Compiled to /usr/share/locale/pt_BR/LC_MESSAGES/enthroned-identity.mo at image
+# build time (build_files/build.sh). The application source strings are
+# the English messages; ki18n/gettext loads this catalog according to the
+# session language (plasma-localerc, System Settings > Language & Region).
+#
+# SPDX-License-Identifier: Apache-2.0
+msgid ""
+msgstr ""
+"Project-Id-Version: enthroned-identity\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Base: Fedora Linux + KDE Plasma (bootc/OCI)"
+msgstr "Base: Fedora Linux + KDE Plasma (bootc/OCI)"
+
+msgid "Build de desenvolvimento - candidato a MVP."
+msgstr "Development build - MVP candidate."
+
+msgid "Canal"
+msgstr "Channel"

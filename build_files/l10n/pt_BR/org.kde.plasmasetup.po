@@ -1,0 +1,46 @@
+# Enthroned OS - Plasma Setup (first-boot wizard) branding strings, pt_BR.
+#
+# The Plasma Setup landing ("Welcome to Plasma Desktop" / "Begin Setup") and
+# the completion texts are compiled into the plasma-setup binary as English
+# ki18n source strings of the "org.kde.plasmasetup" domain. A translation
+# catalog is the supported mechanism to present the Enthroned identity; this
+# catalog is merged over the upstream pt_BR catalog at image build time
+# (build_files/build.sh), so only the branded strings are overridden and the
+# wizard keeps every other upstream translation.
+#
+# There is intentionally no en_US catalog: ki18n treats en_US as the source
+# language and never consults en_US catalogs, so English sessions always show
+# the compiled source text (registered as a limitation in the Lote 6 report).
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: org.kde.plasmasetup (Enthroned OS branding)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Welcome to<br/><b>Plasma Desktop</b>"
+msgstr "Bem-vindo ao<br/><b>Enthroned OS</b>"
+
+msgid "Welcome to<br/><b>Plasma Mobile</b>"
+msgstr "Bem-vindo ao<br/><b>Enthroned OS</b>"
+
+msgid "Welcome to Plasma Desktop"
+msgstr "Bem-vindo ao Enthroned OS"
+
+msgid "Begin Setup"
+msgstr "Começar configuração"
+
+msgctxt "%1 is the distro name"
+msgid "Your device is now ready.<br /><br />Enjoy <b>%1</b>!"
+msgstr "Seu dispositivo está pronto.<br /><br />Aproveite o <b>%1</b>!"
+
+msgctxt "%1 is the distro name"
+msgid ""
+"Your device is now ready.<br /><br />After clicking <b>Finish</b> you will "
+"be able to sign in to your new account.<br /><br />Enjoy <b>%1</b>!"
+msgstr ""
+"Seu dispositivo está pronto.<br /><br />Depois de clicar em <b>Concluir</b> "
+"será possível entrar com a sua nova conta.<br /><br />Aproveite o <b>%1</b>!"

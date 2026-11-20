@@ -1,0 +1,50 @@
+Enthroned OS Artwork License
+SPDX-License-Identifier: LicenseRef-Enthroned-Artwork
+
+Copyright (c) 2026 Enthroned OS Project. All rights reserved, except for the
+permissions granted below.
+
+Covered Works
+
+  - assets/
+  - system_files/usr/share/wallpapers/Enthroned*/
+  - system_files/usr/share/icons/hicolor/*/apps/org.enthroned.*.png
+  - settings/data/icons/
+  - welcome/data/icons/
+  - system_files/usr/share/enthroned-os/branding/
+  - system_files/usr/share/plasma/look-and-feel/org.enthroned.*/contents/splash/images/
+  - docs/screenshots/*.png
+
+The Covered Works are the Enthroned OS wallpapers, logos, wordmarks, character
+and scene artwork, the icons and images derived from them, and screenshots that
+reproduce them. They are not covered by the Apache-2.0 license that applies to
+the source code of this repository.
+
+Permissions
+
+Permission is granted, free of charge, to:
+
+  1. view, clone and fork this repository;
+  2. copy and redistribute the Covered Works unmodified, as part of unmodified
+     copies of this repository or of unmodified Enthroned OS images built from
+     it; and
+  3. use the Covered Works unmodified on your own computer.
+
+Restrictions
+
+Without prior written permission from the copyright holder, you may not:
+
+  1. modify the Covered Works or create derivative works from them;
+  2. use the Covered Works outside Enthroned OS, or sell or sublicense them on
+     their own;
+  3. use the Covered Works in a way that suggests endorsement by, or affiliation
+     with, the Enthroned OS Project.
+
+Forks and derivative distributions must remove or replace the Covered Works.
+The Enthroned name and logos are also subject to TRADEMARKS.md.
+
+Disclaimer
+
+THE COVERED WORKS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM THEIR USE.

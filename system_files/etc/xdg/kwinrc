@@ -1,0 +1,18 @@
+# Enthroned OS KWin defaults.
+# Preserves Fedora/Plasma Wayland settings and applies clean Windows 11-inspired
+# Breeze window chrome using native KDE decoration configuration.
+
+[Wayland]
+InputMethod[$e]=/usr/share/applications/org.kde.plasma.keyboard.desktop
+VirtualKeyboardEnabled=true
+EnablePrimarySelection=false
+
+[Plugins]
+blurEnabled=true
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
+BorderSize=Tiny
+ButtonsOnLeft=
+ButtonsOnRight=IAX

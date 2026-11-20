@@ -1,0 +1,12 @@
+# Enthroned OS default menu favorites.
+# Overrides /usr/share/kde-settings/kde-profile/default/xdg/kicker-extra-favoritesrc.
+#
+# Lote 6: "Boas-vindas ao Enthroned OS" (org.enthroned.welcome.desktop) is
+# pinned first for new users. This file is a config DEFAULT layer: once a user
+# removes an entry (or reorders their favorites) the choice is persisted in
+# the launcher's own configuration and Plasma never re-adds it; custom user
+# lists are never overwritten.
+
+[General]
+Prepend=org.enthroned.welcome.desktop;preferred://browser;org.enthroned.settings.desktop;org.kde.dolphin.desktop;preferred://terminal;org.kde.discover.desktop
+IgnoreDefaults=true

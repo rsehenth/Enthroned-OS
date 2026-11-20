@@ -1,0 +1,16 @@
+# Enthroned OS - retry timer for the first-boot Flatpak provisioning (F4).
+# Keeps retrying while the machine has no network during early boots; once
+# every listed app is installed the service exits instantly (marker check).
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=Enthroned OS - periodic retry of first-boot Flatpak provisioning
+
+[Timer]
+OnBootSec=8min
+OnUnitActiveSec=6h
+Persistent=true
+
+[Install]
+WantedBy=timers.target

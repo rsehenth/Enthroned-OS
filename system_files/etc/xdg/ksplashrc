@@ -1,0 +1,5 @@
+# Enthroned OS Plasma splash screen default.
+# Overrides /usr/share/kde-settings/kde-profile/default/xdg/ksplashrc.
+
+[KSplash]
+Theme=org.enthroned.classic

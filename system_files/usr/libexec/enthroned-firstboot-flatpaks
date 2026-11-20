@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+# Enthroned OS - install the default system Flatpaks listed in
+# /usr/share/enthroned-os/firstboot-flatpaks.txt (F4, ADR-0006; Lote 11A).
+#
+# Guarantees:
+#   - installs only app IDs from the shipped list, through the flatpak
+#     remotes already configured on the base image (Flathub on Aurora);
+#   - never adds or removes remotes, never uninstalls anything, never runs
+#     `flatpak repair` (it only recommends it), never runs downloaded scripts,
+#     never elevates beyond the system service it runs inside;
+#   - idempotent: apps already installed are skipped and recorded; the marker
+#     file gets an app ID only AFTER a verified install, so an interrupted or
+#     failed run is retried from scratch by the timer;
+#   - one run at a time (flock);
+#   - honest exit status (H5 P2-1): the original flatpak error is always
+#     logged, and the result is also written to ${MARKER_DIR}/firstboot-flatpaks.status.
+#
+# Exit codes (the unit treats only 0 and 75 as success):
+#     0  every listed app is installed (or flatpak is absent: nothing to do)
+#    75  deferred, nothing is broken: no network / no flathub remote yet /
+#        another run in progress (the timer retries)
+#    77  flatpak repository looks inconsistent (typically after an interrupted
+#        download); needs an operator: `flatpak repair --system`
+#     1  any other install failure
+#   143  interrupted by SIGTERM/SIGINT
+#
+# SPDX-License-Identifier: Apache-2.0
+
+set -uo pipefail
+
+LIST_FILE="/usr/share/enthroned-os/firstboot-flatpaks.txt"
+MARKER_DIR="/var/lib/enthroned-os"
+LOCK_FILE="/run/enthroned-firstboot-flatpaks.lock"
+MARKER_FILE="${MARKER_DIR}/firstboot-flatpaks.done"
+STATUS_FILE="${MARKER_DIR}/firstboot-flatpaks.status"
+
+log() { echo "enthroned-firstboot-flatpaks: $*"; }
+
+command -v flatpak >/dev/null 2>&1 || exit 0
+
+# Only one run at a time (timer vs. a manual run).
+exec 9>"${LOCK_FILE}" || { log "cannot open lock ${LOCK_FILE}"; exit 1; }
+if ! flock -n 9; then
+	log "another run is in progress; deferring."
+	exit 75
+fi
+
+mkdir -p "${MARKER_DIR}" || { log "cannot create ${MARKER_DIR}"; exit 1; }
+
+write_status() { # result [detail]
+	local tmp="${STATUS_FILE}.$$"
+	printf 'result=%s time=%s %s\n' "$1" "$(date -Is 2>/dev/null || date)" "${2:-}" >"${tmp}" 2>/dev/null &&
+		mv -f "${tmp}" "${STATUS_FILE}" 2>/dev/null
+	return 0
+}
+
+errfile="$(mktemp)" || exit 1
+child=""
+# shellcheck disable=SC2329  # invoked via trap
+cleanup() { rm -f "${errfile}"; }
+# shellcheck disable=SC2329  # invoked via trap
+on_signal() {
+	[[ -n "${child}" ]] && kill "${child}" 2>/dev/null
+	log "interrupted; nothing recorded for the app in flight, the timer will retry."
+	write_status interrupted
+	cleanup
+	exit 143
+}
+trap on_signal TERM INT
+trap cleanup EXIT
+
+if ! flatpak remotes --system 2>/dev/null | grep -qw flathub; then
+	log "no 'flathub' system remote yet; deferring (the base image configures it, this helper never adds remotes)."
+	write_status offline "reason=no-flathub-remote"
+	exit 75
+fi
+
+# Order matters: a damaged repository is reported before network wording.
+corrupt_re="Couldn't find file object|Failed to read commit|No such metadata object|[Cc]orrupt|checksum mismatch|Object .* not found"
+network_re="Could not resolve host|Could not connect to server|Timeout was reached|Temporary failure in name resolution|Network is unreachable|Unable to connect|Connection (timed out|refused|reset)|No route to host|Failed to connect|Operation timed out"
+
+rc_corrupt=0 rc_fail=0 rc_offline=0
+
+while IFS= read -r app; do
+	case "${app}" in
+		'' | \#*) continue ;;
+	esac
+
+	if grep -Fxq "${app}" "${MARKER_FILE}" 2>/dev/null; then
+		continue
+	fi
+
+	if flatpak info --system "${app}" >/dev/null 2>&1; then
+		log "${app} already installed."
+		printf '%s\n' "${app}" >>"${MARKER_FILE}"
+		continue
+	fi
+
+	log "installing ${app}..."
+	: >"${errfile}"
+	# 9>&-: the child must not inherit (and outlive us holding) the run lock.
+	flatpak install --system --noninteractive flathub "${app}" 2>"${errfile}" 9>&- &
+	child=$!
+	wait "${child}"
+	rc=$?
+	child=""
+	# Keep the original flatpak error visible in the journal.
+	[[ -s "${errfile}" ]] && cat "${errfile}" >&2
+
+	if [[ ${rc} -eq 0 ]] && flatpak info --system "${app}" >/dev/null 2>&1; then
+		printf '%s\n' "${app}" >>"${MARKER_FILE}"
+	elif grep -Eq "${corrupt_re}" "${errfile}"; then
+		log "ERROR: flatpak repository looks inconsistent while installing ${app} (interrupted download?). Not repairing automatically; an administrator should run: flatpak repair --system"
+		rc_corrupt=1
+	elif grep -Eq "${network_re}" "${errfile}"; then
+		log "no network while installing ${app}; deferring (the timer will retry)."
+		rc_offline=1
+	else
+		log "ERROR: could not install ${app} (flatpak exit ${rc}); see the flatpak error above. The timer will retry."
+		rc_fail=1
+	fi
+done <"${LIST_FILE}"
+
+if [[ ${rc_corrupt} -eq 1 ]]; then
+	write_status corrupt
+	exit 77
+elif [[ ${rc_fail} -eq 1 ]]; then
+	write_status failed
+	exit 1
+elif [[ ${rc_offline} -eq 1 ]]; then
+	write_status offline "reason=no-network"
+	exit 75
+fi
+write_status ok
+exit 0

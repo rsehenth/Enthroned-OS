@@ -1,0 +1,88 @@
+---
+name: Build disk image (requires published OCI)
+
+# F1.1 policy: manual runs only, and only against an image reference that
+# already exists in a registry (pushed deliberately after ADR-0002).
+#
+# Builder: official osbuild image-builder CLI container
+# (ghcr.io/osbuild/image-builder-cli), the successor of the archived
+# osbuild/bootc-image-builder-action (archived 2026-09-28). See ADR-0004.
+#
+# Produces a QCOW2 artifact as a workflow artifact. No S3, no registry push,
+# no login: the source image must be publicly pullable (or pre-pulled by a
+# runner with access). ISO generation is NOT automated in CI - see ADR-0004.
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_ref:
+        description: "Fully qualified OCI image reference (e.g. ghcr.io/<owner>/enthroned-os:f1-dev)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  disk:
+    name: Build qcow2
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Preflight
+        env:
+          IMAGE_REF_INPUT: ${{ inputs.image_ref }}
+        run: |
+          set -eu
+          if [[ "${IMAGE_REF_INPUT}" == localhost/* ]] || ! [[ "${IMAGE_REF_INPUT}" =~ ^[a-z0-9][a-z0-9.:-]*/[a-zA-Z0-9._/@:-]+$ ]]; then
+            echo "A fully qualified registry reference is required; localhost and control characters are refused." >&2
+            exit 1
+          fi
+          echo "IMAGE_REF=${IMAGE_REF_INPUT}" >> "${GITHUB_ENV}"
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7 (SHA pinned, inherited from upstream template)
+
+      - name: Pull source image into rootful storage
+        run: sudo podman pull "${IMAGE_REF}"
+
+      - name: Build QCOW2 with image-builder
+        run: |
+          mkdir -p output
+          sudo podman run --privileged --rm \
+            -v "$PWD/output:/output" \
+            -v /var/lib/containers/storage:/var/lib/containers/storage \
+            ghcr.io/osbuild/image-builder-cli:latest \
+            build --output-dir /output \
+            --bootc-ref "${IMAGE_REF}" \
+            --bootc-default-fs btrfs \
+            qcow2
+
+      - name: Fix output ownership
+        run: sudo chown -R "$(id -u):$(id -g)" output
+
+      - name: Stage and rename artifact
+        run: |
+          set -eu
+          STAMP="$(date -u +%Y%m%d)"
+          SHA="$(git rev-parse --short HEAD)"
+          mkdir -p dist
+          QCOW2="$(find output -type f -name '*.qcow2' 2>/dev/null | head -n 1 || true)"
+          if [ -z "${QCOW2}" ]; then
+            echo "No qcow2 artifact produced" >&2
+            exit 1
+          fi
+          cp "${QCOW2}" "dist/EnthronedOS-F1-dev-${SHA}-${STAMP}.qcow2"
+          find dist -maxdepth 1 -type f ! -name 'SHA256SUMS' -exec sha256sum {} + > dist/SHA256SUMS
+          ls -lah dist
+
+      - name: Upload disk artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2 (SHA pinned, inherited from upstream template)
+        with:
+          name: enthroned-os-f1-dev-qcow2
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14

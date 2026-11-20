@@ -1,0 +1,15 @@
+{
+  "name": "staged-recovery",
+  "title": "Recuperacao apos reinicializacao",
+  "description": "Depois de reiniciar com um deployment staged pendente, a central reconstroi o estado a partir do bootc status.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check", "rawType": "engine-check-started", "phase": "FetchingInfo", "description": "Verificacao iniciada", "severity": "Info" },
+      { "source": "check", "operationId": "check", "rawType": "check-no-update", "phase": "Completed", "description": "Nenhuma atualizacao disponivel", "severity": "Info" }
+    ], "expectState": "upToDate" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "bootc-status", "rawType": "staged-deployment-detected", "phase": "WaitingRestart", "description": "Novo deployment staged detectado", "severity": "Info" }
+    ], "expectState": "restartRequired" }
+  ],
+  "finalState": "restartRequired"
+}

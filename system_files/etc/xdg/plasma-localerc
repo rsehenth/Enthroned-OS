@@ -1,0 +1,19 @@
+# Enthroned OS system-wide session language and formats.
+# Shipped in /etc/xdg; startplasma (runStartupConfig) reads plasma-localerc to
+# set LANG and LANGUAGE for every graphical session, including the first-boot
+# Plasma Setup (plasma-setup) session. This is the supported KDE mechanism for
+# a distribution default language: a user's own ~/.config/plasma-localerc
+# (written by System Settings > Language & Region) always wins.
+#
+# pt_BR is the product default; the catalogs for Enthroned's own applications
+# are installed under /usr/share/locale/pt_BR/LC_MESSAGES (see build.sh), and
+# upstream KDE applications ship their own pt_BR catalogs. Switching to
+# English keeps working: the source strings of the Enthroned applications are
+# English and upstream catalogs fall back to English automatically.
+# SPDX-License-Identifier: Apache-2.0
+
+[Formats]
+LANG=pt_BR.UTF-8
+
+[Translations]
+LANGUAGE=pt_BR

@@ -1,0 +1,14 @@
+{
+  "name": "service-unavailable",
+  "title": "Servico indisponivel",
+  "description": "systemd D-Bus inacessivel e bootc status falha.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "boot", "rawType": "systemd-unavailable", "phase": "FetchingInfo", "description": "systemd D-Bus indisponivel", "severity": "Warning" }
+    ], "expectState": "serviceUnavailable" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "boot", "rawType": "bootc-status-unavailable", "phase": "FetchingInfo", "description": "Nao foi possivel consultar bootc status", "severity": "Warning" }
+    ], "expectState": "serviceUnavailable" }
+  ],
+  "finalState": "serviceUnavailable"
+}

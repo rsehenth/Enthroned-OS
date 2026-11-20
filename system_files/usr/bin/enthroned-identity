@@ -1,0 +1,102 @@
+#!/bin/sh
+# enthroned-identity - report the origin of the running Enthroned OS image.
+# Runs without root. Reads /usr/share/enthroned-os/identity.json and
+# /usr/share/enthroned-os/release-channel.json.
+
+set -eu
+
+IDENTITY_FILE="/usr/share/enthroned-os/identity.json"
+CHANNEL_FILE="/usr/share/enthroned-os/release-channel.json"
+
+usage() {
+    cat <<EOF
+Usage: enthroned-identity [--summary | --json | --about | --field NAME]
+
+  --summary   Human-readable identity report (default)
+  --json      Print identity.json followed by release-channel.json
+  --about     GUI message (kdialog) when available, otherwise stdout
+  --field N   Print top-level string field NAME (product_name, channel, ...)
+EOF
+}
+
+_field() {
+    _file=$1 _key=$2
+    if command -v jq >/dev/null 2>&1; then
+        jq -r --arg k "$_key" '.[$k] // empty' "$_file"
+    else
+        sed -n "s/.*\"$_key\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p" "$_file" | head -n 1
+    fi
+}
+
+_value() {
+    # Works for quoted strings, booleans and numbers.
+    _file=$1 _key=$2
+    if command -v jq >/dev/null 2>&1; then
+        jq -r --arg k "$_key" '.[$k] // empty' "$_file"
+    else
+        grep -o "\"$_key\"[[:space:]]*:[[:space:]]*[^,}]*" "$_file" |
+            head -n 1 | sed 's/^.*:[[:space:]]*//'
+    fi
+}
+
+[ -r "$IDENTITY_FILE" ] || {
+    echo "enthroned-identity: missing $IDENTITY_FILE" >&2
+    exit 1
+}
+
+case "${1:---summary}" in
+    --json)
+        cat "$IDENTITY_FILE"
+        [ -r "$CHANNEL_FILE" ] && cat "$CHANNEL_FILE"
+        ;;
+    --field)
+        [ $# -ge 2 ] || { usage >&2; exit 2; }
+        _field "$IDENTITY_FILE" "$2"
+        ;;
+    --about)
+        _product=$(_field "$IDENTITY_FILE" product_name)
+        _version=$(_field "$IDENTITY_FILE" version)
+        _channel=$(_field "$IDENTITY_FILE" channel)
+        # GUI strings go through GNU gettext (domain enthroned-identity; the
+        # pt_BR .mo is installed at image build time). Without the gettext
+        # binary the English source text is used as-is.
+        if command -v gettext >/dev/null 2>&1; then
+            TEXTDOMAIN=enthroned-identity
+            export TEXTDOMAIN
+            _tr() { gettext "$1"; }
+        else
+            _tr() { printf '%s' "$1"; }
+        fi
+        _msg="$_product $_version ($(_tr "Channel"): $_channel)
+$(_tr "Base: Fedora Linux + KDE Plasma (bootc/OCI)")
+$(_tr "Development build - MVP candidate.")"
+        if command -v kdialog >/dev/null 2>&1 &&
+            [ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ]; then
+            kdialog --title "$_product" --msgbox "$_msg"
+        else
+            printf '%s\n' "$_msg"
+        fi
+        ;;
+    --summary)
+        echo "Product:        $(_field "$IDENTITY_FILE" product_name)"
+        echo "Product ID:     $(_field "$IDENTITY_FILE" product_id)"
+        echo "Version:        $(_field "$IDENTITY_FILE" version)"
+        echo "Base:           $(_field "$IDENTITY_FILE" base)"
+        echo "Channel:        $(_field "$IDENTITY_FILE" channel)"
+        echo "Phase:          $(_field "$IDENTITY_FILE" phase)"
+        if command -v jq >/dev/null 2>&1; then
+            _up=$(jq -r '.upstream.image_reference // empty' "$IDENTITY_FILE")
+            [ -n "$_up" ] && echo "Upstream image: $_up"
+        fi
+        if [ -r "$CHANNEL_FILE" ]; then
+            echo "Production:     $(_value "$CHANNEL_FILE" production_ready)"
+        fi
+        ;;
+    -h | --help | help)
+        usage
+        ;;
+    *)
+        usage >&2
+        exit 2
+        ;;
+esac

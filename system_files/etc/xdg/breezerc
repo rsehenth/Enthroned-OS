@@ -1,0 +1,19 @@
+# Enthroned OS Breeze decoration defaults (Windows 11-inspired clean chrome).
+# Native KDecoration3/Breeze configuration; user-customizable in System Settings.
+
+[Common]
+OutlineEnabled=true
+OutlineCloseButton=false
+# Medium shadow: cheaper to composite than ShadowLarge (software rendering VMs).
+ShadowSize=ShadowMedium
+ShadowStrength=150
+ShadowColor=0,0,0
+
+[Windeco]
+RoundedCorners=true
+DrawBackgroundGradient=false
+DrawBorderOnMaximizedWindows=false
+TitleAlignment=AlignLeft
+# Lote 6: larger title bar buttons so minimize (dash), maximize (square) and
+# close (X) read clearly at a glance, Windows 11-like, in every resolution.
+ButtonSize=ButtonLarge

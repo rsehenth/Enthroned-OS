@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Id": "org.enthroned.modern",
+        "Name": "Enthroned Modern",
+        "Name[pt_BR]": "Enthroned Modern",
+        "Description": "Enthroned OS Modern desktop experience: dark theme, floating centered taskbar, Windows 11-inspired conventions on KDE Plasma",
+        "Description[pt_BR]": "Experiência de área de trabalho Enthroned OS Modern: tema escuro, barra de tarefas flutuante e centralizada, com convenções inspiradas no Windows 11 sobre o KDE Plasma",
+        "License": "Apache-2.0",
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Version": "0.1.0-dev",
+        "Category": ""
+    },
+    "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Logout;Lock;Suspend;Shutdown;Hibernate;",
+    "Keywords[pt_BR]": "Área de trabalho;Espaço de trabalho;Aparência;Aparência e Comportamento;Encerrar sessão;Bloquear;Suspender;Desligar;Hibernar;",
+    "X-Plasma-APIVersion": "2"
+}

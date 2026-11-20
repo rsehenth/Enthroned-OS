@@ -1,0 +1,7 @@
+{
+  "name": "primeiro-login",
+  "kind": "machine",
+  "description": "F4.13.1 - first appropriate login: never-started -> started.",
+  "steps": [{ "event": "notify" }],
+  "expected": { "phase": "started", "artcraftConsented": false, "autostartShouldShow": true }
+}

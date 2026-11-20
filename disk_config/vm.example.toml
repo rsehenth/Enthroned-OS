@@ -1,0 +1,12 @@
+# Copy to vm.local.toml (ignored by Git) and replace the password hash locally.
+# No default password, autologin, SSH access or root login is configured.
+[[customizations.user]]
+name = "enthroned"
+password = "REPLACE_WITH_LOCAL_HASH"
+groups = ["wheel"]
+
+# Smoke-test VM only: keep Aurora's automatic updater from starting real updates.
+[customizations.kernel]
+append = "systemd.mask=uupd.timer systemd.mask=uupd.service systemd.mask=uupd-manual.service"
+
+# Disk size and the default Btrfs layout are selected by the build recipe.

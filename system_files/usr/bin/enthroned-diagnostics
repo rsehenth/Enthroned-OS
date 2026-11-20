@@ -1,0 +1,219 @@
+#!/usr/bin/env bash
+# Enthroned OS - local, manual diagnostics collector for VM homologation.
+#
+# Guarantees:
+#   - read-only: no root, no network, no package/update/service/config changes;
+#   - nothing runs in the background or at boot; it only runs when you call it;
+#   - nothing is sent anywhere: output stays in
+#     ${XDG_STATE_HOME:-~/.local/state}/enthroned-os/diagnostics/<timestamp>/ (mode 700);
+#   - every file is capped (300 lines) and scrubbed of the home path, user name,
+#     e-mail addresses and password/token/secret/api-key values. No environment dump.
+#
+# Review the folder before sharing it.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+set -uo pipefail
+umask 077
+
+MAX_LINES=300
+CMD_TIMEOUT=20     # seconds per external command
+RUN_TIMEOUT=900    # seconds for "run" (the app is stopped after this)
+OUT_BASE="${XDG_STATE_HOME:-${HOME}/.local/state}/enthroned-os/diagnostics"
+
+usage() {
+	cat <<'EOF'
+Usage: enthroned-diagnostics [command]
+
+Commands:
+  collect            Snapshot of system, boot, processes, graphics and journal errors (default)
+  run settings       Launch Enthroned Settings with Qt/QML logging; records stderr with
+                     millisecond timestamps (time to first scene-graph line ~ window open)
+                     and CPU/RSS samples at 5 s and 20 s. Close the window to finish.
+  run welcome        Same for Enthroned Welcome (opened with --reopen so it always shows)
+  -h, --help         This help
+EOF
+}
+
+SED_ARGS=(-u -E -e "s#${HOME}#~#g"
+	-e 's/[[:alnum:]._%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,}/<email>/g'
+	-e 's/((pass(word|wd)?|token|secret|api[_-]?key|authorization)[=: ]+)[^ ]+/\1<redacted>/Ig')
+user_name="${USER:-}"
+if [ "${#user_name}" -gt 2 ]; then
+	SED_ARGS+=(-e "s/\\b${user_name}\\b/<user>/g")
+fi
+
+scrub() {
+	sed "${SED_ARGS[@]}"
+}
+
+# epoch_us: microseconds since the epoch as a pure integer. bash >= 5.3
+# formats EPOCHREALTIME with the locale decimal separator (pt_BR: comma),
+# which breaks $(( ... )) arithmetic ("value too great for base"); strip
+# every non-digit instead of relying on LC_NUMERIC (the child app keeps
+# the user's locale untouched).
+epoch_us() {
+	local t="${EPOCHREALTIME}"
+	printf '%s' "${t//[!0-9]/}"
+}
+
+# cap <file> <command...>: run a read-only command, keep at most MAX_LINES scrubbed lines.
+cap() {
+	local file="$1"
+	shift
+	if ! command -v "$1" >/dev/null 2>&1; then
+		printf '(unavailable: %s)\n' "$1" >>"${DIR}/${file}"
+		return 0
+	fi
+	{
+		printf '$ %s\n' "$*"
+		timeout "${CMD_TIMEOUT}" "$@" 2>&1 | head -n "${MAX_LINES}"
+		printf '\n'
+	} | scrub >>"${DIR}/${file}"
+}
+
+# capsh <file> <label> <shell pipeline>: same, for small pipelines built from read-only tools.
+capsh() {
+	local file="$1" label="$2" pipeline="$3"
+	{
+		printf '$ %s\n' "${label}"
+		timeout "$((CMD_TIMEOUT + 10))" bash -c "${pipeline}" 2>&1 | head -n "${MAX_LINES}"
+		printf '\n'
+	} | scrub >>"${DIR}/${file}"
+}
+
+new_dir() {
+	DIR="${OUT_BASE}/$(date +%Y%m%d-%H%M%S)"
+	if ! mkdir -p "${DIR}" || ! chmod 700 "${OUT_BASE}" "${DIR}"; then
+		printf 'ERROR: cannot create %s\n' "${DIR}" >&2
+		return 1
+	fi
+}
+
+cmd_collect() {
+	new_dir || exit 1
+
+	# --- system -----------------------------------------------------------
+	cap system.txt uname -r
+	capsh system.txt "os-release (identity fields)" "grep -E '^(NAME|PRETTY_NAME|VERSION_ID|VARIANT)=' /usr/lib/os-release"
+	cap system.txt systemd-detect-virt
+	cap system.txt enthroned-identity --summary
+	cap system.txt enthroned-profile status
+	cap system.txt nproc
+	cap system.txt free -m
+	cap system.txt uptime
+	capsh system.txt "session type" 'printf "XDG_SESSION_TYPE=%s XDG_CURRENT_DESKTOP=%s\n" "${XDG_SESSION_TYPE:-}" "${XDG_CURRENT_DESKTOP:-}"'
+
+	# --- boot / services (read-only) -------------------------------------------
+	# Lote 9 boot audit: separates the boot stages (systemd -> display manager)
+	# and keeps the known boot-gating candidates visible (ldconfig.service is
+	# Before=sysinit.target upstream, so it gates the first boot after each
+	# deployment; blame position alone does not prove gating).
+	cap boot.txt systemd-analyze --no-pager
+	capsh boot.txt "systemd-analyze blame | head -25" "systemd-analyze --no-pager blame | head -n 25"
+	capsh boot.txt "boot-gating candidates in blame" "systemd-analyze --no-pager blame | grep -iE 'ldconfig|wait-online|plymouth|NetworkManager|fsck|flatpak|enthroned|uupd' || echo 'none of the known candidates in blame'"
+	capsh boot.txt "systemd-analyze critical-chain" "systemd-analyze --no-pager critical-chain | head -n 30"
+	capsh boot.txt "systemd-analyze critical-chain graphical.target" "systemd-analyze --no-pager critical-chain graphical.target | head -n 30"
+	capsh boot.txt "boot stage (boot id, uptime, first-boot OOBE running?)" "cat /proc/sys/kernel/random/boot_id; uptime; pgrep -a plasma-setup || echo 'plasma-setup not running (first-boot OOBE not active in this boot)'"
+	cap boot.txt systemctl --failed --no-pager
+	cap boot.txt systemctl --user --failed --no-pager
+	capsh boot.txt "journalctl -b -p err (tail)" "journalctl -b --no-pager -q -p err | tail -n ${MAX_LINES}"
+	capsh boot.txt "journalctl --user -b -p err (tail)" "journalctl --user -b --no-pager -q -p err | tail -n ${MAX_LINES}"
+	capsh boot.txt "kernel messages of this boot (tail)" "journalctl -b --no-pager -q -k | tail -n ${MAX_LINES}"
+	capsh boot.txt "enthroned units" "systemctl --no-pager list-timers --all | grep -iE 'NEXT|enthroned|uupd'; systemctl --no-pager status enthroned-firstboot-flatpaks.service enthroned-update-check.service | head -n 40"
+	capsh boot.txt "enthroned user units" "systemctl --user --no-pager status enthroned-desktop-actions.service | head -n 15"
+
+	# --- processes / resources -----------------------------------------------
+	capsh processes.txt "top CPU" "ps -eo pid,ppid,pcpu,pmem,rss,etimes,comm --sort=-pcpu | head -n 20"
+	capsh processes.txt "top RSS" "ps -eo pid,ppid,pcpu,pmem,rss,etimes,comm --sort=-rss | head -n 20"
+	capsh processes.txt "duplicated user processes" 'ps -u "$USER" -o comm= | sort | uniq -c | sort -rn | awk "\$1>1" | head -n 15'
+	capsh processes.txt "welcome/setup/baloo/discover running?" 'pgrep -a -u "$USER" "plasma-welcome|enthroned|plasma-setup|baloo|discover|kdeconnect" || echo none'
+	capsh processes.txt "autostart entries" "ls -1 /etc/xdg/autostart ~/.config/autostart 2>/dev/null"
+
+	# --- graphics / compositor -------------------------------------------------
+	local qdbustool=qdbus6
+	command -v qdbus6 >/dev/null 2>&1 || qdbustool=qdbus-qt6
+	capsh graphics.txt "KWin support information (filtered)" "${qdbustool} org.kde.KWin /KWin supportInformation | grep -iE 'compositing|opengl|renderer|driver|gpu|vendor|llvmpipe|software|blur|platform|animation' | head -n 40"
+	capsh graphics.txt "kwin/kdeglobals relevant keys" "for k in 'kwinrc Compositing Backend' 'kwinrc Plugins blurEnabled' 'kdeglobals KDE AnimationDurationFactor'; do set -- \$k; printf '%s/%s/%s=%s\n' \"\$1\" \"\$2\" \"\$3\" \"\$(kreadconfig6 --file \$1 --group \$2 --key \$3)\"; done"
+	cap graphics.txt eglinfo -B
+	cap graphics.txt glxinfo -B
+	capsh graphics.txt "drm devices" "ls /sys/class/drm"
+
+	# --- journal: errors of this boot ---------------------------------------
+	local filter='plasmashell|kwin|qml|enthroned|plasma-setup|plasma-apply|drkonqi|segfault|coredump'
+	local bad='error|warn|fail|crash|segfault|TypeError|ReferenceError|Unable to assign|abort|not defined|is not a type'
+	capsh journal.txt "journalctl -b -p warning (tail)" "journalctl -b --no-pager -q -p warning | tail -n ${MAX_LINES}"
+	capsh journal.txt "plasma/enthroned/qml problems (system+user journal, tail)" "{ journalctl -b --no-pager -q; journalctl --user -b --no-pager -q; } 2>&1 | grep -iE '${filter}' | grep -iE '${bad}' | tail -n ${MAX_LINES}"
+	cap journal.txt coredumpctl list --no-pager
+
+	printf 'Diagnostics saved in: %s\n' "${DIR}"
+	printf 'Files are capped and scrubbed, but review them before sharing.\n'
+}
+
+cmd_run() {
+	local app="${1:-}" bin
+	shift || true
+	local -a args=()
+	case "${app}" in
+		settings) bin=enthroned-settings ;;
+		welcome)
+			bin=enthroned-welcome
+			args=(--reopen)
+			;;
+		*)
+			usage >&2
+			exit 2
+			;;
+	esac
+	command -v "${bin}" >/dev/null 2>&1 || {
+		printf 'ERROR: %s not found in PATH.\n' "${bin}" >&2
+		exit 3
+	}
+	new_dir || exit 1
+	local log="${DIR}/run-${app}.log"
+	local start
+	start="$(epoch_us)"
+
+	local samples="${DIR}/run-${app}-samples.txt"
+	(
+		sleep 5
+		ps -C "${bin}" -o pid,pcpu,rss,etimes,comm
+		sleep 15
+		ps -C "${bin}" -o pid,pcpu,rss,etimes,comm
+	) >"${samples}" 2>&1 &
+	local sampler=$!
+
+	# QSG_INFO prints the render backend/driver once the first window is exposed.
+	# Keep reading after the cap (never close the pipe: a SIGPIPE would kill the app).
+	local count=0
+	QSG_INFO=1 QT_FORCE_STDERR_LOGGING=1 timeout "${RUN_TIMEOUT}" "${bin}" "${args[@]}" "$@" 2>&1 | scrub | while IFS= read -r line; do
+		count=$((count + 1))
+		[ "${count}" -le 2000 ] || continue
+		now="$(epoch_us)"
+		printf '[+%6d ms] %s\n' "$(((now - start) / 1000))" "${line}"
+	done >"${log}"
+	printf '[exit after %d ms]\n' "$((($(epoch_us) - start) / 1000))" >>"${log}"
+
+	pkill -P "${sampler}" 2>/dev/null
+	kill "${sampler}" 2>/dev/null
+	wait "${sampler}" 2>/dev/null
+	scrub <"${samples}" >"${samples}.tmp" && mv "${samples}.tmp" "${samples}"
+	printf 'Run log saved in: %s\n' "${DIR}"
+}
+
+main() {
+	case "${1:-collect}" in
+		collect) cmd_collect ;;
+		run)
+			shift
+			cmd_run "$@"
+			;;
+		-h | --help | help) usage ;;
+		*)
+			usage >&2
+			exit 2
+			;;
+	esac
+}
+
+main "$@"

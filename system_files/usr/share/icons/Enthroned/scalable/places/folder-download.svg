@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <path d="M16 38c0-4.4 3.6-8 8-8h26c2.1 0 4.1.8 5.7 2.3L62 38h42c4.4 0 8 3.6 8 8v46c0 4.4-3.6 8-8 8H24c-4.4 0-8-3.6-8-8Z" fill="#5E2596"/>
+  <path d="M16 52h96v40c0 4.4-3.6 8-8 8H24c-4.4 0-8-3.6-8-8Z" fill="#8B38C2"/>
+  <path d="M16 52h96v3H16Z" fill="#C79BEA"/>
+  <!-- Download arrow into a tray -->
+  <g fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 56v26"/>
+    <path d="M52 70l12 12 12-12"/>
+    <path d="M48 92h32"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+{
+  "name": "ciclo-completo-retomada",
+  "kind": "machine",
+  "description": "Lote 11B - full lifecycle: first login, interrupted walk, resume on a later login, conclusion. After completion the autostart never shows again while a manual reopen still does, and the completed phase is never reset by a launch.",
+  "steps": [
+    { "event": "notify" },
+    { "page": 2 },
+    { "event": "close" },
+    { "event": "notify" },
+    { "page": 4 },
+    { "event": "finish" },
+    { "event": "notify" }
+  ],
+  "expected": { "phase": "completed", "finalPage": 4, "autostartShouldShow": false }
+}

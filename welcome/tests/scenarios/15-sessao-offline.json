@@ -1,0 +1,17 @@
+{
+  "name": "sessao-offline",
+  "kind": "machine",
+  "installer": {
+    "gate": "open",
+    "steps": ["start-check", "unavailable"],
+    "note": "no network during the check"
+  },
+  "description": "F4.13.15 - offline session: the optional install fails cleanly, the walkthrough still completes and autostart stops; the option remains accessible via manual reopen.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }, { "event": "artcraft-failure" }, { "page": 4 }, { "event": "finish" }],
+  "expected": {
+    "phase": "completed",
+    "artcraftConsented": true,
+    "artcraftInstallState": "failed",
+    "autostartShouldShow": false
+  }
+}

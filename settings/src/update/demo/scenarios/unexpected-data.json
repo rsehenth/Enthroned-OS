@@ -1,0 +1,29 @@
+{
+  "name": "unexpected-data",
+  "title": "Dados inesperados",
+  "description": "Linhas de journal (formato journalctl -o json) malformadas e mensagens desconhecidas nao alteram estados. Amostras reais do formato slog JSON do uupd (--json) dentro do envelope MESSAGE.",
+  "journalLines": [
+    "{\"__REALTIME_TIMESTAMP\":\"1763260801000000\",\"MESSAGE\":\"{\\\"time\\\":\\\"2026-11-16T04:00:01Z\\\",\\\"level\\\":\\\"INFO\\\",\\\"msg\\\":\\\"System module has completed.\\\",\\\"module\\\":\\\"system\\\"}\"}",
+    "{\"__REALTIME_TIMESTAMP\":\"1763260802000000\",\"MESSAGE\":\"{\\\"level\\\":\\\"ERROR\\\",\\\"msg\\\":\\\"Flatpak module has failed.\\\",\\\"module\\\":\\\"flatpak\\\"}\"}",
+    "isto nao e um json",
+    "{\"_SYSTEMD_UNIT\":\"uupd-manual.service\"}",
+    "{\"__REALTIME_TIMESTAMP\":\"1763260803000000\",\"MESSAGE\":\"{\\\"level\\\":\\\"DEBUG\\\",\\\"msg\\\":\\\"Command output\\\",\\\"module\\\":\\\"system\\\",\\\"status\\\":\\\"running\\\",\\\"output\\\":\\\"{\\\\\\\"type\\\\\\\":\\\\\\\"ProgressBytes\\\\\\\",\\\\\\\"task\\\\\\\":\\\\\\\"pulling\\\\\\\",\\\\\\\"bytes\\\\\\\":100,\\\\\\\"bytesTotal\\\\\\\":400}\\\"}\"}",
+    "{\"__REALTIME_TIMESTAMP\":\"1763260804000000\",\"MESSAGE\":\"{\\\"level\\\":\\\"INFO\\\",\\\"msg\\\":\\\"Updates Completed Successfully\\\"}\"}",
+    "{\"__REALTIME_TIMESTAMP\":\"1763260805000000\",\"MESSAGE\":\"{\\\"level\\\":\\\"INFO\\\",\\\"msg\\\":\\\"Applying System Update\\\"}\"}"
+  ],
+  "expectedEvents": [
+    { "rawType": "module-completed", "source": "system" },
+    { "rawType": "module-failed", "source": "flatpak" },
+    { "rawType": "unknown-data" },
+    { "rawType": "unknown-data" },
+    { "rawType": "bootc-progress", "phase": "Downloading", "progressPercent": 20.0 },
+    { "rawType": "update-success" }
+  ],
+  "expectedIgnored": 1,
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "boot", "rawType": "bootc-status-ok", "phase": "FetchingInfo", "description": "Status consultado", "severity": "Info" }
+    ], "expectState": "unknown" }
+  ],
+  "finalState": "unknown"
+}

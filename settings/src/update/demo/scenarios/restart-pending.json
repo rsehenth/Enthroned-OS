@@ -1,0 +1,14 @@
+{
+  "name": "restart-pending",
+  "title": "Reinicializacao necessaria",
+  "description": "Update conclui com sucesso e o deployment fica staged.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "update-success", "phase": "Validating", "description": "Comando encerrado; status do deployment pendente", "severity": "Info" }
+    ], "expectState": "deploymentPending" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "staged-deployment-detected", "phase": "WaitingRestart", "description": "Novo deployment preparado para a proxima inicializacao", "severity": "Info" }
+    ], "expectState": "restartRequired" }
+  ],
+  "finalState": "restartRequired"
+}

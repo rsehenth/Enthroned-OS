@@ -1,0 +1,56 @@
+---
+name: Validate repository
+
+# F1 policy: validation only. This workflow never builds images for publishing
+# and never touches a registry. Publishing is blocked until the ADR-0002 steps
+# (namespace, cosign key, explicit human approval) are completed.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint shell, Just and repository policy
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7 (SHA pinned, inherited from upstream template)
+
+      - name: Install just
+        uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0 (SHA pinned, inherited from upstream template)
+
+      - name: Ensure shellcheck
+        run: |
+          if ! command -v shellcheck >/dev/null 2>&1; then
+            sudo apt-get update -y
+            sudo apt-get install -y shellcheck
+          fi
+
+      - name: Just syntax check
+        run: just check
+
+      - name: Shell lint
+        run: just lint
+
+      - name: Source policy checks (base image, identity, secrets)
+        run: bash scripts/verify-source.sh
+
+      - name: Desktop and application source checks
+        run: |
+          bash scripts/validate-desktop.sh
+          bash scripts/validate-settings.sh
+          bash scripts/validate-welcome.sh
+          bash scripts/test-system-stability.sh
+          node scripts/test-layouts.mjs

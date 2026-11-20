@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Application
+Name=Enthroned Settings
+Name[pt_BR]=Configurações do Enthroned
+GenericName=System Settings
+GenericName[pt_BR]=Configurações do sistema
+Comment=Configure Enthroned OS and manage updates
+Comment[pt_BR]=Configure o Enthroned OS e gerencie atualizações
+Exec=enthroned-settings
+Icon=org.enthroned.settings
+Categories=Qt;KDE;Settings;
+Keywords=enthroned;settings;updates;configurações;atualizações;
+StartupNotify=true
+StartupWMClass=enthroned-settings
+X-KDE-StartupNotify=true
+Terminal=false
+NoDisplay=false

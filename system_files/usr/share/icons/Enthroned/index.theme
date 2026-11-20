@@ -1,0 +1,19 @@
+# Enthroned OS folder icon identity (light scheme default).
+# Personalizes a theme on top of Breeze (the KDE base the image ships):
+# the folder family (plain, open, special XDG folders, desktop and home) uses
+# the Enthroned amber identity with white glyphs for high contrast; every
+# other icon falls through to Breeze so the whole system stays coherent.
+# SPDX-License-Identifier: Apache-2.0
+
+[Icon Theme]
+Name=Enthroned
+Comment=Enthroned OS folders on a Breeze base
+Inherits=breeze
+Directories=scalable/places
+
+[scalable/places]
+Size=128
+MinSize=8
+MaxSize=512
+Context=Places
+Type=Scalable

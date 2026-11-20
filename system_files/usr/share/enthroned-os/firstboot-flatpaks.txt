@@ -1,0 +1,9 @@
+# Enthroned OS - default system Flatpaks (F4, ADR-0006).
+# One Flatpak app ID per line; lines starting with # are ignored.
+# Provisioned once per machine by enthroned-firstboot-flatpaks.service
+# (offline-safe: the timer retries until it succeeds).
+#
+# Brave Browser - published on Flathub by Brave Software
+# (https://flathub.org/apps/com.brave.Browser, manifest:
+#  https://github.com/flathub/com.brave.Browser).
+com.brave.Browser

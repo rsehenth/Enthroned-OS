@@ -1,0 +1,14 @@
+# Enthroned OS: hide two Dolphin context-menu entries that confused users when
+# right-clicking an empty area of a folder (Lote 15). Keys are the names Dolphin's
+# Settings > Context Menu page writes; per-user ~/.config/kservicemenurc wins, so
+# anyone can switch them back on there. Nothing else in the menu is touched.
+#
+# filelight: "View Disk Usage Statistics" (service menu of the Filelight package,
+#   /usr/share/kio/servicemenus/filelight.desktop). Filelight itself stays installed.
+# setfoldericonitemaction: the colour swatch strip and "Other..." (dolphin-libs plugin).
+#   Folder colours remain available in Settings > Personalization > Files and folders.
+# SPDX-License-Identifier: Apache-2.0
+
+[Show]
+filelight=false
+setfoldericonitemaction=false

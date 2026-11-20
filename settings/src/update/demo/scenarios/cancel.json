@@ -1,0 +1,17 @@
+{
+  "name": "cancel",
+  "title": "Cancelamento (apenas demo)",
+  "description": "O uupd real nao expoe cancelamento; este fluxo existe SOMENTE no modo demo para validar a interface.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada (demo)", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando imagem", "severity": "Info", "progressPercent": 20.0 }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "cancel-requested", "phase": "Failed", "description": "Cancelamento solicitado", "severity": "Warning", "result": "Cancelled" }
+    ], "expectState": "updatesAvailable" }
+  ],
+  "finalState": "updatesAvailable"
+}

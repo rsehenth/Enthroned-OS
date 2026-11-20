@@ -1,0 +1,655 @@
+# Enthroned OS - Enthroned Welcome (enthroned-welcome), pt_BR.
+# Compiled to /usr/share/locale/pt_BR/LC_MESSAGES/enthroned-welcome.mo at image
+# build time (build_files/build.sh). The application source strings are
+# the English messages; ki18n/gettext loads this catalog according to the
+# session language (plasma-localerc, System Settings > Language & Region).
+#
+# SPDX-License-Identifier: Apache-2.0
+msgid ""
+msgstr ""
+"Project-Id-Version: enthroned-welcome\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "(unknown)"
+msgstr "(desconhecido)"
+
+msgid "A Linux desktop designed to deliver a modern experience, ease of use and a "
+"refined look on top of Fedora's powerful base — always focused on user "
+"experience."
+msgstr "Um desktop Linux pensado para entregar experiência moderna, facilidade de "
+"uso e visual refinado sobre a base poderosa do Fedora — sempre com foco em "
+"User Experience."
+
+msgid "A clear view of what is up to date"
+msgstr "Acompanhamento claro do que está em dia"
+
+msgid "A more familiar file manager"
+msgstr "Gerenciador de arquivos mais familiar"
+
+msgid "A simple, understandable visual experience"
+msgstr "Experiência visual simples e compreensível"
+
+msgid "A simpler, more powerful and more intuitive system"
+msgstr "Um sistema mais simples, poderoso e intuitivo"
+
+msgid "A tidy, responsive desktop for everyday use"
+msgstr "Desktop organizado e responsivo no dia a dia"
+
+msgid "Active"
+msgstr "Ativo"
+
+msgid "Advances to the next step"
+msgstr "Avança para a próxima etapa"
+
+msgid "Advances to the style step"
+msgstr "Avança para a etapa de estilo"
+
+msgid "All set"
+msgstr "Tudo pronto"
+
+msgid "An important future step to broaden compatibility with Windows 10/11 "
+"programs and simplify installing and using compatible applications."
+msgstr "Etapa futura importante para ampliar a compatibilidade com programas do "
+"Windows 10/11 e simplificar a instalação e o uso de aplicativos compatíveis."
+
+msgid "An organization designed to make life easier for new users from the very "
+"first login."
+msgstr "Organização pensada para facilitar a vida de novos usuários desde o primeiro "
+"acesso."
+
+msgid "An up-to-date base for work and creation"
+msgstr "Base atualizada para trabalho e criação"
+
+msgid "App store (KDE Discover)"
+msgstr "Loja de aplicativos (KDE Discover)"
+
+msgid "Appearance profile"
+msgstr "Perfil de aparência"
+
+msgid "Application opened."
+msgstr "Aplicativo aberto."
+
+msgid "Applies the appearance profile after confirmation"
+msgstr "Aplica o perfil de aparência após confirmação"
+
+msgid "Apply appearance profile"
+msgstr "Aplicar perfil de aparência"
+
+msgid "Apply profile"
+msgstr "Aplicar perfil"
+
+msgid "Applying…"
+msgstr "Aplicando…"
+
+msgid "ArtCraft Launcher (optional)"
+msgstr "ArtCraft Launcher (opcional)"
+
+msgid "ArtCraft Launcher installed."
+msgstr "ArtCraft Launcher instalado."
+
+msgid "ArtCraft Launcher is already installed on this system."
+msgstr "O ArtCraft Launcher já está instalado neste sistema."
+
+msgid "ArtCraft Launcher is an optional manager for discovering and installing the "
+"Craft App Suite applications — free and open-source tools, each one "
+"installed on its own. Covered areas include:"
+msgstr "O ArtCraft Launcher é um gerenciador opcional para descobrir e instalar os "
+"aplicativos da Craft App Suite — ferramentas livres e de código aberto, cada "
+"uma instalável por conta própria. As áreas cobertas incluem:"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Back to getting started"
+msgstr "Voltar aos primeiros passos"
+
+msgid "Brave Browser — default browser"
+msgstr "Brave Browser — navegador padrão"
+
+msgid "Browser (Brave)"
+msgstr "Navegador (Brave)"
+
+msgid "Browser and applications"
+msgstr "Navegador e aplicativos"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancels the running installation; nothing on the system is changed"
+msgstr "Cancela a instalação em andamento; nada é alterado no sistema"
+
+msgid "Classic and Modern profiles to adapt the desktop to different styles of use."
+msgstr "Perfis Classic e Modern para adaptar a área de trabalho a diferentes estilos "
+"de uso."
+
+msgid "Classic: light look with a traditional panel"
+msgstr "Classic: visual claro com painel tradicional"
+
+msgid "Color scheme: Enthroned Dark"
+msgstr "Esquema de cores: Enthroned Dark"
+
+msgid "Color scheme: Enthroned Light"
+msgstr "Esquema de cores: Enthroned Light"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Could not apply the profile: %1"
+msgstr "Não foi possível aplicar o perfil: %1"
+
+msgid "Could not open %1 right now."
+msgstr "Não foi possível abrir %1 agora."
+
+msgid "Could not query the official release (no internet or service unavailable): "
+"%1"
+msgstr "Não foi possível consultar o lançamento oficial (sem internet ou serviço "
+"indisponível): %1"
+
+msgid "Could not start flatpak."
+msgstr "Não foi possível iniciar o flatpak."
+
+msgid "Creativity and productivity tools"
+msgstr "Ferramentas de criatividade e produtividade"
+
+msgid "Creativity tools"
+msgstr "Ferramentas de criatividade"
+
+msgid "Current profile: %1."
+msgstr "Perfil atual: %1."
+
+msgid "Current profile: %1. Choosing another profile is optional and always depends "
+"on your confirmation."
+msgstr "Perfil atual: %1. Escolher outro perfil é opcional e sempre depende da sua "
+"confirmação."
+
+msgid "Current profile: the Plasma default. Choose one of the Enthroned profiles "
+"below or keep the current one."
+msgstr "Perfil atual: padrão do Plasma. Escolha um dos perfis Enthroned abaixo ou "
+"mantenha o atual."
+
+msgid "Dark theme, centered floating panel and clock with time only. Inspired by "
+"Windows 11."
+msgstr "Escuro, painel flutuante centralizado e relógio só com a hora. Referência: "
+"Windows 11."
+
+msgid "Demo mode — no real installation is performed."
+msgstr "Modo demonstração — nenhuma instalação real é executada."
+
+msgid "Demo mode — nothing is actually downloaded or installed."
+msgstr "Modo demonstração — nada é baixado ou instalado de verdade."
+
+msgid "Demo mode: %1"
+msgstr "Modo demonstração: %1"
+
+msgid "Download failed: %1"
+msgstr "Falha no download: %1"
+
+msgid "Downloading ArtCraft Launcher…"
+msgstr "Baixando o ArtCraft Launcher…"
+
+msgid "Downloading…"
+msgstr "Baixando…"
+
+msgid "Downloading… %1%"
+msgstr "Baixando… %1%"
+
+msgid "Ease of use"
+msgstr "Facilidade de uso"
+
+msgid "Enthroned Compatibility Engine"
+msgstr "Motor de Compatibilidade Enthroned"
+
+msgid "Enthroned OS ships with the Brave browser as the default browser and KDE "
+"Discover as the app store. Other applications can be installed whenever you "
+"want, straight from the store."
+msgstr "O Enthroned OS vem com o navegador Brave como navegador padrão e com o KDE "
+"Discover como loja de aplicativos. Outros aplicativos podem ser instalados "
+"quando você quiser, direto da loja."
+
+msgid "Entirely voluntary option, unchecked by default"
+msgstr "Opção inteiramente voluntária, desmarcada por padrão"
+
+msgid "Example: headphones with spatial audio"
+msgstr "Exemplo: headphone com áudio espacial"
+
+msgid "Failed to download the official checksums: %1"
+msgstr "Falha ao baixar os checksums oficiais: %1"
+
+msgid "Failed to save the checksums."
+msgstr "Falha ao salvar os checksums."
+
+msgid "Failed to save the downloaded package."
+msgstr "Falha ao salvar o pacote baixado."
+
+msgid "Fewer manual steps in common tasks"
+msgstr "Menos etapas manuais nas tarefas comuns"
+
+msgid "Finish"
+msgstr "Concluir"
+
+msgid "Finishes the initial setup and opens the desktop"
+msgstr "Conclui a configuração inicial e abre a área de trabalho"
+
+msgid "Flatpak is not available on this system."
+msgstr "O flatpak não está disponível neste sistema."
+
+msgid "Future vision"
+msgstr "Visão futura"
+
+msgid "Get started"
+msgstr "Começar"
+
+msgid "Getting started"
+msgstr "Primeiros passos"
+
+msgid "Go to getting started"
+msgstr "Ir para os primeiros passos"
+
+msgid "Goes back to the previous step"
+msgstr "Volta para a etapa anterior"
+
+msgid "I want to install ArtCraft Launcher"
+msgstr "Quero instalar o ArtCraft Launcher"
+
+msgid "If you continue, Enthroned will download the official installer (user "
+"Flatpak) from the project's official release, verify the SHA-256 checksum "
+"and install it into your profile — without asking for a password and without "
+"changing the system. No application from the suite is installed "
+"automatically: you choose later, inside the launcher."
+msgstr "Se você continuar, o Enthroned baixará o instalador oficial (Flatpak do "
+"usuário) do lançamento oficial do projeto, verificará o checksum SHA-256 e "
+"instalará no seu perfil — sem pedir senha e sem alterar o sistema. Nenhum "
+"aplicativo da suíte é instalado automaticamente: você escolhe depois, dentro "
+"do launcher."
+
+msgid "In development"
+msgstr "Em desenvolvimento"
+
+msgid "Install ArtCraft Launcher?"
+msgstr "Instalar o ArtCraft Launcher?"
+
+msgid "Install now"
+msgstr "Instalar agora"
+
+msgid "Installation not finished — you can try again later from Settings"
+msgstr "Instalação não concluída — você pode tentar de novo depois pelas "
+"Configurações"
+
+msgid "Installed"
+msgstr "Instalado"
+
+msgid "Installed on this system. Internet links open in Brave."
+msgstr "Instalado neste sistema. Os links da internet abrem no Brave."
+
+msgid "Installed — app store"
+msgstr "Instalado — loja de aplicativos"
+
+msgid "Installed — default browser"
+msgstr "Instalado — navegador padrão"
+
+msgid "Installing into the user profile (Flatpak)…"
+msgstr "Instalando no perfil do usuário (Flatpak)…"
+
+msgid "Installing…"
+msgstr "Instalando…"
+
+msgid "Intelligent Device Manager"
+msgstr "Gerenciador de Dispositivos Inteligente"
+
+msgid "Interface and experience"
+msgstr "Interface e experiência"
+
+msgid "Intuitive, straightforward Start menu"
+msgstr "Menu Iniciar intuitivo e direto"
+
+msgid "KDE Discover — app store"
+msgstr "KDE Discover — loja de aplicativos"
+
+msgid "Learn more"
+msgstr "Saber mais"
+
+msgid "Leaves the option unchecked and continues without installing anything"
+msgstr "Deixa a opção desmarcada e continua sem instalar nada"
+
+msgid "Light theme, solid panel at the bottom, menu on the left and clock with "
+"date. Inspired by Zorin OS."
+msgstr "Claro, painel sólido na base, menu à esquerda e relógio com data. "
+"Referência: Zorin OS."
+
+msgid "Long-term ambitions to broaden what the desktop can do."
+msgstr "Ambições de longo prazo para ampliar o alcance do desktop."
+
+msgid "Looks and UX focus"
+msgstr "Visual e foco em UX"
+
+msgid "Modern experience"
+msgstr "Experiência moderna"
+
+msgid "Modern: dark look with a centered dock"
+msgstr "Modern: visual escuro com barra centralizada"
+
+msgid "Next steps"
+msgstr "Próximos passos"
+
+msgid "No Flatpak %1 package in release %2."
+msgstr "Nenhum pacote Flatpak %1 no lançamento %2."
+
+msgid "No usable temporary folder."
+msgstr "Sem pasta temporária utilizável."
+
+msgid "Not found on this system"
+msgstr "Não encontrado neste sistema"
+
+msgid "Not installed yet. The system installs it automatically as soon as there is "
+"a connection — or you can install it now from the store."
+msgstr "Ainda não está instalado. O sistema o instala automaticamente assim que "
+"houver conexão — ou você pode instalá-lo agora pela loja."
+
+msgid "Not now"
+msgstr "Agora não"
+
+msgid "Not requested (optional)"
+msgstr "Não solicitado (opcional)"
+
+msgid "Open Brave"
+msgstr "Abrir o Brave"
+
+msgid "Open the app store"
+msgstr "Abrir a loja de aplicativos"
+
+msgid "Open the store"
+msgstr "Abrir a loja"
+
+msgid "Opens the Brave browser"
+msgstr "Abre o navegador Brave"
+
+msgid "Opens the KDE Discover app store"
+msgstr "Abre a loja de aplicativos KDE Discover"
+
+msgid "Opens the official ArtCraft Launcher page"
+msgstr "Abre a página oficial do ArtCraft Launcher"
+
+msgid "Pending — it will be installed automatically once there is a connection, or "
+"from the store"
+msgstr "Pendente — será instalado automaticamente quando houver conexão, ou pela "
+"loja"
+
+msgid "Pending — you chose to install; finish later from Settings or by reopening "
+"this assistant"
+msgstr "Pendente — você escolheu instalar; conclua depois pelas Configurações ou "
+"reabrindo este assistente"
+
+msgid "Performance and optimization"
+msgstr "Performance e otimização"
+
+msgid "Personalization designed for the way you use it"
+msgstr "Personalização pensada para o seu jeito de usar"
+
+msgid "Pillars already taking shape in the system's current experience."
+msgstr "Pilares que já estão tomando forma na experiência atual do sistema."
+
+msgid "Planned"
+msgstr "Planejado"
+
+msgid "Planned features to make using peripherals more natural."
+msgstr "Recursos planejados para tornar o uso de periféricos mais natural."
+
+msgid "Plasma default (no Enthroned profile applied)"
+msgstr "Padrão do Plasma (nenhum perfil Enthroned aplicado)"
+
+msgid "Powerful Fedora base"
+msgstr "Base poderosa Fedora"
+
+msgid "Presents the vision and next steps of Enthroned OS"
+msgstr "Apresenta a visão e as próximas etapas do Enthroned OS"
+
+msgid "Profile applied through the official Plasma mechanism."
+msgstr "Perfil aplicado pelo mecanismo oficial do Plasma."
+
+msgid "Profiles and personalization"
+msgstr "Perfis e personalização"
+
+msgid "Project vision: the available controls depend on each device's "
+"compatibility, without promising universal support."
+msgstr "Visão do projeto: os controles disponíveis dependem da compatibilidade de "
+"cada dispositivo, sem prometer suporte universal."
+
+msgid "Querying the official ArtCraft Launcher release…"
+msgstr "Consultando o lançamento oficial do ArtCraft Launcher…"
+
+msgid "Querying the official release…"
+msgstr "Consultando o lançamento oficial…"
+
+msgid "Realistic scope: the focus is not to promise universal support. Drivers, "
+"antivirus and software deeply tied to the Windows kernel may be out of "
+"scope."
+msgstr "Escopo realista: o foco não é prometer suporte universal. Drivers, antivírus "
+"e softwares com dependência profunda do kernel do Windows podem ficar fora "
+"do escopo."
+
+msgid "Returns to the first steps of the assistant"
+msgstr "Retorna para as etapas iniciais do assistente"
+
+msgid "Returns to the initial setup assistant"
+msgstr "Retorna ao assistente de configuração inicial"
+
+msgid "Roadmap"
+msgstr "Roadmap"
+
+msgid "Roadmap and system vision"
+msgstr "Roadmap e visão do sistema"
+
+msgid "Search, install, open and remove applications, with updates handled by the "
+"KDE store."
+msgstr "Pesquise, instale, abra e remova aplicativos com atualizações pela loja do "
+"KDE."
+
+msgid "Security and reliability preserved"
+msgstr "Segurança e confiabilidade preservadas"
+
+msgid "Settings brought together in one place"
+msgstr "Configurações centralizadas em um único lugar"
+
+msgid "Shows the five-step welcome assistant"
+msgstr "Mostra o assistente inicial em cinco etapas"
+
+msgid "Simplified updates"
+msgstr "Atualizações simplificadas"
+
+msgid "Skip assistant"
+msgstr "Pular assistente"
+
+msgid "Stops the assistant from opening automatically at login"
+msgstr "Impede que o assistente abra automaticamente ao iniciar sessão"
+
+msgid "Smooth flow and less friction in daily use on a modern Fedora-inspired base."
+msgstr "Boa fluidez e menor atrito no uso diário sobre uma base moderna inspirada no "
+"Fedora."
+
+msgid "Starts the optional installation after confirmation"
+msgstr "Inicia a instalação opcional após confirmação"
+
+msgid "Step %1 completed"
+msgstr "Etapa %1 concluída"
+
+msgid "Step %1 current"
+msgstr "Etapa %1 atual"
+
+msgid "Step %1 of %2"
+msgstr "Etapa %1 de %2"
+
+msgid "Step %1 pending"
+msgstr "Etapa %1 pendente"
+
+msgid "Summary of your choices:"
+msgstr "Resumo das suas escolhas:"
+
+msgid "Switching uses Plasma's official mechanism (look-and-feel). You can go back "
+"by applying another profile or theme in System Settings; KDE does not "
+"guarantee full reversal of every individual preference."
+msgstr "A troca usa o mecanismo oficial do Plasma (look-and-feel). É possível voltar "
+"aplicando outro perfil ou tema nas Configurações do Sistema; a reversão "
+"integral de cada preferência individual não é garantida pelo KDE."
+
+msgid "The ArtCraft Launcher installation is disabled at this stage of Enthroned OS "
+"(under security review). You can install it later from Settings or directly "
+"from the project's official page."
+msgstr "A instalação do ArtCraft Launcher está desabilitada nesta fase do Enthroned "
+"OS (em avaliação de segurança). Você pode instalar depois pelas "
+"Configurações ou direto pela página oficial do projeto."
+
+msgid "The Enthroned OS vision"
+msgstr "Visão do Enthroned OS"
+
+msgid "The Flatpak installation failed: %1"
+msgstr "A instalação Flatpak falhou: %1"
+
+msgid "The SHA-256 verification failed. The download was discarded for safety."
+msgstr "A verificação SHA-256 falhou. O download foi descartado por segurança."
+
+msgid "The app store was not found on this system."
+msgstr "A loja de aplicativos não foi encontrada neste sistema."
+
+msgid "The downloaded package is unreadable."
+msgstr "Pacote baixado ilegível."
+
+msgid "The future vision of Enthroned OS is to deliver a more beautiful, friendlier "
+"Linux for users coming from Windows — balancing a modern base, a refined "
+"experience and compatibility."
+msgstr "A visão futura do Enthroned OS é entregar um Linux mais bonito e amigável "
+"para usuários vindos do Windows — equilibrando base moderna, experiência "
+"refinada e compatibilidade."
+
+msgid "The goal is to recognize compatible peripherals automatically and enable "
+"extra features without workarounds, bringing controls together in a clear "
+"interface."
+msgstr "O objetivo é reconhecer periféricos compatíveis automaticamente e habilitar "
+"recursos extras sem gambiarras, centralizando controles em uma interface "
+"clara."
+
+msgid "The installation failed."
+msgstr "A instalação falhou."
+
+msgid "The installation finished, but the application was not found."
+msgstr "A instalação terminou, mas o aplicativo não foi encontrado."
+
+msgid "The installation was canceled."
+msgstr "A instalação foi cancelada."
+
+msgid "The installation was canceled. Nothing on the system was changed."
+msgstr "A instalação foi cancelada. Nada foi alterado no sistema."
+
+msgid "The launcher is an independent project in early development (alpha) and is "
+"not part of the base system. The current catalog and the details of each "
+"application are on the official page."
+msgstr "O launcher é um projeto independente em desenvolvimento inicial (alpha) e "
+"não faz parte do sistema base. O catálogo atual e os detalhes de cada "
+"aplicativo estão na página oficial."
+
+msgid "The official ArtCraft Launcher package (alpha project) will be downloaded "
+"from the project's official page, with checksum verification and "
+"installation into your user profile.\n\nNothing else is installed. You can "
+"remove it later from the app store."
+msgstr "Será baixado o pacote oficial do ArtCraft Launcher (projeto em alpha) a "
+"partir da página oficial do projeto, com verificação de checksum e "
+"instalação no seu perfil de usuário.\n\nNada mais é instalado. Você pode "
+"remover depois pela loja de aplicativos."
+
+msgid "The profile tool is not available in this environment. The same profiles "
+"remain in System Settings → Colors & Themes → Look and Feel."
+msgstr "A ferramenta de perfis não está disponível neste ambiente. Os mesmos perfis "
+"continuam em Configurações do Sistema → Cores e Temas → Look and Feel."
+
+msgid "The profile will be applied through Plasma's official mechanism. The session "
+"may reapply the panel and desktop layout."
+msgstr "O perfil será aplicado pelo mecanismo oficial do Plasma. A sessão pode "
+"reaplicar o layout do painel e da área de trabalho."
+
+msgid "This assistant presents the system in five short steps. You can close it any "
+"time and resume later where you left off — nothing is lost."
+msgstr "Este assistente apresenta o sistema em cinco etapas curtas. Você pode fechar "
+"quando quiser e retomar depois no mesmo ponto — nada é perdido."
+
+msgid "Unknown profile"
+msgstr "perfil desconhecido"
+
+msgid "Update the system from Settings, reducing the reliance on the terminal."
+msgstr "Atualizar o sistema a partir de Configurações, reduzindo a dependência do "
+"terminal."
+
+msgid "Using this desktop"
+msgstr "Como usar este desktop"
+
+msgid "Verifying the package (SHA-256)…"
+msgstr "Verificando o pacote (SHA-256)…"
+
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+msgid "Welcome to Enthroned OS"
+msgstr "Bem-vindo ao Enthroned OS"
+
+msgid "What this step aims to deliver"
+msgstr "O que essa etapa busca entregar"
+
+msgid "When you plug in headphones that support spatial audio, the project's goal "
+"is for the system to detect the model and automatically present those extra "
+"features so you can adjust them on the spot."
+msgstr "Ao conectar um headphone compatível com áudio espacial, a meta do projeto é "
+"que o sistema detecte o modelo e apresente automaticamente esses recursos "
+"extras para você ajustar na hora."
+
+msgid "You can also install it later."
+msgstr "Você também pode instalar depois."
+
+msgid "You can open the store to install more applications, reopen this assistant "
+"from Enthroned Settings and adjust any option later — nothing here is final."
+msgstr "Você pode abrir a loja para instalar mais aplicativos, reabrir este "
+"assistente pelas Configurações do Enthroned e ajustar qualquer opção depois "
+"— nada aqui é definitivo."
+
+msgid "You have already started this assistant. Continue where you left off."
+msgstr "Você já começou este assistente antes. Continue de onde parou."
+
+msgid "Your computer is ready. Enthroned OS is a Linux desktop with the KDE Plasma "
+"environment: a menu in the corner of the panel, windows that are easy to "
+"organize and everything you need to get started."
+msgstr "Seu computador está pronto. O Enthroned OS é um desktop Linux com o ambiente "
+"KDE Plasma: um menu no canto do painel, janelas simples de organizar e tudo "
+"o que você precisa para começar."
+
+msgid "Your style"
+msgstr "Seu estilo"
+
+msgid "• %1"
+msgstr "• %1"
+
+msgid "• Automatic recognition of compatible peripherals"
+msgstr "• Reconhecimento automático de periféricos compatíveis"
+
+msgid "• Centralized controls for headsets, spatial audio, special controllers and "
+"presets"
+msgstr "• Controles centralizados para headsets, áudio espacial, controles especiais "
+"e presets"
+
+msgid "• Fewer manual adjustments scattered across the system"
+msgstr "• Menos ajustes manuais dispersos pelo sistema"
+
+msgid "• Photography and image editing\n• Graphic and vector design\n• Video "
+"editing and production\n• Documents and presentations\n• Spreadsheets and "
+"productivity tools\n• PDFs"
+msgstr "• Fotografia e edição de imagem\n• Design gráfico e vetorial\n• Edição e "
+"produção de vídeo\n• Documentos e apresentações\n• Planilhas e ferramentas "
+"de produtividade\n• PDFs"
+
+msgid "• Pursue the broadest possible compatibility for everyday software"
+msgstr "• Buscar a maior compatibilidade possível para softwares do dia a dia"
+
+msgid "• Simplify installing and running compatible Windows programs"
+msgstr "• Simplificar a instalação e execução de programas Windows compatíveis"
+
+msgid "Enthroned OS"
+msgstr "Enthroned OS"

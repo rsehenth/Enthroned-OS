@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "description": "Enthroned Settings - declarative update state machine contract. This file is the single source of truth consumed by BOTH the C++ backend (settings/src/update/updatestatemachine.cpp) and the logic test runner (settings/tests/run-tests.mjs). Any change here must keep both interpreters in sync; the static validator cross-checks state names.",
+  "initial": "unknown",
+  "states": [
+    "unknown",
+    "checking",
+    "upToDate",
+    "updatesAvailable",
+    "updating",
+    "preparing",
+    "deploymentPending",
+    "updateConfirmed",
+    "rollingBack",
+    "restartRequired",
+    "failed",
+    "noNetwork",
+    "serviceUnavailable"
+  ],
+  "states_description": {
+    "unknown": "Estado desconhecido: ainda nao foi possivel observar o sistema.",
+    "checking": "Verificando atualizacoes.",
+    "upToDate": "Sistema atualizado (nenhuma atualizacao disponivel).",
+    "updatesAvailable": "Atualizacoes disponiveis (nenhuma em andamento).",
+    "updating": "Atualizacao em andamento (download/execucao).",
+    "preparing": "Preparando nova versao (import/staging do deployment).",
+    "deploymentPending": "Comando encerrado; falta uma captura posterior do deployment.",
+    "updateConfirmed": "Atualizacao concluida com status confirmado e sem reinicializacao pendente.",
+    "rollingBack": "Revertendo o sistema para a versao anterior (bootc rollback).",
+    "restartRequired": "Reinicializacao necessaria (deployment staged presente).",
+    "failed": "Falha na ultima operacao de verificacao/atualizacao.",
+    "noNetwork": "Sem conexao de rede suficiente para verificar.",
+    "serviceUnavailable": "Servico de atualizacao/systemd indisponivel neste momento."
+  },
+  "guards_description": "A transition applies only if every key in 'requires' is present and true in the evaluation context (first matching rule wins; unknown events keep the current state).",
+  "honesty_contract": "Reading the installed deployment does not report update availability. A successful system update command enters deploymentPending. Only a capture started after the command exited can confirm restartRequired or updateConfirmed. The engine retains the last confirmed staging and the last check outcome independently of the operation state.",
+  "transitions": [
+    { "from": "unknown", "event": "bootc-status-ok", "requires": ["stagedDeployment"], "to": "restartRequired" },
+    { "from": "unknown", "event": "bootc-status-ok", "requires": [], "to": "unknown" },
+    { "from": "unknown", "event": "bootc-status-unavailable", "requires": [], "to": "unknown" },
+    { "from": "unknown", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+    { "from": "unknown", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "unknown", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "unknown", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "unknown", "event": "bootc-progress", "requires": ["phaseDownloading"], "to": "updating" },
+    { "from": "unknown", "event": "bootc-progress", "requires": ["phasePreparing"], "to": "preparing" },
+    { "from": "unknown", "event": "bootc-progress", "requires": ["phaseApplying"], "to": "preparing" },
+    { "from": "unknown", "event": "bootc-download-finished", "requires": [], "to": "preparing" },
+    { "from": "unknown", "event": "update-success", "requires": [], "to": "deploymentPending" },
+    { "from": "unknown", "event": "update-failed-with-errors", "requires": [], "to": "failed" },
+    { "from": "unknown", "event": "module-failed", "requires": [], "to": "failed" },
+    { "from": "unknown", "event": "offline-detected", "requires": [], "to": "noNetwork" },
+
+    { "from": "checking", "event": "check-no-update", "requires": [], "to": "upToDate" },
+    { "from": "checking", "event": "check-update-available", "requires": [], "to": "updatesAvailable" },
+    { "from": "checking", "event": "check-failed", "requires": ["offlineDetected"], "to": "noNetwork" },
+    { "from": "checking", "event": "check-failed", "requires": [], "to": "failed" },
+    { "from": "checking", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "checking", "event": "bootc-status-ok", "requires": [], "to": "checking" },
+
+    { "from": "upToDate", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "upToDate", "event": "check-update-available", "requires": [], "to": "updatesAvailable" },
+    { "from": "upToDate", "event": "bootc-status-ok", "requires": ["stagedDeployment"], "to": "restartRequired" },
+    { "from": "upToDate", "event": "bootc-status-ok", "requires": [], "to": "upToDate" },
+    { "from": "upToDate", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "upToDate", "event": "offline-detected", "requires": [], "to": "noNetwork" },
+    { "from": "upToDate", "event": "check-failed", "requires": ["offlineDetected"], "to": "noNetwork" },
+    { "from": "upToDate", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+    { "from": "upToDate", "event": "update-success", "requires": [], "to": "deploymentPending" },
+    { "from": "upToDate", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "upToDate", "event": "engine-update-started", "requires": ["mutationBlocked"], "to": "upToDate" },
+    { "from": "upToDate", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+
+    { "from": "updatesAvailable", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "updatesAvailable", "event": "engine-update-started", "requires": ["mutationBlocked"], "to": "updatesAvailable" },
+    { "from": "updatesAvailable", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "updatesAvailable", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+    { "from": "updatesAvailable", "event": "bootc-status-ok", "requires": ["stagedDeployment"], "to": "restartRequired" },
+    { "from": "updatesAvailable", "event": "bootc-status-ok", "requires": [], "to": "updatesAvailable" },
+    { "from": "updatesAvailable", "event": "check-no-update", "requires": [], "to": "upToDate" },
+    { "from": "updatesAvailable", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+    { "from": "updatesAvailable", "event": "check-failed", "requires": ["offlineDetected"], "to": "noNetwork" },
+    { "from": "updatesAvailable", "event": "check-failed", "requires": [], "to": "failed" },
+    { "from": "updatesAvailable", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "updatesAvailable", "event": "offline-detected", "requires": [], "to": "noNetwork" },
+
+    { "from": "updating", "event": "bootc-progress", "requires": ["phaseDownloading"], "to": "updating" },
+    { "from": "updating", "event": "bootc-progress", "requires": ["phasePreparing"], "to": "preparing" },
+    { "from": "updating", "event": "bootc-progress", "requires": ["phaseApplying"], "to": "preparing" },
+    { "from": "updating", "event": "bootc-download-finished", "requires": [], "to": "preparing" },
+    { "from": "updating", "event": "flatpak-progress", "requires": [], "to": "updating" },
+    { "from": "updating", "event": "module-completed", "requires": [], "to": "updating" },
+    { "from": "updating", "event": "module-failed", "requires": [], "to": "failed" },
+    { "from": "updating", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+    { "from": "updating", "event": "update-success", "requires": [], "to": "deploymentPending" },
+    { "from": "updating", "event": "check-no-update", "requires": [], "to": "upToDate" },
+    { "from": "updating", "event": "flatpak-update-success", "requires": [], "to": "upToDate" },
+    { "from": "updating", "event": "flatpak-update-failed", "requires": [], "to": "failed" },
+    { "from": "updating", "event": "update-failed-with-errors", "requires": [], "to": "failed" },
+    { "from": "updating", "event": "unit-inactive-clean", "requires": [], "to": "failed" },
+    { "from": "updating", "event": "systemd-unavailable", "requires": [], "to": "failed" },
+    { "from": "updating", "event": "cancel-requested", "requires": ["demoMode"], "to": "updatesAvailable" },
+
+    { "from": "preparing", "event": "bootc-progress", "requires": ["phaseDownloading"], "to": "updating" },
+    { "from": "preparing", "event": "bootc-progress", "requires": ["phasePreparing"], "to": "preparing" },
+    { "from": "preparing", "event": "bootc-progress", "requires": ["phaseApplying"], "to": "preparing" },
+    { "from": "preparing", "event": "module-completed", "requires": [], "to": "preparing" },
+    { "from": "preparing", "event": "module-failed", "requires": [], "to": "failed" },
+    { "from": "preparing", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+    { "from": "preparing", "event": "update-success", "requires": [], "to": "deploymentPending" },
+    { "from": "preparing", "event": "update-failed-with-errors", "requires": [], "to": "failed" },
+    { "from": "preparing", "event": "systemd-unavailable", "requires": [], "to": "failed" },
+    { "from": "preparing", "event": "cancel-requested", "requires": ["demoMode"], "to": "updatesAvailable" },
+
+    { "from": "deploymentPending", "event": "staged-deployment-detected", "requires": ["freshDeployment"], "to": "restartRequired" },
+    { "from": "deploymentPending", "event": "deployment-confirmed", "requires": ["freshDeployment"], "to": "updateConfirmed" },
+    { "from": "deploymentPending", "event": "update-failed-with-errors", "requires": [], "to": "failed" },
+    { "from": "updateConfirmed", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "updateConfirmed", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "updateConfirmed", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+    { "from": "updateConfirmed", "event": "staged-deployment-detected", "requires": [], "to": "restartRequired" },
+
+    { "from": "upToDate", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+    { "from": "restartRequired", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+    { "from": "failed", "event": "engine-rollback-started", "requires": ["mutationAllowed", "rollbackAvailable"], "to": "rollingBack" },
+    { "from": "rollingBack", "event": "rollback-success", "requires": [], "to": "restartRequired" },
+    { "from": "rollingBack", "event": "rollback-failed", "requires": [], "to": "failed" },
+
+    { "from": "restartRequired", "event": "bootc-status-ok", "requires": ["stagedDeployment"], "to": "restartRequired" },
+    { "from": "restartRequired", "event": "bootc-status-ok", "requires": [], "to": "restartRequired" },
+    { "from": "restartRequired", "event": "staged-deployment-cleared", "requires": [], "to": "unknown" },
+    { "from": "restartRequired", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "restartRequired", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "restartRequired", "event": "systemd-unavailable", "requires": ["stagedDeployment"], "to": "serviceUnavailable" },
+    { "from": "restartRequired", "event": "systemd-unavailable", "requires": [], "to": "restartRequired" },
+
+    { "from": "failed", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "failed", "event": "engine-update-started", "requires": ["mutationAllowed"], "to": "updating" },
+    { "from": "failed", "event": "bootc-status-ok", "requires": [], "to": "failed" },
+    { "from": "failed", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+
+    { "from": "noNetwork", "event": "engine-check-started", "requires": [], "to": "checking" },
+    { "from": "noNetwork", "event": "bootc-status-ok", "requires": [], "to": "noNetwork" },
+    { "from": "noNetwork", "event": "offline-detected", "requires": [], "to": "noNetwork" },
+
+    { "from": "serviceUnavailable", "event": "bootc-status-ok", "requires": [], "to": "serviceUnavailable" },
+    { "from": "serviceUnavailable", "event": "bootc-status-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "serviceUnavailable", "event": "systemd-unavailable", "requires": [], "to": "serviceUnavailable" },
+    { "from": "serviceUnavailable", "event": "engine-check-started", "requires": [], "to": "checking" }
+  ],
+  "defaults": {
+    "unknownEvent": "keep",
+    "noMatchingTransition": "keep"
+  },
+  "journal_mapping": [
+    {
+      "comment": "uupd slog JSON lines (uupd.service / uupd-manual.service run with --json --log-level=debug). MESSAGE is parsed as JSON; rules match on msg/msgSuffix and emit normalized events.",
+      "match": { "msgSuffix": "module has completed." },
+      "event": "module-completed",
+      "sourceFromField": "module"
+    },
+    {
+      "match": { "msgSuffix": "module has failed." },
+      "event": "module-failed",
+      "sourceFromField": "module"
+    },
+    {
+      "match": { "msg": "Updates Completed Successfully" },
+      "event": "update-success"
+    },
+    {
+      "match": { "msg": "Updates finished with errors!" },
+      "event": "update-failed-with-errors"
+    },
+    {
+      "match": { "msg": "Command output", "field": "status", "equals": "running" },
+      "event": "bootc-progress",
+      "source": "system",
+      "payloadFromField": "output"
+    },
+    {
+      "comment": "enthroned-system-update.service runs the fixed helper /usr/libexec/enthroned-system-update (bootc upgrade --progress-fd 9 with fd 9 redirected to the journal). MESSAGE is then the raw bootc progress JSON object itself (no slog wrapper), so the payload is the message.",
+      "match": { "field": "type", "equals": "ProgressBytes" },
+      "event": "bootc-progress",
+      "source": "system",
+      "payloadFromMessage": true
+    },
+    {
+      "match": { "field": "type", "equals": "ProgressSteps" },
+      "event": "bootc-progress",
+      "source": "system",
+      "payloadFromMessage": true
+    },
+    {
+      "match": { "msg": "Update Check" },
+      "event": "check-info"
+    },
+    {
+      "match": { "msg": "Applying System Update" },
+      "event": "ignore"
+    },
+    {
+      "match": { "level": "ERROR" },
+      "event": "log-error"
+    }
+  ],
+  "journal_mapping_description": "Rules are evaluated in order; first match wins. Non-JSON lines and non-matching slog lines produce an 'unknown-data' event (severity Debug, never used for state changes). The 'bootc-progress' payload is the bootc progress JSON line forwarded by uupd.",
+  "bootc_progress": {
+    "description": "Mapping of bootc --progress-fd JSON task names to normalized phases and percent windows (values mirror ublue-os/uupd drv/system PROGRESS_STAGES).",
+    "phases": {
+      "pulling": { "phase": "Downloading", "start": 0, "length": 80 },
+      "importing": { "phase": "Preparing", "start": 80, "length": 10 },
+      "staging": { "phase": "Applying", "start": 90, "length": 10 },
+      "unknown": { "phase": "FetchingInfo", "start": 100, "length": 0 }
+    },
+    "percentFormulas": {
+      "ProgressSteps": "start + min(length, (steps / (stepsTotal + 1)) * length)",
+      "ProgressBytes": "start + min(length, (bytes / bytesTotal) * length)"
+    },
+    "downloadFinished": "Emitted when the task transitions FROM 'pulling' TO anything else (uupd maps pulling->Downloading; anything else means the pull phase ended)."
+  },
+  "event_types": [
+    "bootc-status-ok", "bootc-status-unavailable", "engine-check-started", "engine-update-started",
+    "check-started", "check-no-update", "check-update-available", "check-failed", "check-info",
+    "systemd-unavailable", "bootc-progress", "bootc-download-finished",
+    "module-completed", "module-failed", "update-success", "update-failed-with-errors",
+    "unit-inactive-clean", "staged-deployment-detected", "journal-unavailable",
+    "log-error", "unknown-data", "offline-detected", "cancel-requested", "demo-event",
+    "update-rejected", "concurrent-operation-detected", "spec-error",
+    "flatpak-progress", "flatpak-update-success", "flatpak-update-failed",
+    "engine-rollback-started", "rollback-success", "rollback-failed",
+    "preflight-blocked", "staged-origin-blocked", "deployment-confirmed", "staged-deployment-cleared"
+  ]
+}

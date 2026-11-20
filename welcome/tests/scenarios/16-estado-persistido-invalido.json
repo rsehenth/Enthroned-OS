@@ -1,0 +1,32 @@
+{
+  "name": "estado-persistido-invalido",
+  "kind": "persistence",
+  "description": "F4.13.16 - corrupted/invalid persisted state resets to the initial state without crashing or blocking the user.",
+  "cases": [
+    {
+      "label": "truncated json",
+      "json": "{\"version\":1,\"phase\":\"sta",
+      "expected": { "phase": "never-started", "artcraftConsented": false, "currentPage": 0 }
+    },
+    {
+      "label": "not json at all",
+      "json": "welcome state (corrupted by disk failure)",
+      "expected": { "phase": "never-started", "artcraftConsented": false }
+    },
+    {
+      "label": "unknown phase value",
+      "json": "{\"version\":1,\"phase\":\"finished-forever\",\"artcraftConsented\":true}",
+      "expected": { "phase": "never-started", "artcraftConsented": false }
+    },
+    {
+      "label": "future schema version",
+      "json": "{\"version\":99,\"phase\":\"completed\"}",
+      "expected": { "phase": "never-started" }
+    },
+    {
+      "label": "json array instead of object",
+      "json": "[1,2,3]",
+      "expected": { "phase": "never-started" }
+    }
+  ]
+}

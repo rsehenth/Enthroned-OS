@@ -1,0 +1,14 @@
+[Unit]
+Description=Enthroned OS rollback to the previous deployment (bootc rollback, fixed command)
+# Design and contracts: docs/operations/UPDATE-SYSTEM.md (repository).
+# Conditions are only honored in [Unit] (Lote 9 boot audit).
+ConditionPathExists=/usr/bin/bootc
+
+[Service]
+Type=oneshot
+# MUTATING (points the next boot at the previous deployment; never reboots).
+# Fixed command, no arguments from the UI or the environment. The Update
+# Center only offers it when a previous deployment exists (bootc status) and
+# the image origin check passes. Restarting afterwards is always the user's
+# explicit decision.
+ExecStart=/usr/bin/bootc rollback

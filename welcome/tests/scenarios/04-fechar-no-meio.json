@@ -1,0 +1,7 @@
+{
+  "name": "fechar-no-meio",
+  "kind": "machine",
+  "description": "F4.13.4 - user closes the assistant mid-way: interrupted with the page preserved.",
+  "steps": [{ "event": "notify" }, { "page": 2 }, { "event": "close" }],
+  "expected": { "phase": "interrupted", "finalPage": 2, "autostartShouldShow": true }
+}

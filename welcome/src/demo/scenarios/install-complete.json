@@ -1,0 +1,13 @@
+{
+  "name": "install-complete",
+  "description": "Demo fixture: the gated install path runs to completion (NO real download or install happens in demo mode).",
+  "steps": [
+    { "state": "checking", "message": "Consultando o lançamento oficial do ArtCraft Launcher…" },
+    { "state": "downloading", "message": "Baixando o ArtCraft Launcher…", "progress": 0 },
+    { "state": "downloading", "message": "Baixando o ArtCraft Launcher…", "progress": 55 },
+    { "state": "downloading", "message": "Baixando o ArtCraft Launcher…", "progress": 100 },
+    { "state": "verifying", "message": "Verificando o pacote (SHA-256)…" },
+    { "state": "installing", "message": "Instalando no perfil do usuário (Flatpak)…" },
+    { "state": "done", "message": "ArtCraft Launcher instalado." }
+  ]
+}

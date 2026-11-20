@@ -1,0 +1,8 @@
+# Enthroned OS KRunner defaults (KDE Discover/AppStream search enabled).
+# Overrides /usr/share/kde-settings/kde-profile/default/xdg/krunnerrc.
+
+[General]
+FreeFloating=true
+
+[Plugins]
+krunner_appstreamEnabled=true

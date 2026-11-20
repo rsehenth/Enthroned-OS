@@ -1,0 +1,15 @@
+.git
+.codex
+.gemini
+.commandcode
+graphify-out
+output
+dist
+disk_config/vm.local.toml
+.env
+.env.*
+*.key
+*.pem
+**/build
+**/cmake-build-*
+**/__pycache__

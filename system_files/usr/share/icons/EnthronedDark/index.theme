@@ -1,0 +1,17 @@
+# Enthroned OS folder icon identity (dark scheme variant).
+# Same folder family as the Enthroned theme; non-overridden icons fall
+# through to Breeze Dark so dark-scheme icon rendering keeps its own colors.
+# SPDX-License-Identifier: Apache-2.0
+
+[Icon Theme]
+Name=Enthroned Dark
+Comment=Enthroned OS folders on a Breeze Dark base
+Inherits=breeze-dark
+Directories=scalable/places
+
+[scalable/places]
+Size=128
+MinSize=8
+MaxSize=512
+Context=Places
+Type=Scalable

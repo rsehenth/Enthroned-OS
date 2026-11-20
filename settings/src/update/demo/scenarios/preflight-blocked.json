@@ -1,0 +1,17 @@
+{
+  "name": "preflight-blocked",
+  "title": "Operacao recusada pelo preflight",
+  "description": "Falta de espaco ou operacao concorrente recusa o inicio; o estado permanece.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check-1", "rawType": "engine-check-started", "phase": "Checking", "description": "Verificando atualizacoes", "severity": "Info" }
+    ], "expectState": "checking" },
+    { "delayMs": 300, "events": [
+      { "source": "check", "operationId": "check-1", "rawType": "check-update-available", "phase": "FetchingInfo", "description": "Atualizacao disponivel", "severity": "Info" }
+    ], "expectState": "updatesAvailable" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "update-1", "rawType": "preflight-blocked", "phase": "Initializing", "description": "Espaco livre insuficiente para a atualizacao do sistema", "severity": "Warning" }
+    ], "expectState": "updatesAvailable" }
+  ],
+  "finalState": "updatesAvailable"
+}

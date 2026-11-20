@@ -1,0 +1,20 @@
+{
+  "name": "system-update",
+  "title": "Atualizacao somente do sistema",
+  "description": "Fluxo bootc: progresso real do --progress-fd, staging e reinicializacao pendente.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "update-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao do sistema iniciada via enthroned-system-update.service", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "update-1", "rawType": "bootc-progress", "phase": "Downloading", "progressPercent": 32.0, "description": "Downloading", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "update-1", "rawType": "bootc-download-finished", "phase": "Preparing", "description": "Download concluido", "severity": "Info" }
+    ], "expectState": "preparing" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "update-1", "rawType": "staged-deployment-detected", "phase": "WaitingRestart", "description": "Novo deployment staged", "severity": "Info" }
+    ], "expectState": "restartRequired" }
+  ],
+  "finalState": "restartRequired"
+}

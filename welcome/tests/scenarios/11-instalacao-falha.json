@@ -1,0 +1,12 @@
+{
+  "name": "instalacao-falha",
+  "kind": "machine",
+  "installer": {
+    "gate": "open",
+    "steps": ["start-check", "download-found", "download-ok", "checksum-ok", "install-failed"],
+    "note": "flatpak install step fails"
+  },
+  "description": "F4.13.11 - installation fails: honest failed phase, walkthrough stays resumable and retryable.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }, { "event": "artcraft-failure" }],
+  "expected": { "phase": "optional-failed", "artcraftInstallState": "failed", "installerState": "failed" }
+}

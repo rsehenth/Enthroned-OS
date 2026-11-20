@@ -1,0 +1,9 @@
+{
+  "name": "instancias-duplicadas",
+  "kind": "decision",
+  "description": "F4.13.6 - two instances try to start: the second never shows anything (either source).",
+  "cases": [
+    { "phase": "never-started", "source": "autostart", "alreadyRunning": true, "expectedShow": false },
+    { "phase": "never-started", "source": "manual", "alreadyRunning": true, "expectedShow": false }
+  ]
+}

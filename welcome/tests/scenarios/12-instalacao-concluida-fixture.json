@@ -1,0 +1,12 @@
+{
+  "name": "instalacao-concluida-fixture",
+  "kind": "machine",
+  "installer": {
+    "gate": "open",
+    "steps": ["start-check", "download-found", "download-ok", "checksum-ok", "install-ok"],
+    "note": "FIXTURE ONLY: proves the contract is coherent; no real installation is ever performed by tests or demo"
+  },
+  "description": "F4.13.12 - installation concluded (fixture only): optional-done is reachable through the contract.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }, { "event": "artcraft-success" }],
+  "expected": { "phase": "optional-done", "artcraftInstallState": "done", "installerState": "done" }
+}

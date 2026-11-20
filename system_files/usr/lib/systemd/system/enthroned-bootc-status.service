@@ -1,0 +1,39 @@
+# Enthroned OS - read-only bootc status cache for the Update Center (P1-2).
+#
+# `bootc status` demands root, and the Settings app is unprivileged (H4:
+# version/origin stayed "Indisponível"). This oneshot unit runs a fixed
+# read-only helper at boot. Update units reuse it after a successful run.
+# The helper publishes the bootc status JSON at
+# /run/enthroned/bootc-status.json (0644, root-owned, per-boot lifetime).
+# There is no polkit, no D-Bus service and no generic root access; the unit
+# is disabled by removing it, and it never mutates the system.
+#
+# Lote 10.2 (Gate 10.1): the unit is wanted by graphical.target (wiring in
+# build_files/build.sh) and explicitly orders itself AFTER it. For a target
+# unit, systemd suppresses the implicit "target After= wanted unit" ordering
+# when the wanted unit already orders itself after the target
+# (unit_add_default_target_dependency), so the target never waits for this
+# oneshot: boot stays non-blocking and the cache appears shortly after the
+# desktop is up. BootcStatusProvider watches for the late publication.
+# A multi-user-only boot intentionally does not run it (no graphical
+# Settings app there).
+#
+# Wiring: no [Install] section (project convention - boot-chain enablement is
+# explicit in build_files/build.sh via `systemctl add-wants`).
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=Enthroned OS - bootc status cache for the Update Center (read-only)
+ConditionPathExists=/usr/bin/bootc
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/enthroned-bootc-status
+RuntimeDirectory=enthroned
+RuntimeDirectoryMode=0755
+TimeoutStartSec=30
+RemainAfterExit=yes
+NoNewPrivileges=yes
+PrivateTmp=yes

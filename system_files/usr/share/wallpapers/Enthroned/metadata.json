@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Id": "Enthroned",
+        "License": "LicenseRef-Enthroned-Artwork",
+        "Name": "Enthroned",
+        "Name[pt_BR]": "Enthroned",
+        "Description": "Enthroned OS default light wallpaper",
+        "Description[pt_BR]": "Papel de parede claro padrão do Enthroned OS"
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "failure",
+  "title": "Falha na atualizacao",
+  "description": "Modulo do sistema falha durante o update.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando imagem", "severity": "Info", "progressPercent": 30.0 }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "module-failed", "phase": "Failed", "description": "Modulo System falhou", "severity": "Error", "result": "Failure" }
+    ], "expectState": "failed" }
+  ],
+  "finalState": "failed"
+}

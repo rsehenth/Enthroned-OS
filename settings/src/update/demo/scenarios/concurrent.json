@@ -1,0 +1,14 @@
+{
+  "name": "concurrent",
+  "title": "Operacao concorrente bloqueada",
+  "description": "Segunda solicitacao de update enquanto outra opera; deve ser recusada sem mudar o estado.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "upd-2", "rawType": "bootc-progress", "phase": "Downloading", "description": "Segunda solicitacao recusada: operacao em andamento", "severity": "Warning" }
+    ], "expectState": "updating" }
+  ],
+  "finalState": "updating"
+}

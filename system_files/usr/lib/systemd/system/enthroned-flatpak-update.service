@@ -1,0 +1,17 @@
+[Unit]
+Description=Enthroned OS application update (Flatpak system installation)
+# Design and contracts: docs/operations/UPDATE-SYSTEM.md (repository).
+Wants=network-online.target
+After=network-online.target
+# Conditions are only honored in [Unit] (Lote 9 boot audit).
+ConditionPathExists=/usr/bin/flatpak
+
+[Service]
+Type=oneshot
+# MUTATING (updates the Flatpak SYSTEM installation only). Fixed command:
+# never removes applications, never touches user data. The user
+# installation is updated in the user session by the Enthroned Update
+# Center (fixed `flatpak update --user --noninteractive`, no privileges).
+# Scheduled runs stay with uupd.timer (Aurora upstream); this unit is
+# manual-only and is never enabled.
+ExecStart=/usr/bin/flatpak update --noninteractive --system

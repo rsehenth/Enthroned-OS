@@ -1,0 +1,21 @@
+[Unit]
+Description=Enthroned OS read-only update check (bootc manifest metadata)
+Documentation=https://github.com/ublue-os/uupd
+Wants=network-online.target
+After=network-online.target
+# Conditions are only honored in [Unit]; a stray ConditionPathExists in
+# [Service] is ignored (Lote 9 boot audit).
+ConditionPathExists=/usr/bin/uupd
+
+[Service]
+Type=oneshot
+# H4-010: exit 77 is the documented "no update" outcome of this read-only
+# check, not a failure — accept it so the unit never shows up as failed
+# (keeps `systemctl --failed` clean). Every other code still fails.
+SuccessExitStatus=77
+# READ-ONLY CHECK. `uupd update-check` only queries whether a newer image
+# manifest exists (bootc upgrade --check / rpm-ostree upgrade --check):
+# exit 0 = update available, exit 77 = no update. It never stages, deploys
+# or reboots. Evidence and contracts:
+# docs/architecture/ENTHRONED-UPDATE-ARCHITECTURE.md
+ExecStart=/usr/bin/uupd update-check

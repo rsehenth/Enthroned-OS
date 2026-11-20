@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Enthroned Files Setup
+Comment=One-shot Dolphin/Places defaults for the Enthroned file experience (exits immediately; not a service)
+Exec=/usr/libexec/enthroned-files-setup
+Icon=system-file-manager
+Terminal=false
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2

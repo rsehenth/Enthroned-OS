@@ -1,0 +1,17 @@
+{
+  "name": "preparing",
+  "title": "Preparando nova versao",
+  "description": "Download concluido; modulos concluem; staging do deployment (janela 90-100%).",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-download-finished", "phase": "Preparing", "description": "Download concluido", "severity": "Info" }
+    ], "expectState": "preparing" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Applying", "description": "Implantando nova versao", "severity": "Info", "progressPercent": 95.0 }
+    ], "expectState": "preparing" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "module-completed", "phase": "Completed", "description": "Modulo Flatpak concluido", "severity": "Info" }
+    ], "expectState": "preparing" }
+  ],
+  "finalState": "preparing"
+}

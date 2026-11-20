@@ -1,0 +1,16 @@
+{
+  "name": "brave-ausente",
+  "kind": "uipolicy",
+  "description": "F4.13.13 - Brave absent: the page shows the honest pending state and never a launch button.",
+  "rules": [
+    {
+      "file": "qml/pages/AppsPage.qml",
+      "contains": ["apps.braveAvailable", "Not installed yet. The system installs it automatically"],
+      "notContains": []
+    },
+    {
+      "file": "src/welcome-state-spec.json",
+      "contains": ["\"launch_action_requires_available\": true", "\"no_fake_controls\": true"]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+// Enthroned OS - polkit rule that confines the upstream uupd grant (Gate 12.2).
+//
+// Aurora's /usr/share/polkit-1/rules.d/uupd.rules returns YES for ANY subject
+// (no session, group or verb check) on org.freedesktop.systemd1.manage-units
+// for uupd.service and uupd-manual.service. manage-units also covers stop,
+// restart and kill, so any local account could start an update outside the
+// Update Center's channel gate or kill one while bootc is staging.
+//
+// Polkit stops at the first rule that returns a result, and this file sorts
+// before uupd.rules, so deciding here keeps that YES from being reached.
+// Nothing is granted that upstream did not already grant, and nothing is
+// denied outright (the default admin authentication stays available):
+//   - active local wheel users keep passwordless START of the two units. The
+//     Update Center needs it for uupd-manual.service (StartUnit, verb "start");
+//   - every other verb (stop, restart, kill, set-property...) and every other
+//     subject needs administrator authentication;
+//   - `run0 --empower` users (group "empower") already hold every action
+//     through empower.rules; they are left to the later rules, unchanged;
+//   - a missing "verb" detail fails closed.
+// The scheduled uupd.timer and `sudo uupd` run as root and never reach polkit.
+// The Enthroned update units stay in 10-org.enthroned.settings.rules.
+polkit.addRule(function(action, subject) {
+    if (action.id != "org.freedesktop.systemd1.manage-units") {
+        return;
+    }
+    var unit = action.lookup("unit");
+    if (unit != "uupd.service" && unit != "uupd-manual.service") {
+        return;
+    }
+    if (subject.isInGroup("empower")) {
+        return;
+    }
+    if (action.lookup("verb") == "start" &&
+        subject.local && subject.active && subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+    return polkit.Result.AUTH_ADMIN;
+});

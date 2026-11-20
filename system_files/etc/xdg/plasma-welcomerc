@@ -1,0 +1,5 @@
+# Enthroned OS defense-in-depth against upstream plasma-welcome first-run launch.
+
+[General]
+LastSeenVersion=999.99.99
+LiveEnvironment=false

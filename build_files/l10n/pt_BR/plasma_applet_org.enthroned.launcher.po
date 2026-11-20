@@ -1,0 +1,118 @@
+# Enthroned OS - Enthroned Launcher (org.enthroned.launcher), pt_BR.
+# Compiled to /usr/share/locale/pt_BR/LC_MESSAGES/plasma_applet_org.enthroned.launcher.mo
+# at image build time (build_files/build.sh).
+#
+# Lote 11B (H4/H5): the .mo name IS the translation domain, and Plasma derives
+# a plasmoid's domain from libplasma's Plasma::Applet::translationDomain():
+# "plasma_applet_" + KPlugin.Id. The previous file name (org.enthroned.launcher.po)
+# compiled to a domain the launcher QML never consults, so every i18n() call
+# fell back to the English source strings ("Pinned", "All applications",
+# "Places", "Search this computer", "Session and power" — H4 P2 / H5 herdado).
+# The QML source strings are the English messages; ki18n loads this catalog
+# according to the session language (plasma-localerc, System Settings >
+# Language & Region).
+#
+# SPDX-License-Identifier: Apache-2.0
+msgid ""
+msgstr ""
+"Project-Id-Version: org.enthroned.launcher\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home folder"
+msgstr "Pasta pessoal"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Downloads"
+msgstr "Downloads"
+
+msgid "Pictures"
+msgstr "Imagens"
+
+msgid "Files"
+msgstr "Arquivos"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "App store"
+msgstr "Loja de aplicativos"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "Search this computer"
+msgstr "Pesquisar no computador"
+
+msgid "Categories"
+msgstr "Categorias"
+
+msgid "Pinned"
+msgstr "Fixados"
+
+msgid "All applications"
+msgstr "Todos os aplicativos"
+
+msgid "Search results"
+msgstr "Resultados da pesquisa"
+
+msgid "Right-click to organize"
+msgstr "Botão direito: organizar"
+
+msgid "Pinned applications"
+msgstr "Aplicativos fixados"
+
+msgid "Applications"
+msgstr "Aplicativos"
+
+msgid "Searching…"
+msgstr "Pesquisando…"
+
+msgid "No results"
+msgstr "Nenhum resultado"
+
+msgid "No pinned applications"
+msgstr "Nenhum aplicativo fixado"
+
+msgid "Try a different search term."
+msgstr "Tente outro termo de pesquisa."
+
+msgid "Choose “All applications” in the sidebar, right-click an application and use “Pin to Start menu”."
+msgstr "Escolha “Todos os aplicativos” na barra lateral, clique com o botão direito em um aplicativo e use “Fixar no menu Iniciar”."
+
+msgid "Places"
+msgstr "Locais"
+
+msgid "Tools"
+msgstr "Ferramentas"
+
+msgid "User settings"
+msgstr "Configurações do usuário"
+
+msgid "Lock"
+msgstr "Bloquear"
+
+msgid "Session and power"
+msgstr "Sessão e energia"
+
+msgid "Unpin from Start menu"
+msgstr "Desafixar do menu Iniciar"
+
+msgid "Move to start"
+msgstr "Mover para o início"
+
+msgid "Move earlier"
+msgstr "Mover para antes"
+
+msgid "Move later"
+msgstr "Mover para depois"
+
+msgid "Pin to Start menu"
+msgstr "Fixar no menu Iniciar"
+
+msgid "Add to desktop"
+msgstr "Adicionar à área de trabalho"

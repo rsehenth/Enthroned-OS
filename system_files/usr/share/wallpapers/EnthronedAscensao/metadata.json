@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Id": "EnthronedAscensao",
+        "License": "LicenseRef-Enthroned-Artwork",
+        "Name": "Enthroned — Ascensão",
+        "Name[pt_BR]": "Enthroned — Ascensão",
+        "Description": "Enthroned OS official wallpaper: Ascensão",
+        "Description[pt_BR]": "Papel de parede oficial do Enthroned OS: Ascensão"
+    }
+}

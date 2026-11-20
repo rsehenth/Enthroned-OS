@@ -1,0 +1,16 @@
+{
+  "name": "discover-ausente",
+  "kind": "uipolicy",
+  "description": "F4.13.14 - Discover absent: no store button and an honest message.",
+  "rules": [
+    {
+      "file": "qml/pages/AppsPage.qml",
+      "contains": ["apps.discoverAvailable", "The app store was not found on this system"],
+      "notContains": []
+    },
+    {
+      "file": "qml/pages/FinishPage.qml",
+      "contains": ["apps.discoverAvailable"]
+    }
+  ]
+}

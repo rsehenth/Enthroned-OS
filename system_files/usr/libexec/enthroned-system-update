@@ -1,0 +1,11 @@
+#!/bin/sh
+# Enthroned OS system update helper (Lote 8).
+# Fixed, non-configurable bootc update path. This script takes NO arguments
+# and ignores any that are passed: it always runs exactly
+#   bootc upgrade --progress-fd 9  (fd 9 redirected to stderr/journal)
+# `bootc upgrade` downloads and STAGES the next deployment transactionally;
+# applying it requires an explicit reboot (never performed here).
+# The --progress-fd JSON lines land in the systemd journal, where the
+# Enthroned Update Center parses them into real progress events.
+# Evidence/contracts: docs/architecture/ENTHRONED-UPDATE-ARCHITECTURE.md
+exec /usr/bin/bootc upgrade --progress-fd 9 9>&2

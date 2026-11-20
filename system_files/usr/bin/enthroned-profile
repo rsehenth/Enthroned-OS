@@ -1,0 +1,320 @@
+#!/usr/bin/env bash
+# Enthroned OS - appearance profile selector (Classic / Modern).
+# User-level tool: lists profiles, shows the active one and applies a profile
+# through the official KDE mechanism (plasma-apply-lookandfeel). It records
+# the previous look-and-feel so `restore` can undo the last switch.
+#
+# No root, no resident services, no writes to other users' homes. Applying a
+# look-and-feel only re-runs the chosen profile's defaults and layout script
+# (KDE-native, user-reversible by applying any other installed look-and-feel
+# or via System Settings > Colors & Themes > Look and Feel).
+#
+# SPDX-License-Identifier: Apache-2.0
+
+set -euo pipefail
+
+CLASSIC_ID="org.enthroned.classic"
+MODERN_ID="org.enthroned.modern"
+STATE_DIR="${XDG_STATE_HOME:-${HOME}/.local/state}/enthroned-os"
+PREVIOUS_FILE="${STATE_DIR}/previous-lookandfeel"
+
+usage() {
+	cat <<'EOF'
+Usage: enthroned-profile <command>
+
+Commands:
+  status           Show the active appearance profile (default command)
+  list             List the installed look-and-feel packages
+  apply classic    Apply the Enthroned Classic profile (light, Zorin-like)
+  apply modern     Apply the Enthroned Modern profile (dark, Windows 11-like)
+  restore          Re-apply the look-and-feel active before the last apply
+
+The same switching is available graphically in
+System Settings > Colors & Themes > Look and Feel.
+EOF
+}
+
+have_tool() {
+	command -v "$1" >/dev/null 2>&1
+}
+
+require_tools() {
+	local missing=""
+	have_tool plasma-apply-lookandfeel || missing="${missing} plasma-apply-lookandfeel"
+	have_tool kreadconfig6 || missing="${missing} kreadconfig6"
+	if [ -n "${missing}" ]; then
+		printf 'ERROR: required KDE tools not found:%s\n' "${missing}" >&2
+		exit 3
+	fi
+}
+
+active_lookandfeel() {
+	kreadconfig6 --file kdeglobals --group KDE --key LookAndFeelPackage 2>/dev/null || true
+}
+
+installed_lookandfeels() {
+	if have_tool kpackagetool6; then
+		{
+			kpackagetool6 --global --type Plasma/LookAndFeel --list 2>/dev/null || true
+			kpackagetool6 --type Plasma/LookAndFeel --list 2>/dev/null || true
+		} | grep -v '^Listing ' | sed '/^[[:space:]]*$/d' | sort -u
+	elif have_tool plasma-apply-lookandfeel; then
+		plasma-apply-lookandfeel --list 2>/dev/null || true
+	fi
+}
+
+is_installed() {
+	local id="$1"
+	installed_lookandfeels | grep -qx -- "${id}"
+}
+
+# Lote 13: the user's wallpaper survives a profile switch.
+# `plasma-apply-lookandfeel --resetLayout` recreates the desktop containments,
+# which drops their wallpaper configuration and falls back to the profile
+# default (Enthroned - Vigilia). So the wallpaper(s) the user has configured are
+# read from the running plasmashell (one per screen) before the switch and
+# written back afterwards. Nothing is stored on disk, nothing runs at login and
+# nothing happens when no wallpaper was configured or plasmashell is not
+# reachable: the profile default then applies, as before.
+plasma_script() {
+	local bus=""
+	for bus in qdbus6 qdbus-qt6 qdbus; do
+		have_tool "${bus}" && break
+		bus=""
+	done
+	[ -n "${bus}" ] || return 1
+	# Gate 13.1: only talk to a plasmashell that is already running (a plain
+	# method call could otherwise D-Bus-activate a new one, e.g. from a TTY),
+	# and never wait indefinitely for one that is stuck.
+	[ "$("${bus}" org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.NameHasOwner org.kde.plasmashell 2>/dev/null)" = "true" ] || return 1
+	if have_tool timeout; then
+		timeout "${ENTHRONED_PLASMA_TIMEOUT:-15}" "${bus}" org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$1" 2>/dev/null
+	else
+		"${bus}" org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$1" 2>/dev/null
+	fi
+}
+
+wallpaper_snapshot() {
+	plasma_script 'var out = ""; var ds = desktops();
+for (var i = 0; i < ds.length; i++) {
+	var d = ds[i];
+	if (d.wallpaperPlugin !== "org.kde.image") { continue; }
+	d.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
+	var img = d.readConfig("Image", "");
+	if (img) { out += d.screen + "|" + img + "\n"; }
+}
+print(out);' || true
+}
+
+wallpaper_restore() {
+	local snapshot="$1" entries="" line screen image
+	while IFS= read -r line; do
+		screen="${line%%|*}"
+		image="${line#*|}"
+		# Only plain numeric screens and file URLs/paths; anything else is skipped.
+		case "${screen}" in '' | *[!0-9]*) continue ;; esac
+		case "${image}" in file:///* | /*) ;; *) continue ;; esac
+		case "${image}" in *[\\\"[:cntrl:]]*) continue ;; esac
+		entries="${entries}\"${screen}\": \"${image}\", "
+	done <<<"${snapshot}"
+	[ -n "${entries}" ] || return 0
+	# The new containments may appear a moment after --resetLayout returns, so
+	# an empty write (no matching desktop yet) is retried a few times. Only
+	# existing desktops are touched: nothing is created, so no duplicates.
+	local attempt written=""
+	for attempt in 1 2 3; do
+		written="$(plasma_script "var map = {${entries%, }}; var ds = desktops(); var n = 0;
+for (var i = 0; i < ds.length; i++) {
+	var d = ds[i];
+	if (map[d.screen] === undefined) { continue; }
+	d.wallpaperPlugin = \"org.kde.image\";
+	d.currentConfigGroup = [\"Wallpaper\", \"org.kde.image\", \"General\"];
+	d.writeConfig(\"Image\", map[d.screen]);
+	if (d.reloadConfig) { d.reloadConfig(); }
+	n++;
+}
+print(n);")" || return 0
+		case "${written}" in '' | *[!0-9]*) return 0 ;; esac
+		[ "${written}" -gt 0 ] && return 0
+		sleep "${ENTHRONED_PLASMA_RETRY_DELAY:-1}"
+	done
+}
+
+# Lote 15: the desktop icon size and the accent colour chosen in Settings >
+# Personalization survive a profile switch as well (same approach as the
+# wallpaper: read before, written back after, nothing stored by this tool). The
+# accent id/hex live in ~/.config/enthronedpersonalizationrc, written by Settings.
+iconsize_snapshot() {
+	plasma_script 'var out = ""; var ds = desktops();
+for (var i = 0; i < ds.length; i++) {
+	var d = ds[i];
+	d.currentConfigGroup = ["General"];
+	var v = d.readConfig("iconSize", "");
+	if (v !== "") { out += d.screen + "|" + v + "\n"; }
+}
+print(out);' || true
+}
+
+iconsize_restore() {
+	local snapshot="$1" entries="" line screen size
+	while IFS= read -r line; do
+		screen="${line%%|*}"
+		size="${line#*|}"
+		case "${screen}" in '' | *[!0-9]*) continue ;; esac
+		case "${size}" in [0-6]) ;; *) continue ;; esac
+		entries="${entries}\"${screen}\": ${size}, "
+	done <<<"${snapshot}"
+	[ -n "${entries}" ] || return 0
+	local attempt written=""
+	for attempt in 1 2 3; do
+		written="$(plasma_script "var map = {${entries%, }}; var ds = desktops(); var n = 0;
+for (var i = 0; i < ds.length; i++) {
+	var d = ds[i];
+	if (map[d.screen] === undefined) { continue; }
+	d.currentConfigGroup = [\"General\"];
+	d.writeConfig(\"iconSize\", map[d.screen]);
+	if (d.reloadConfig) { d.reloadConfig(); }
+	n++;
+}
+print(n);")" || return 0
+		case "${written}" in '' | *[!0-9]*) return 0 ;; esac
+		[ "${written}" -gt 0 ] && return 0
+		sleep "${ENTHRONED_PLASMA_RETRY_DELAY:-1}"
+	done
+}
+
+accent_restore() {
+	local hex=""
+	have_tool kreadconfig6 && have_tool plasma-apply-colorscheme || return 0
+	hex="$(kreadconfig6 --file enthronedpersonalizationrc --group Accent --key Hex 2>/dev/null || true)"
+	case "${hex}" in
+		\#[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]) plasma-apply-colorscheme --accent-color "${hex}" >/dev/null 2>&1 || true ;;
+	esac
+}
+
+cmd_status() {
+	local active
+	active="$(active_lookandfeel)"
+	case "${active}" in
+		"${CLASSIC_ID}")
+			printf 'Active profile: Enthroned Classic (%s)\n' "${active}"
+			;;
+		"${MODERN_ID}")
+			printf 'Active profile: Enthroned Modern (%s)\n' "${active}"
+			;;
+		"")
+			printf 'Active profile: none set (Plasma default)\n'
+			;;
+		*)
+			printf 'Active look-and-feel: %s (not an Enthroned profile)\n' "${active}"
+			;;
+	esac
+	if [ -f "${PREVIOUS_FILE}" ]; then
+		printf 'Previous look-and-feel (restore target): %s\n' "$(cat "${PREVIOUS_FILE}")"
+	fi
+}
+
+cmd_list() {
+	local active
+	active="$(active_lookandfeel)"
+	local id
+	while IFS= read -r id; do
+		[ -z "${id}" ] && continue
+		local mark=" "
+		[ "${id}" = "${active}" ] && mark="*"
+		printf '%s %s\n' "${mark}" "${id}"
+	done < <(installed_lookandfeels)
+}
+
+cmd_apply() {
+	local target="$1"
+	local id
+	case "${target}" in
+		classic | "${CLASSIC_ID}") id="${CLASSIC_ID}" ;;
+		modern | "${MODERN_ID}") id="${MODERN_ID}" ;;
+		*)
+			printf "ERROR: unknown profile '%s' (use: classic, modern)\n" "${target}" >&2
+			exit 2
+			;;
+	esac
+
+	if ! is_installed "${id}"; then
+		printf 'ERROR: look-and-feel %s is not installed on this system.\n' "${id}" >&2
+		exit 4
+	fi
+
+	# Record the current look-and-feel so `restore` can undo this switch.
+	local previous
+	previous="$(active_lookandfeel)"
+	if [ -n "${previous}" ] && [ "${previous}" != "${id}" ]; then
+		mkdir -p "${STATE_DIR}"
+		printf '%s\n' "${previous}" >"${PREVIOUS_FILE}"
+	fi
+
+	local wallpapers iconsizes
+	wallpapers="$(wallpaper_snapshot)"
+	iconsizes="$(iconsize_snapshot)"
+	plasma-apply-lookandfeel --resetLayout -a "${id}"
+	wallpaper_restore "${wallpapers}"
+	iconsize_restore "${iconsizes}"
+	accent_restore
+	cmd_status
+}
+
+cmd_restore() {
+	if [ ! -f "${PREVIOUS_FILE}" ]; then
+		printf 'No previous look-and-feel recorded; nothing to restore.\n'
+		exit 0
+	fi
+	local previous
+	previous="$(cat "${PREVIOUS_FILE}")"
+	if [ -z "${previous}" ]; then
+		printf 'Previous look-and-feel record is empty; nothing to restore.\n'
+		exit 0
+	fi
+	if ! is_installed "${previous}"; then
+		printf 'ERROR: previous look-and-feel %s is no longer installed.\n' "${previous}" >&2
+		exit 4
+	fi
+	local wallpapers iconsizes
+	wallpapers="$(wallpaper_snapshot)"
+	iconsizes="$(iconsize_snapshot)"
+	plasma-apply-lookandfeel --resetLayout -a "${previous}"
+	wallpaper_restore "${wallpapers}"
+	iconsize_restore "${iconsizes}"
+	accent_restore
+	rm -f "${PREVIOUS_FILE}"
+	cmd_status
+}
+
+main() {
+	local cmd="${1:-status}"
+	case "${cmd}" in
+		-h | --help | help)
+			usage
+			;;
+		status)
+			require_tools
+			cmd_status
+			;;
+		list)
+			require_tools
+			cmd_list
+			;;
+		apply)
+			shift
+			require_tools
+			cmd_apply "${1:-}"
+			;;
+		restore)
+			require_tools
+			cmd_restore
+			;;
+		*)
+			usage >&2
+			exit 2
+			;;
+	esac
+}
+
+main "$@"

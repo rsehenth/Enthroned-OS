@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "policy": "optional-third-party-install",
+  "allowArtcraftInstall": true,
+  "notes": [
+    "Lote 6: the ArtCraft optional install gate is open because every contract",
+    "requirement is validated: official GitHub source (storytold/craft-launcher",
+    "releases), SHA256SUMS verification before install, user-level Flatpak only",
+    "(no root, no system mutation), explicit UI consent with an unchecked",
+    "checkbox and a confirmation dialog, real progress and failure handling,",
+    "cancellation support, and the automatic desktop shortcut follows the",
+    "CreateDesktopShortcuts preference.",
+    "Set allowArtcraftInstall to false (or remove this file) to lock the",
+    "optional install again; the UI then reports the honest blocked state."
+  ]
+}

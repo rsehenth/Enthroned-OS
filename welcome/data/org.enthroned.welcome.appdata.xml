@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+    <id>org.enthroned.welcome</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>Apache-2.0</project_license>
+    <name>Enthroned Welcome</name>
+    <name xml:lang="pt_BR">Boas-vindas do Enthroned</name>
+    <summary>First-experience assistant for Enthroned OS</summary>
+    <summary xml:lang="pt_BR">Assistente de primeira experiência do Enthroned OS</summary>
+    <developer_name>Enthroned OS</developer_name>
+    <description>
+        <p>
+            Enthroned Welcome introduces Enthroned OS on the first login of each
+            user: it tours the KDE Plasma desktop, lets you choose the appearance
+            profile (Classic or Modern), presents the Brave browser and the KDE
+            Discover store, and offers — entirely optionally — the ArtCraft
+            Launcher.
+        </p>
+        <p>
+            Progress is saved per user: the assistant can be closed, resumed
+            later and reopened at any time. Nothing is installed without explicit
+            consent, and no account or telemetry is required.
+        </p>
+        <p xml:lang="pt_BR">
+            O Enthroned Welcome apresenta o Enthroned OS no primeiro login de cada
+            usuário: conhece o desktop KDE Plasma, escolhe o perfil de aparência
+            (Classic ou Modern), apresenta o navegador Brave e a loja KDE Discover
+            e oferece — de forma inteiramente opcional — o ArtCraft Launcher.
+        </p>
+        <p xml:lang="pt_BR">
+            O progresso é guardado por usuário: o assistente pode ser fechado,
+            retomado depois e reaberto a qualquer momento. Nada é instalado sem
+            consentimento explícito e nenhuma conta ou telemetria é exigida.
+        </p>
+    </description>
+    <launchable type="desktop-id">org.enthroned.welcome.desktop</launchable>
+    <provides>
+        <binary>enthroned-welcome</binary>
+    </provides>
+    <categories>
+        <category>System</category>
+        <category>Utility</category>
+    </categories>
+    <releases>
+        <release version="0.1.0" date="2026-11-16">
+            <description>
+                <p>First release (F4): five steps, per-user persistence, controlled autostart and optional installation with consent.</p>
+                <p xml:lang="pt_BR">Primeira versão (F4): cinco etapas, persistência por usuário, autostart controlado e instalação opcional com consentimento.</p>
+            </description>
+        </release>
+    </releases>
+    <content_rating type="oars-1.1" />
+</component>

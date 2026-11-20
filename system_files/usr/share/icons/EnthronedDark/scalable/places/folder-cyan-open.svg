@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Enthroned open folder: same identity with a raised front face and a
+       document sheet behind it. -->
+  <path d="M16 38c0-4.4 3.6-8 8-8h26c2.1 0 4.1.8 5.7 2.3L62 38h42c4.4 0 8 3.6 8 8v14H16Z" fill="#27838F"/>
+  <path d="M46 52h44l-6 8H40Z" fill="#C5EEF3"/>
+  <path d="M112 60 88 96c-1.3 2-3.5 3.2-5.9 3.2H20c-3.4 0-5.3-3.9-3.2-6.6l24-32c1.5-2 3.9-3.2 6.4-3.2h61c3.4 0 5.3 3.9 3.8 6.6Z" fill="#54C0CE"/>
+  <path d="M16.8 92.6l24-32c1.5-2 3.9-3.2 6.4-3.2H60L28.8 99.2H20c-3.4 0-5.3-3.9-3.2-6.6Z" fill="#99DEE7" opacity="0.55"/>
+</svg>

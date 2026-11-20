@@ -1,0 +1,7 @@
+{
+  "name": "retomar-depois",
+  "kind": "machine",
+  "description": "F4.13.5 - user resumes the interrupted walkthrough on a later login, at the same page.",
+  "steps": [{ "event": "notify" }, { "page": 2 }, { "event": "close" }, { "event": "notify" }],
+  "expected": { "phase": "started", "finalPage": 2, "autostartShouldShow": true }
+}

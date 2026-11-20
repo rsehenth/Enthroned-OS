@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "channel": "f1-dev",
+  "description": "F1 development channel. Not production-ready; expect breaking rebuilds.",
+  "production_ready": false,
+  "upstream_channel": "aurora:stable",
+  "expected_image_references": [],
+  "expected_image_references_note": "Repositories (no tag) that identify the Enthroned channel. Empty until the registry namespace exists (ADR-0002); while empty the Settings treats the origin as unverified and still blocks generic Fedora/CentOS images. Once filled, any other origin blocks system updates.",
+  "publish_registry": null,
+  "publish_policy": "Publishing to a registry is disabled in F1 until a namespace and signing keys are configured by a human (ADR-0002)."
+}

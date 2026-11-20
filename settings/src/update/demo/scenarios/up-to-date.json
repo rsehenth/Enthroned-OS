@@ -1,0 +1,14 @@
+{
+  "name": "up-to-date",
+  "title": "Sistema atualizado",
+  "description": "Verificacao conclui sem atualizacoes (uupd update-check sai com 77).",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check-1", "rawType": "engine-check-started", "phase": "Checking", "description": "Verificando atualizacoes", "severity": "Info" }
+    ], "expectState": "checking" },
+    { "delayMs": 400, "events": [
+      { "source": "check", "operationId": "check-1", "rawType": "check-no-update", "phase": "Completed", "description": "Nenhuma atualizacao disponivel", "severity": "Info", "result": "Success" }
+    ], "expectState": "upToDate" }
+  ],
+  "finalState": "upToDate"
+}

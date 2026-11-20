@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "product_name": "Enthroned OS",
+  "product_id": "enthroned-os",
+  "version": "0.1.0-dev",
+  "base": "aurora",
+  "channel": "f1-dev",
+  "phase": "F1-foundation",
+  "upstream": {
+    "project": "Universal Blue Aurora",
+    "image_reference": "ghcr.io/ublue-os/aurora:stable",
+    "repository": "https://github.com/ublue-os/aurora",
+    "documentation": "https://docs.getaurora.dev/"
+  },
+  "derived_from": "Universal Blue image-template (https://github.com/ublue-os/image-template)",
+  "notes": "Development metadata for the F1 foundation build. Not a production release. The base system identity (os-release, bootloader) remains owned by upstream Aurora; this file only describes the Enthroned OS layer."
+}

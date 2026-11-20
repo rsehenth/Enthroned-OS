@@ -1,0 +1,178 @@
+{
+  "schema_version": 2,
+  "product": "Enthroned OS",
+  "layer": "desktop-visual-identity",
+  "phase": "Lote 13",
+  "plasma_target": "KDE Plasma 6.6+ (Aurora stable / Fedora 44)",
+  "identity": {
+    "source": "Colors and forms measured from the owner's original assets (wall1-3, E mark, throne, wordmark). Nothing here is redrawn or substituted.",
+    "measured": {
+      "violet_black": ["#070113", "#120428", "#1C063A", "#2A0C50"],
+      "violet_mid": ["#3D156C", "#5E2596"],
+      "accent": ["#8922B8", "#932EBF"],
+      "lilac_highlight": "#9B66BD",
+      "silver": ["#E0D4E5", "#A996B3"]
+    },
+    "note": "The scheme neutrals are the measured violet-blacks lightened and desaturated; the accent family is derived from the measured magenta-violet. Silver is reserved for logo art and highlights."
+  },
+  "color_schemes": {
+    "light": {
+      "file": "/usr/share/color-schemes/EnthronedLight.colors",
+      "kconfig_name": "EnthronedLight",
+      "display_name": "Enthroned Light",
+      "surface": "#F6F3FA",
+      "surface_view": "#FDFCFF",
+      "surface_alternate": "#ECE7F3",
+      "text": "#1E162C",
+      "text_inactive": "#5A5070",
+      "focus_hover": "#7A32BE",
+      "selection": "#6F26A8",
+      "success": "#17693F",
+      "warning": "#855210",
+      "error": "#A8344A",
+      "link": "#6A25A6",
+      "visited": "#8A2F78"
+    },
+    "dark": {
+      "file": "/usr/share/color-schemes/EnthronedDark.colors",
+      "kconfig_name": "EnthronedDark",
+      "display_name": "Enthroned Dark",
+      "surface": "#17111F",
+      "surface_view": "#1C1626",
+      "surface_alternate": "#120D1A",
+      "surface_raised": "#241D32",
+      "text": "#ECE7F4",
+      "text_inactive": "#ADA2BF",
+      "focus_hover": "#B684EA",
+      "selection": "#9A3DD6",
+      "success": "#45CB93",
+      "warning": "#E8A64A",
+      "error": "#F28A9B",
+      "link": "#BC8EEA",
+      "visited": "#E39BCB"
+    },
+    "generator": "scripts/gen-color-schemes.py (writes both .colors files and audits every foreground/background pair: text >= 4.5:1, focus ring >= 3:1)"
+  },
+  "brand": {
+    "primary": "#6F26A8",
+    "primary_hover": "#7A32BE",
+    "primary_on_dark": "#B684EA",
+    "accent_silver": "#E0D4E5",
+    "logo": "/usr/share/icons/hicolor/256x256/apps/org.enthroned.enthroned-os.png",
+    "launcher_icon_classic": "/usr/share/icons/hicolor/256x256/apps/org.enthroned.launcher-classic.png",
+    "launcher_icon_modern": "/usr/share/icons/hicolor/256x256/apps/org.enthroned.launcher-modern.png",
+    "wordmark": "/usr/share/enthroned-os/branding/enthroned-wordmark.png",
+    "wordmark_mono": "/usr/share/enthroned-os/branding/enthroned-wordmark-mono.png",
+    "logo_usage": {
+      "start_button_classic": "E mark, colored variant (E Logo-2): the white variant has ~1.1:1 contrast on the light Classic panel",
+      "start_button_modern": "throne symbol, colored variant (Throne-2): keeps the silhouette readable at 24-48 px on the dark Modern panel",
+      "about_welcome_splash": "full wordmark, colored variant",
+      "monochrome_variants": "reserved for light-on-dark print/export; never used as an icon on a light surface",
+      "clear_space": "at least 1/8 of the artwork height on every side; never stretched, recolored or placed on a busy photographic area"
+    }
+  },
+  "wallpapers": {
+    "default": "EnthronedVigilia",
+    "packages": {
+      "EnthronedSoberania": { "name": "Enthroned — Soberania", "source": "assets/wall1.png" },
+      "EnthronedAscensao": { "name": "Enthroned — Ascensão", "source": "assets/wall2.png" },
+      "EnthronedVigilia": { "name": "Enthroned — Vigília", "source": "assets/wall3.png" }
+    },
+    "policy": "Installed as native KPackage wallpapers (/usr/share/wallpapers). Originals are shipped byte-identical at their own size (1672x941); Plasma scales at runtime. The default is declared only in the look-and-feel [Wallpaper] defaults (plus lock/login); nothing re-applies it at login and a profile switch restores the user's own choice."
+  },
+  "spacing_scale_px": [4, 8, 12, 16, 24, 32],
+  "control_heights_px": {
+    "compact": 28,
+    "standard": 32,
+    "touch": 36
+  },
+  "radius_px": {
+    "control": 6,
+    "surface": 8,
+    "overlay": 12,
+    "note": "In QML derive radii from Kirigami.Units.smallSpacing (control = x1.5, surface = x2, overlay = x3) so they follow scale; never a bare number."
+  },
+  "elevation": {
+    "scale": ["flat", "raised", "overlay"],
+    "policy": "Surfaces are separated by Kirigami.Theme.alternateBackgroundColor and a 1px separator (Kirigami.Theme.textColor at 15% opacity); shadows belong to the compositor (Plasma popups, floating panel), never to in-app cards."
+  },
+  "panel": {
+    "classic_height_px": 44,
+    "modern_height_px": 48,
+    "position": "bottom",
+    "note": "Classic: solid, full-width, menu at the left, clock with date. Modern: floating, cluster centered, clock with time only. Both >= 44px so pointer and touch targets stay comfortable."
+  },
+  "components": {
+    "launcher": {
+      "type": "plasma-applet",
+      "id": "org.enthroned.launcher",
+      "path": "/usr/share/plasma/plasmoids/org.enthroned.launcher/",
+      "fallback": "org.kde.plasma.kickoff",
+      "alternative_capability": "org.kde.plasma.launchermenu",
+      "icon_per_profile": {
+        "org.enthroned.classic": "org.enthroned.launcher-classic",
+        "org.enthroned.modern": "org.enthroned.launcher-modern"
+      },
+      "note": "Uses the native kicker models; all colors come from the active Enthroned scheme (no hardcoded colors). The profile layout script writes the icon (General/icon) on every layout reset, on the launcher and on the kickoff fallback alike."
+    },
+    "profile_tool": {
+      "type": "cli",
+      "path": "/usr/bin/enthroned-profile",
+      "mechanism": "plasma-apply-lookandfeel",
+      "note": "Snapshots the user's wallpaper(s) per screen before the switch and writes them back after, so a profile switch never resets a personal choice."
+    },
+    "desktop_trash": {
+      "type": "stock-widget",
+      "id": "org.kde.plasma.trash",
+      "note": "Added to the desktop containment by the look-and-feel layout scripts; user-removable."
+    },
+    "folder_icons": {
+      "themes": ["Enthroned", "EnthronedDark"],
+      "palette": { "back": "#5E2596", "front": "#8B38C2", "mid": "#9E55D2", "highlight": "#C79BEA", "light": "#E1C8F5", "glyph": "#FFFFFF" },
+      "note": "Violet two-tone folders replace the former amber ones; same tonal roles, white glyphs unchanged."
+    },
+    "splash": {
+      "background": "#120428",
+      "note": "Both profiles use the deep violet of the default wallpaper so there is no light/dark flash between splash and desktop; the logo is the original wordmark."
+    }
+  },
+  "typography": {
+    "family": "System default (Noto Sans on Fedora/Aurora)",
+    "policy": "Do not override system fonts; Plasma font settings remain user-owned.",
+    "source": "Native KDE font stack; no bundled font.",
+    "roles": {
+      "page_title": "Kirigami.Heading level 1-2",
+      "section_title": "Kirigami.Heading level 3-4",
+      "body": "default Label",
+      "secondary": "Label with Kirigami.Theme.disabledTextColor (Kirigami maps it to the scheme's ForegroundInactive, >= 4.5:1 on Window, View, Button and alternate surfaces in both schemes)",
+      "caption": "Kirigami.Theme.smallFont"
+    }
+  },
+  "motion": {
+    "tokens": {
+      "micro": "Kirigami.Units.shortDuration (hover, focus, selection)",
+      "standard": "Kirigami.Units.longDuration (expand/collapse, step change)"
+    },
+    "policy": "Kirigami.Units durations follow the global Plasma animation speed, so users who turn animations off get zero-duration transitions. No permanent animations; indeterminate indicators only while real work is in progress."
+  },
+  "states": {
+    "focus": "DecorationFocus ring, 2px (Kirigami.Units.smallSpacing / 2), always visible on keyboard focus",
+    "hover": "highlightColor at 10% opacity over the surface (DecorationHover for borders)",
+    "pressed": "highlightColor at 20% opacity",
+    "selected": "highlightColor at 16% opacity plus a 3px accent indicator bar (selection never relies on color alone)",
+    "active": "Selection background with selection text",
+    "disabled": "ColorEffects:Disabled desaturation (KDE native)"
+  },
+  "semantic": {
+    "positive": "Kirigami.Theme.positiveTextColor / positiveBackgroundColor (always paired with an icon and a text label)",
+    "neutral": "Kirigami.Theme.neutralTextColor / neutralBackgroundColor",
+    "negative": "Kirigami.Theme.negativeTextColor / negativeBackgroundColor",
+    "info": "Kirigami.Theme.highlightColor"
+  },
+  "notes": [
+    "All colors map to KConfig keys in the .colors schemes; components must not hardcode colors (the splash backgrounds are the one documented exception: they render before any scheme is loaded).",
+    "Lote 13 audit: 268 pairs (134 per scheme) across Window, View, Button, Header, Tooltip, Complementary and Selection sets all meet WCAG 2.1 AA text contrast (4.5:1); the focus ring and the Selection/highlight color (progress bars, switches, sliders, accent bars) meet 3:1 against the surfaces they sit on. Static computation from the .colors files by scripts/gen-color-schemes.py --check.",
+    "Contrast was computed statically; it has not been confirmed in a running Plasma session.",
+    "Reversibility: users can switch back to any installed scheme via System Settings > Colors."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Enthroned OS Project"
+            }
+        ],
+        "Id": "EnthronedVigilia",
+        "License": "LicenseRef-Enthroned-Artwork",
+        "Name": "Enthroned — Vigília",
+        "Name[pt_BR]": "Enthroned — Vigília",
+        "Description": "Enthroned OS official wallpaper: Vigília (default)",
+        "Description[pt_BR]": "Papel de parede oficial do Enthroned OS: Vigília (padrão)"
+    }
+}

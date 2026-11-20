@@ -1,0 +1,36 @@
+# Enthroned OS - first-boot provisioning of the default system Flatpaks (F4).
+# Machine-level application provisioning (ADR-0006), not a per-user
+# first-run mechanism: the Welcome assistant is driven by XDG autostart and
+# its own per-user state instead.
+#
+# Safe to run any number of times: already-installed apps are skipped and a
+# marker file records what was completed. Without network the installs fail
+# and the companion timer retries later; the user can always install apps
+# through KDE Discover in the meantime.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=Enthroned OS - first-boot provisioning of default system Flatpaks
+Documentation=file:/usr/share/enthroned-os/firstboot-flatpaks.txt
+ConditionPathExists=/usr/bin/flatpak
+ConditionFileNotEmpty=/usr/share/enthroned-os/firstboot-flatpaks.txt
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/enthroned-firstboot-flatpaks
+# Lote 11A (H5 P2-1): a failed install now FAILS the unit (the helper exits
+# 1/77 and logs the original flatpak error). Only exit 75 - "deferred": no
+# network, no flathub remote yet, or another run in progress - is a success;
+# the reason is recorded in /var/lib/enthroned-os/firstboot-flatpaks.status.
+# 77 (inconsistent flatpak repo) needs an administrator: flatpak repair --system
+# (never run automatically).
+SuccessExitStatus=75
+# Background provisioning must not compete with the desktop session (the timer
+# fires ~8 min after boot) nor hang forever on a stalled download (oneshot
+# units default to no timeout).
+TimeoutStartSec=45min
+Nice=15
+IOSchedulingClass=idle

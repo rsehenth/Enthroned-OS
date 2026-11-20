@@ -1,0 +1,40 @@
+# Enthroned OS system-wide Dolphin defaults (Enthroned File Experience).
+# Shipped in /etc/xdg in the container; bootc handles deployment defaults.
+# This file is the system default /etc/xdg/dolphinrc and acts as a
+# system-wide default layer. Per-user settings (~/.config/dolphinrc) always
+# win; nothing here is forced onto existing users who already set a value.
+#
+# Windows-familiar choices only; destructive-action confirmations (delete
+# prompts, trash) are intentionally NOT touched and remain enabled.
+# Settings that Dolphin keeps outside dolphinrc (toolbar, Places, view mode,
+# panels) are seeded once per user by /usr/libexec/enthroned-files-setup.
+# Key names checked against Dolphin's dolphin_generalsettings.kcfg.
+# SPDX-License-Identifier: Apache-2.0
+
+[General]
+# Windows-like address bar: always show the clickable full path...
+ShowFullPath=true
+# ...and mirror it in the window title.
+ShowFullPathInTitlebar=true
+# One consistent view behavior across all folders (like Explorer), instead of
+# per-directory remembered view properties.
+GlobalViewProps=true
+# "Copy to / Move to" submenus in the context menu (familiar for Windows users).
+ShowCopyMoveMenu=true
+# Keep the zoom slider visible in the status bar.
+ShowZoomSlider=true
+# Folders opened by other applications (downloads, launcher, desktop) open as
+# a new tab in an existing window — Explorer-like tabbed navigation.
+OpenExternallyCalledFolderInNewTab=true
+# Explorer-like tab strip: always visible, with a close button on each tab
+# (Ctrl+T / Ctrl+W are Dolphin's own defaults).
+AlwaysShowTabBar=true
+ShowCloseButtonOnTabs=true
+# Breadcrumb stays the default location bar (click the empty part or Ctrl+L
+# to type a path); keep it explicit.
+EditableUrl=false
+# Useful status bar across the full width: item counts, selection size and
+# free space of the current disk.
+ShowStatusBar=FullWidth
+# Natural order (file2 before file10), like Explorer.
+SortingChoice=NaturalSorting

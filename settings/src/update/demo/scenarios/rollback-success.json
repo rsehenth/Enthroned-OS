@@ -1,0 +1,19 @@
+{
+  "name": "rollback-success",
+  "title": "Rollback preparado",
+  "description": "Rollback explicito: unidade fixa roda, sucesso e reinicializacao pendente.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check", "rawType": "engine-check-started", "phase": "FetchingInfo", "description": "Verificacao iniciada", "severity": "Info" },
+      { "source": "check", "operationId": "check", "rawType": "check-no-update", "phase": "Completed", "description": "Nenhuma atualizacao disponivel", "severity": "Info" },
+      { "source": "engine", "operationId": "bootc-status", "rawType": "bootc-status-ok", "phase": "Initializing", "description": "Status de deployment consultado", "severity": "Info" }
+    ], "expectState": "upToDate" },
+    { "delayMs": 300, "events": [
+      { "source": "engine", "operationId": "rollback-1", "rawType": "engine-rollback-started", "phase": "Initializing", "description": "Rollback iniciado via enthroned-rollback.service", "severity": "Info" }
+    ], "expectState": "rollingBack" },
+    { "delayMs": 400, "events": [
+      { "source": "system", "operationId": "rollback-1", "rawType": "rollback-success", "phase": "WaitingRestart", "description": "Rollback preparado", "severity": "Info" }
+    ], "expectState": "restartRequired" }
+  ],
+  "finalState": "restartRequired"
+}

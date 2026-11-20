@@ -1,0 +1,7 @@
+{
+  "name": "artcraft-cancelamento",
+  "kind": "machine",
+  "description": "F4.13.9 - user cancels the choice before installing: no pending install, no consent left behind.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }, { "event": "decline" }],
+  "expected": { "phase": "started", "artcraftConsented": false, "artcraftInstallState": "idle" }
+}

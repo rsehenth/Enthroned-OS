@@ -1,0 +1,7 @@
+{
+  "name": "artcraft-consentimento",
+  "kind": "machine",
+  "description": "F4.13.8 - user explicitly checks the option and continues: optional-pending with consent stored.",
+  "steps": [{ "event": "notify" }, { "event": "consent" }],
+  "expected": { "phase": "optional-pending", "artcraftConsented": true, "artcraftInstallState": "pending" }
+}

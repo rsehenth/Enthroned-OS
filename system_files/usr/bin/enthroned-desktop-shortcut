@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+# Enthroned OS - create a desktop shortcut for a REAL installed application.
+#
+# Used by two flows (Lote 6):
+#   1. the launcher context menu action "Adicionar a area de trabalho"
+#      (explicit user action, always allowed);
+#   2. the optional ArtCraft install in Enthroned Welcome (automatic, only
+#      when the user preference CreateDesktopShortcuts is enabled, which is
+#      the default; checked with --if-enabled).
+#
+# Guarantees:
+#   - only launchers (.desktop entries) that are actually installed in the
+#     XDG application directories (user, flatpak exports and system) are
+#     used; nothing is invented;
+#   - entries marked NoDisplay or Hidden are refused (technical/hidden
+#     components never get shortcuts);
+#   - the file is written to the REAL user Desktop directory
+#     (xdg-user-dir DESKTOP, falling back to $XDG_CONFIG_HOME/user-dirs.dirs
+#     and, only when that configuration does not exist, $HOME/Desktop);
+#     it is never created for a disabled desktop dir (H4-009: a Desktop
+#     configured as $HOME, or a user-dirs.dirs that defines no $HOME
+#     subpath, gets NO files);
+#   - an existing file with the same name is NEVER overwritten (the user's
+#     own files always win); a duplicate is simply not created;
+#   - no daemon and no monitoring: the script runs once, does one copy and
+#     exits; installed-application updates never touch the shortcut again;
+#   - trust follows the desktop entry trust policy: the copied launcher is
+#     marked executable and trusted via gio metadata because it comes from a
+#     system-installed application the user explicitly chose; nothing is
+#     executed here and no privileges are elevated.
+#
+# Usage: enthroned-desktop-shortcut [--if-enabled] <storage-id>.desktop
+# Exit codes: 0 = shortcut exists or was created (or disabled by preference),
+#             1 = the application or its launcher is not usable.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+set -uo pipefail
+
+check_pref() {
+	# kreadconfig6 falls back to /etc/xdg defaults; the shipped default is
+	# created at image build time and is "true" (create automatically).
+	if command -v kreadconfig6 >/dev/null 2>&1; then
+		local value
+		value="$(kreadconfig6 --file enthroned-os/preferences.conf \
+			--group General --key CreateDesktopShortcuts --default true 2>/dev/null)"
+		[[ "${value}" == "true" ]]
+	else
+		return 0
+	fi
+}
+
+if_enabled=false
+if [[ "${1:-}" == "--if-enabled" ]]; then
+	if_enabled=true
+	shift
+fi
+
+storage_id="${1:-}"
+# H4-002: only a plain desktop-file name is accepted. Path separators,
+# traversal, whitespace/control characters and shell metacharacters are
+# rejected before anything is resolved; the id is only ever joined into a
+# search path, never interpreted as a command.
+if [[ ! "${storage_id}" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*\.desktop$ ]] \
+	|| [[ "${storage_id}" == *..* ]]; then
+	echo "enthroned-desktop-shortcut: not a .desktop storage id: ${storage_id}" >&2
+	exit 1
+fi
+
+if ${if_enabled} && ! check_pref; then
+	exit 0
+fi
+
+# Resolve the launcher in the real XDG application directories (user first,
+# then flatpak exports and system dirs), mirroring KService's search.
+search_dirs=(
+	"${XDG_DATA_HOME:-${HOME}/.local/share}/applications"
+	"${HOME}/.local/share/flatpak/exports/share/applications"
+	"/var/lib/flatpak/exports/share/applications"
+	"/usr/share/flatpak/exports/share/applications"
+)
+if [[ -n "${XDG_DATA_DIRS:-}" ]]; then
+	IFS=':' read -r -a extra_dirs <<<"${XDG_DATA_DIRS}"
+	for d in "${extra_dirs[@]}"; do
+		[[ -n "${d}" ]] && search_dirs+=("${d}/applications")
+	done
+else
+	search_dirs+=("/usr/local/share/applications" "/usr/share/applications")
+fi
+
+source_file=""
+for dir in "${search_dirs[@]}"; do
+	candidate="${dir}/${storage_id}"
+	if [[ -f "${candidate}" ]]; then
+		source_file="${candidate}"
+		break
+	fi
+done
+
+if [[ -z "${source_file}" ]]; then
+	echo "enthroned-desktop-shortcut: launcher not installed: ${storage_id}" >&2
+	exit 1
+fi
+
+# Refuse technical/hidden entries and anything without a Name to display.
+grep -Eq '^(NoDisplay|Hidden)=true' "${source_file}" && {
+	echo "enthroned-desktop-shortcut: refusing hidden entry: ${storage_id}" >&2
+	exit 1
+}
+grep -Eq '^Name=' "${source_file}" || {
+	echo "enthroned-desktop-shortcut: refusing unnamed entry: ${storage_id}" >&2
+	exit 1
+}
+
+# Real user Desktop directory. H4-009: a disabled Desktop dir (configured as
+# $HOME, or a user-dirs.dirs that names no $HOME subpath) gets NO files; the
+# $HOME/Desktop fallback applies only when the configuration really does not
+# exist (no xdg-user-dir result AND no XDG_DESKTOP_DIR entry).
+desktop_dir=""
+user_dirs="${XDG_CONFIG_HOME:-${HOME}/.config}/user-dirs.dirs"
+if command -v xdg-user-dir >/dev/null 2>&1; then
+	desktop_dir="$(xdg-user-dir DESKTOP 2>/dev/null || true)"
+fi
+if [[ "${desktop_dir}" == "${HOME}" ]]; then
+	echo "enthroned-desktop-shortcut: Desktop directory is disabled; no shortcut written" >&2
+	exit 0
+fi
+if [[ -z "${desktop_dir}" ]]; then
+	if [[ -f "${user_dirs}" ]]; then
+		candidate="$(sed -n 's/^XDG_DESKTOP_DIR="\$HOME\/\([^"]*\)".*/\1/p' \
+			"${user_dirs}" | head -n 1)"
+		if [[ -n "${candidate}" ]]; then
+			desktop_dir="${HOME}/${candidate}"
+		elif grep -q '^XDG_DESKTOP_DIR=' "${user_dirs}"; then
+			echo "enthroned-desktop-shortcut: Desktop directory is disabled or custom; no shortcut written" >&2
+			exit 0
+		fi
+	fi
+	[[ -z "${desktop_dir}" ]] && desktop_dir="${HOME}/Desktop"
+fi
+
+target="${desktop_dir}/${storage_id}"
+if [[ -e "${target}" ]]; then
+	echo "enthroned-desktop-shortcut: already on the desktop: ${target}" >&2
+	exit 0
+fi
+
+mkdir -p "${desktop_dir}" 2>/dev/null || {
+	echo "enthroned-desktop-shortcut: cannot create ${desktop_dir}" >&2
+	exit 1
+}
+
+cp -p "${source_file}" "${target}" || {
+	echo "enthroned-desktop-shortcut: copy failed: ${target}" >&2
+	exit 1
+}
+chmod 0755 "${target}" 2>/dev/null || true
+# Mark the launcher as trusted (KDE/Plasma desktop-entry trust policy). The
+# file comes from an installed application and the user asked for it; gio is
+# best-effort and its absence only leaves the standard trust prompt.
+if command -v gio >/dev/null 2>&1; then
+	gio set "${target}" metadata::trusted true 2>/dev/null || true
+fi
+
+echo "enthroned-desktop-shortcut: created ${target}"
+exit 0

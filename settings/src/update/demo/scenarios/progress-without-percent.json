@@ -1,0 +1,17 @@
+{
+  "name": "progress-without-percent",
+  "title": "Progresso sem porcentagem",
+  "description": "Fonte nao fornece porcentagem confiavel; UI deve usar indicador indeterminado.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Atualizando aplicativos", "severity": "Info", "currentItem": "org.gnome.Builder" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Atualizando aplicativos", "severity": "Info", "currentItem": "org.videolan.VLC" }
+    ], "expectState": "updating" }
+  ],
+  "finalState": "updating"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "update-available",
+  "title": "Atualizacoes disponiveis",
+  "description": "Verificacao encontra nova imagem do sistema e dois flatpaks.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "check-1", "rawType": "engine-check-started", "phase": "Checking", "description": "Verificando atualizacoes", "severity": "Info" }
+    ], "expectState": "checking" },
+    { "delayMs": 400, "events": [
+      { "source": "check", "operationId": "check-1", "rawType": "check-update-available", "phase": "FetchingInfo", "description": "Nova imagem disponivel", "severity": "Info" }
+    ], "expectState": "updatesAvailable" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "check-1", "rawType": "check-update-available", "phase": "FetchingInfo", "description": "2 aplicativos Flatpak com atualizacao", "severity": "Info" }
+    ], "expectState": "updatesAvailable" }
+  ],
+  "finalState": "updatesAvailable"
+}

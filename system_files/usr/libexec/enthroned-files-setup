@@ -1,0 +1,217 @@
+#!/usr/bin/python3
+# Enthroned OS - one-shot, per-user Dolphin provisioning (Enthroned File Experience).
+#
+# Why a script: Dolphin keeps the Places sidebar (user-places.xbel), the default
+# view mode (view_properties/global/.directory) and the toolbar layout
+# (kxmlgui6/dolphin/dolphinui.rc) in the user's home, not in /etc/xdg, and the
+# Places entries contain absolute, localized paths. A copied file would be wrong
+# for other users and for pt-BR folder names.
+#
+# Rules: additive and idempotent. Existing bookmarks, view settings and toolbar
+# files are never overwritten (a toolbar file written by this script is only
+# refreshed when Dolphin's UI version changes). No resident process: started by
+# /etc/xdg/autostart/org.enthroned.files-setup.desktop, exits in milliseconds.
+# Devices, Network and Trash are native Solid/KIO entries; no drive letters are
+# invented. Every step fails soft (logged to stderr -> user journal).
+#
+# SPDX-License-Identifier: Apache-2.0
+
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+import zlib
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+SETUP_VERSION = "1"  # bump to re-run the additive steps for existing users
+HOME = Path(os.environ.get("HOME") or Path.home())
+CONFIG = Path(os.environ.get("XDG_CONFIG_HOME") or HOME / ".config")
+DATA = Path(os.environ.get("XDG_DATA_HOME") or HOME / ".local" / "share")
+STATE = Path(os.environ.get("XDG_STATE_HOME") or HOME / ".local" / "state") / "enthroned-os"
+MARKER = STATE / "files-setup"
+UI_SYSTEM = Path(os.environ.get("ENTHRONED_DOLPHIN_UI") or "/usr/share/kxmlgui6/dolphin/dolphinui.rc")
+UI_COMMENT = "enthroned-os files-setup"
+
+NS = {
+    "bookmark": "http://www.freedesktop.org/standards/desktop-bookmarks",
+    "mime": "http://www.freedesktop.org/standards/shared-mime-info",
+    "kdepriv": "http://www.kde.org/kdepriv",
+}
+for _p, _u in NS.items():
+    ET.register_namespace(_p, _u)
+FDO, KDE = "http://freedesktop.org", "http://www.kde.org"
+
+# Dolphin toolbar: Explorer-like row (back/forward/up, breadcrumb, search, quick
+# file actions, view menu). Action names come from Dolphin's own dolphinui.rc.
+TOOLBAR = [
+    "go_back", "go_forward", "go_up", "url_navigators", "toggle_search", None,
+    "new_menu", "edit_cut", "edit_copy", "edit_paste", "renamefile", "movetotrash", None,
+    "view_settings", "split_view", "hamburger_menu",
+]
+
+# Details view like Explorer. ViewMode 1 = DetailsView in DolphinView::Mode.
+VIEW_PROPS = """[Dolphin]
+Version=4
+ViewMode=1
+SortRole=text
+SortOrder=0
+SortFoldersFirst=true
+VisibleRoles=Details_text,Details_modificationtime,Details_type,Details_size,CustomizedDetails
+"""
+
+
+def log(msg):
+    print(f"enthroned-files-setup: {msg}", file=sys.stderr)
+
+
+def xdg_dirs():
+    """Real, already-localized XDG directories (never invents or renames any)."""
+    dirs_file = CONFIG / "user-dirs.dirs"
+    if not dirs_file.exists() and shutil.which("xdg-user-dirs-update"):
+        subprocess.run(["xdg-user-dirs-update"], check=False, timeout=20)
+    found = {}
+    try:
+        text = dirs_file.read_text(encoding="utf-8")
+    except OSError:
+        return found
+    for m in re.finditer(r'^XDG_(\w+)_DIR="(.*)"\s*$', text, re.M):
+        path = Path(m.group(2).replace("$HOME", str(HOME)))
+        if path != HOME and path.is_dir():  # == $HOME means "disabled" in XDG
+            found[m.group(1)] = path
+    return found
+
+
+def bookmark(href, title, icon, system):
+    """Element shaped like KFilePlacesItem::createBookmark (kio)."""
+    b = ET.Element("bookmark", href=href)
+    ET.SubElement(b, "title").text = title
+    info = ET.SubElement(b, "info")
+    fdo = ET.SubElement(info, "metadata", owner=FDO)
+    ET.SubElement(fdo, f"{{{NS['bookmark']}}}icon", name=icon)
+    kde = ET.SubElement(info, "metadata", owner=KDE)
+    ET.SubElement(kde, "ID").text = f"{int(time.time())}/{zlib.crc32(href.encode()) % 1000}"
+    if system:  # KDE translates system labels ("Home", "Trash"...) for the UI locale
+        ET.SubElement(kde, "isSystemItem").text = "true"
+    return b
+
+
+def norm(href):
+    return href.rstrip("/")
+
+
+def seed_places(dirs):
+    xbel = DATA / "user-places.xbel"
+    extra = []  # Pictures/Music/Videos: not in KDE's own default set
+    for key, icon in (("PICTURES", "folder-pictures"), ("MUSIC", "folder-music"), ("VIDEOS", "folder-videos")):
+        if key in dirs:
+            # Non-system items show the on-disk (localized) folder name verbatim.
+            extra.append((dirs[key].as_uri(), dirs[key].name, icon, False))
+
+    if xbel.exists():
+        tree = ET.parse(xbel)
+        root = tree.getroot()
+        seen = {norm(b.get("href", "")) for b in root.iter("bookmark")}
+        todo = [e for e in extra if norm(e[0]) not in seen]
+        if not todo:
+            return
+        # Insert after the last personal folder already listed, else before Trash.
+        personal = {norm(dirs[k].as_uri()) for k in ("DESKTOP", "DOWNLOAD", "DOCUMENTS") if k in dirs}
+        children = list(root)
+        at = len(children)
+        for i, c in enumerate(children):
+            href = norm(c.get("href", "")) if c.tag == "bookmark" else ""
+            if href in personal:
+                at = i + 1
+            elif href == "trash:" and at == len(children):
+                at = i
+        for n, e in enumerate(todo):
+            root.insert(at + n, bookmark(*e))
+    else:
+        root = ET.Element("xbel")
+        info = ET.SubElement(root, "info")
+        meta = ET.SubElement(info, "metadata", owner=KDE)
+        # Version 4 = current KFilePlacesModel format; KDE still appends its own
+        # Recent Files/Locations (kio-extras) and keeps Devices native.
+        ET.SubElement(meta, "kde_places_version").text = "4"
+        for g in ("Places", "Remote", "Devices", "RemovableDevices"):
+            ET.SubElement(meta, f"GroupState-{g}-IsHidden").text = "false"
+        items = [(HOME.as_uri(), "Home", "user-home", True)]
+        for key, title, icon in (("DESKTOP", "Desktop", "user-desktop"), ("DOWNLOAD", "Downloads", "folder-download"),
+                                 ("DOCUMENTS", "Documents", "folder-documents")):
+            if key in dirs:
+                items.append((dirs[key].as_uri(), title, icon, True))
+        items += extra
+        items += [("remote:/", "Network", "folder-network", True), ("trash:/", "Trash", "user-trash", True)]
+        for e in items:
+            root.append(bookmark(*e))
+        tree = ET.ElementTree(root)
+
+    xbel.parent.mkdir(parents=True, exist_ok=True)
+    ET.indent(tree, space=" ")
+    atomic_write(xbel, '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE xbel>\n'
+                 + ET.tostring(tree.getroot(), encoding="unicode") + "\n")
+
+
+def seed_view_props():
+    target = DATA / "dolphin" / "view_properties" / "global" / ".directory"
+    if not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        atomic_write(target, VIEW_PROPS)
+
+
+def seed_toolbar():
+    try:
+        ui_version = re.search(r'<gui\b[^>]*\bversion="(\d+)"', UI_SYSTEM.read_text(encoding="utf-8")).group(1)
+    except (OSError, AttributeError):
+        log("Dolphin dolphinui.rc not found; toolbar left at Dolphin defaults")
+        return
+    target = DATA / "kxmlgui6" / "dolphin" / "dolphinui.rc"
+    if target.exists():
+        old = target.read_text(encoding="utf-8")
+        if UI_COMMENT not in old or f'version="{ui_version}"' in old:
+            return  # user-edited, or already current
+    actions = "\n".join("   <Separator/>" if a is None else f'   <Action name="{a}"/>' for a in TOOLBAR)
+    # Same shape KDE writes when the user edits the toolbar; a stale version is
+    # ignored by KXmlGui, so a Dolphin update falls back to its defaults safely.
+    target.parent.mkdir(parents=True, exist_ok=True)
+    atomic_write(target, f'<!DOCTYPE gui SYSTEM "kpartgui.dtd">\n<!-- {UI_COMMENT} -->\n'
+                 f'<gui name="dolphin" version="{ui_version}">\n'
+                 f'  <ToolBar name="mainToolBar" noMerge="1">\n   <text context="@title:menu">Main Toolbar</text>\n'
+                 f'{actions}\n  </ToolBar>\n</gui>\n')
+
+
+def atomic_write(path, text):
+    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=path.name + ".")
+    with os.fdopen(fd, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    os.replace(tmp, path)
+
+
+def main():
+    # The toolbar step also runs after Dolphin updates (UI version changed).
+    step_failed = False
+    try:
+        seed_toolbar()
+    except Exception as exc:  # noqa: BLE001 - fail soft, never block the session
+        log(f"toolbar: {exc}")
+        step_failed = True
+    if MARKER.exists() and MARKER.read_text().strip() == SETUP_VERSION:
+        return 0
+    for name, step in (("places", lambda: seed_places(xdg_dirs())), ("view", seed_view_props)):
+        try:
+            step()
+        except Exception as exc:  # noqa: BLE001
+            log(f"{name}: {exc}")
+            step_failed = True
+    if not step_failed:
+        STATE.mkdir(parents=True, exist_ok=True)
+        MARKER.write_text(SETUP_VERSION + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

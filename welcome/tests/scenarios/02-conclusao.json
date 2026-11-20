@@ -1,0 +1,7 @@
+{
+  "name": "conclusao",
+  "kind": "machine",
+  "description": "F4.13.2 - user concludes the walkthrough: autostart never opens it again.",
+  "steps": [{ "event": "notify" }, { "page": 4 }, { "event": "finish" }],
+  "expected": { "phase": "completed", "autostartShouldShow": false }
+}

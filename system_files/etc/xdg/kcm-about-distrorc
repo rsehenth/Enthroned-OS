@@ -1,0 +1,8 @@
+# Enthroned OS distribution identity for KInfoCenter / About This System.
+# Overrides /usr/share/kde-settings/kde-profile/default/xdg/kcm-about-distrorc.
+
+[General]
+LogoPath=/usr/share/pixmaps/enthroned-logo.png
+Name=Enthroned OS
+Variant=Desktop
+Website=

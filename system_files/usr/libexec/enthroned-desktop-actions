@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+# Enthroned OS - desktop context menu defaults for the user's Plasma config.
+#
+# Plasma 6.6 reads the desktop containment actions from the user's
+# plasma-org.kde.plasma.desktop-appletsrc, which plasmashell opens with
+# KConfig::SimpleConfig — /etc/xdg defaults never cascade into it, so the
+# only reliable delivery is the user file itself. The bindings are keyed by
+# containment TYPE, not id: libplasma reads [ActionPlugins][0] (0 = Desktop)
+# in Containment::restore / ContainmentPrivate::containmentActionsConfig
+# every time a desktop containment is created — including the first login,
+# when the default layout creates it. This script runs as a user unit
+# ordered Before=plasma-plasmashell.service on every login and:
+#
+#   1. ON THE FIRST LOGIN OF A USER ONLY (migration marker, H4-008): binds
+#      the desktop right button to the Enthroned context menu plugin
+#      (org.enthroned.contextmenu, which reuses the stock Plasma menu and
+#      prepends "Configurações do Enthroned"), keeps the native middle-click
+#      default (org.kde.paste) and disables the three context-menu
+#      separators that render as empty gaps (_sep1, _sep3, _sep4; _sep2
+#      stays). Seeding happens ONLY for keys that are ABSENT: a key that
+#      exists with an explicit empty value is a user choice and is never
+#      "repaired" (H4-008: kreadconfig6 returns the same empty string for a
+#      missing key and for an existing empty one, so the default is probed
+#      with a sentinel). After the migration marker exists, these defaults
+#      are never applied again — anything the user changed, removed or
+#      disabled afterwards survives every following login.
+#   2. ON EVERY LOGIN: heals a stale binding back to the stock plugin
+#      (org.kde.contextmenu) if the Enthroned plugin binary is no longer
+#      installed. Only the Enthroned binding itself is touched by the heal;
+#      every other preference stays as the user left it.
+#
+# Idempotent; always exits 0 so login is never blocked (NP-01 bounds the
+# wait in enthroned-desktop-actions.service with TimeoutStartSec). Requires
+# kreadconfig6/kwriteconfig6 (shipped with the Plasma base).
+#
+# SPDX-License-Identifier: Apache-2.0
+
+set -uo pipefail
+
+FILE=plasma-org.kde.plasma.desktop-appletsrc
+PLUGIN=org.enthroned.contextmenu
+STOCK=org.kde.contextmenu
+TRIGGER="RightButton;NoModifier"
+DESKTOP_TYPE=0
+# H4-008: one-time migration marker per user; after it exists the defaults
+# are never re-applied, so later user changes (including removals) stick.
+MIGRATION="${XDG_CONFIG_HOME:-${HOME}/.config}/enthroned/desktop-actions.done"
+# Sentinel that tells "key does not exist" apart from "key exists, empty".
+ABSENT=__ENTHRONED_CONFIG_ABSENT__
+
+r() { kreadconfig6 --file "$FILE" "$@" 2>/dev/null; }
+w() { kwriteconfig6 --file "$FILE" "$@" 2>/dev/null; }
+
+plugin_installed() {
+	local dir
+	for dir in /usr/lib64/qt6/plugins/plasma/containmentactions \
+		/usr/lib/qt6/plugins/plasma/containmentactions; do
+		[[ -f "${dir}/${PLUGIN}.so" ]] && return 0
+	done
+	return 1
+}
+
+command -v kreadconfig6 >/dev/null 2>&1 || exit 0
+command -v kwriteconfig6 >/dev/null 2>&1 || exit 0
+
+# 1. First-login migration: seed ONLY absent keys (see header).
+#    R93-03: the migration marker is created ONLY when every required write
+#    is confirmed by kwriteconfig6's exit status. A failed (e.g. temporary)
+#    write keeps the marker absent so the NEXT login retries exactly the keys
+#    that are still absent - already-written keys and pre-existing user
+#    choices (including explicit empty/removals) are never written again.
+#    Login is never blocked: the helper still exits 0 either way.
+if [[ ! -f "${MIGRATION}" ]]; then
+	migration_ok=1
+	# 1a. Mouse bindings for the desktop containment type (0 = Desktop).
+	current="$(r --group ActionPlugins --group "$DESKTOP_TYPE" --key "$TRIGGER" --default "${ABSENT}")"
+	if [[ "$current" == "${ABSENT}" ]] && plugin_installed; then
+		w --group ActionPlugins --group "$DESKTOP_TYPE" --key "$TRIGGER" "$PLUGIN" || migration_ok=0
+	fi
+	# 1b. Preserve the native middle-click default once the type group exists
+	#     (Plasma would skip its shell defaults for this group). An
+	#     explicitly empty value stays empty: the user disabled it.
+	paste="$(r --group ActionPlugins --group "$DESKTOP_TYPE" --key "MiddleButton;NoModifier" --default "${ABSENT}")"
+	if [[ "$paste" == "${ABSENT}" ]]; then
+		w --group ActionPlugins --group "$DESKTOP_TYPE" --key "MiddleButton;NoModifier" org.kde.paste || migration_ok=0
+	fi
+	# 1c. Separator cleanup in the per-trigger subgroup the stock menu plugin
+	#     restores from (ContextMenu::restore), type-keyed: effective from
+	#     the first login, no containment ids involved.
+	for sep in _sep1 _sep3 _sep4; do
+		value="$(r --group ActionPlugins --group "$DESKTOP_TYPE" --group "$TRIGGER" --key "$sep" --default "${ABSENT}")"
+		[[ "$value" == "${ABSENT}" ]] || continue
+		w --group ActionPlugins --group "$DESKTOP_TYPE" --group "$TRIGGER" --key "$sep" false || migration_ok=0
+	done
+	if (( migration_ok )); then
+		mkdir -p "$(dirname "${MIGRATION}")" 2>/dev/null || true
+		: > "${MIGRATION}" 2>/dev/null || true
+	fi
+fi
+
+# 2. Every login: heal a stale binding back to the stock menu if the
+#    Enthroned plugin binary is no longer installed. Nothing else is ever
+#    rewritten after the migration (H4-008).
+current="$(r --group ActionPlugins --group "$DESKTOP_TYPE" --key "$TRIGGER")"
+if [[ "$current" == "$PLUGIN" ]] && ! plugin_installed; then
+	w --group ActionPlugins --group "$DESKTOP_TYPE" --key "$TRIGGER" "$STOCK"
+fi
+
+exit 0

@@ -1,0 +1,7 @@
+{
+  "name": "pular-na-primeira-etapa",
+  "kind": "machine",
+  "description": "An early finish cannot complete the assistant. Explicit dismissal keeps the current page and suppresses autostart after revisiting.",
+  "steps": [{ "event": "notify" }, { "event": "finish" }, { "event": "dismiss" }, { "event": "notify" }, { "event": "close" }],
+  "expected": { "phase": "dismissed", "finalPage": 0, "autostartShouldShow": false }
+}

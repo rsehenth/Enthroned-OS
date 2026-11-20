@@ -1,0 +1,18 @@
+[Unit]
+Description=Enthroned OS periodic system update staging timer (NOT enabled by default)
+# Enablement policy: docs/operations/UPDATE-PIPELINE.md (repository).
+
+[Timer]
+# The closed-channel image masks this timer and its service (Gate 12.3).
+# A future release must validate the signed official origin and staging
+# before deciding to enable this timer (docs/operations/UPDATE-PIPELINE.md).
+# There is NO automatic reboot: the timer only stages; restarting stays a
+# user decision in the Update Center.
+OnCalendar=*-*-* 06:30:00
+RandomizedDelaySec=15m
+Persistent=true
+Unit=enthroned-system-update.service
+AccuracySec=1m
+
+[Install]
+WantedBy=timers.target

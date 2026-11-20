@@ -1,0 +1,19 @@
+[Unit]
+Description=Enthroned OS system update (bootc upgrade, fixed command)
+# Design and contracts: docs/operations/UPDATE-SYSTEM.md (repository).
+Wants=network-online.target
+After=network-online.target
+# Conditions are only honored in [Unit] (Lote 9 boot audit).
+ConditionPathExists=/usr/bin/bootc
+
+[Service]
+Type=oneshot
+# MUTATING (stages a new deployment; never reboots). The command is FIXED in
+# the shipped helper /usr/libexec/enthroned-system-update (bootc upgrade with
+# --progress-fd redirected to the journal). No arguments are ever accepted
+# from the UI or the environment. Started by the Enthroned Update Center via
+# systemd D-Bus with the Enthroned polkit rule (active local wheel users).
+ExecStart=/usr/libexec/enthroned-system-update
+# A read failure leaves the deployment unconfirmed without changing the
+# update command's outcome. The helper reports the failure in the journal.
+ExecStartPost=-/usr/bin/timeout 30s /usr/libexec/enthroned-bootc-status

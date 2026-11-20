@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=About Enthroned OS
+Name[pt_BR]=Sobre o Enthroned OS
+Comment=Development build identity and image origin
+Comment[pt_BR]=Identidade da build de desenvolvimento e origem da imagem
+Exec=enthroned-identity --about
+Icon=dialog-information
+Categories=System;Documentation;
+Keywords=Enthroned;About;System;Identity;
+Terminal=false

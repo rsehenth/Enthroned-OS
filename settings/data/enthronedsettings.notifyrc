@@ -1,0 +1,41 @@
+[Global]
+IconName=org.enthroned.settings
+Comment=Enthroned Settings
+Comment[pt_BR]=Configurações do Enthroned
+Name=Enthroned Settings
+Name[pt_BR]=Configurações do Enthroned
+
+[Event/update-available]
+Name=Update available
+Name[pt_BR]=Atualização disponível
+Comment=An update is available for the system
+Comment[pt_BR]=Há atualizações disponíveis para o sistema
+Action=Popup
+
+[Event/download-finished]
+Name=Download finished
+Name[pt_BR]=Download concluído
+Comment=The update image download finished
+Comment[pt_BR]=O download da imagem de atualização terminou
+Action=Popup
+
+[Event/update-staged]
+Name=Update prepared
+Name[pt_BR]=Atualização preparada
+Comment=The system update finished and is prepared
+Comment[pt_BR]=A atualização do sistema terminou e foi preparada
+Action=Popup
+
+[Event/restart-required]
+Name=Restart required
+Name[pt_BR]=Reinicialização necessária
+Comment=A restart is needed to apply the prepared update
+Comment[pt_BR]=É necessário reiniciar para aplicar a atualização preparada
+Action=Popup
+
+[Event/update-failed]
+Name=Update failed
+Name[pt_BR]=Falha na atualização
+Comment=An update operation failed
+Comment[pt_BR]=Uma operação de atualização falhou
+Action=Popup

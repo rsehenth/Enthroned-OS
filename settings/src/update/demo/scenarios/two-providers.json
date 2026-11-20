@@ -1,0 +1,19 @@
+{
+  "name": "two-providers",
+  "title": "Dois provedores emitindo eventos",
+  "description": "Sistema e Flatpak emitem eventos intercalados; estados devem ser coerentes.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "upd-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando runtime", "severity": "Info", "currentItem": "org.kde.Platform" },
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Downloading", "description": "Baixando imagem", "severity": "Info", "progressPercent": 40.0, "bytesTransferred": 100000000, "bytesTotal": 250000000 }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "flatpak", "operationId": "upd-1", "rawType": "module-completed", "phase": "Completed", "description": "Modulo Flatpak concluido", "severity": "Info" },
+      { "source": "system", "operationId": "upd-1", "rawType": "bootc-progress", "phase": "Preparing", "description": "Importando imagem", "severity": "Info", "progressPercent": 85.0 }
+    ], "expectState": "preparing" }
+  ],
+  "finalState": "preparing"
+}

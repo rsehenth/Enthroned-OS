@@ -1,0 +1,17 @@
+{
+  "name": "download-interrupted",
+  "title": "Download interrompido",
+  "description": "A atualizacao falha no meio do download; a maquina registra a falha e permite tentar de novo.",
+  "steps": [
+    { "delayMs": 0, "events": [
+      { "source": "engine", "operationId": "update-1", "rawType": "engine-update-started", "phase": "Initializing", "description": "Atualizacao iniciada", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "update-1", "rawType": "bootc-progress", "phase": "Downloading", "progressPercent": 41.0, "description": "Downloading", "severity": "Info" }
+    ], "expectState": "updating" },
+    { "delayMs": 300, "events": [
+      { "source": "system", "operationId": "update-1", "rawType": "update-failed-with-errors", "phase": "Failed", "description": "Conexao interrompida durante o download", "severity": "Error" }
+    ], "expectState": "failed" }
+  ],
+  "finalState": "failed"
+}
