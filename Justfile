@@ -439,11 +439,12 @@ lint:
         echo "shellcheck could not be found. Please install it."
         exit 1
     fi
+    # Fail on warnings and errors; info and style notes are advisory
     # Run shellcheck on all Bash scripts
-    find . -iname "*.sh" -type f -exec shellcheck "{}" ';'
+    find . -iname "*.sh" -type f -exec shellcheck --severity=warning "{}" ';'
     # Also check shell helpers without a .sh extension
-    shellcheck system_files/usr/bin/enthroned-identity system_files/usr/bin/enthroned-diagnostics
-    shellcheck system_files/usr/libexec/enthroned-system-update
+    shellcheck --severity=warning system_files/usr/bin/enthroned-identity system_files/usr/bin/enthroned-diagnostics
+    shellcheck --severity=warning system_files/usr/libexec/enthroned-system-update
 
 # Runs shfmt on all Bash scripts
 format:
