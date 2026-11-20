@@ -1,0 +1,9 @@
+# Normalize line endings: LF in the repository and in every checkout.
+* text=auto eol=lf
+*.sh text eol=lf
+
+# Binary files are never converted.
+*.png binary
+*.jpg binary
+*.ico binary
+*.jxl binary
