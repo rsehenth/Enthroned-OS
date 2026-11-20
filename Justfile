@@ -423,7 +423,7 @@ bootc-capabilities:
 
 # Lote 8: update pipeline (check-base, build, verify, version, notes; the
 # publish phase is gated and never runs implicitly). Extra args pass through:
-#   just update-pipeline check-base
+# just update-pipeline check-base
 [group('Utility')]
 update-pipeline *args:
     #!/usr/bin/env bash
