@@ -6,7 +6,7 @@
 # verify-artifacts), chunkah rechunk recipe dropped for F1.
 
 set dotenv-filename := "image-template.env"
-set dotenv-load := true
+set dotenv-load
 
 export image_name := env_var("IMAGE_NAME")
 export repo_organization := env_var("REPO_ORGANIZATION")
